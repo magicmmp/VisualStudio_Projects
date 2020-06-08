@@ -1,0 +1,17 @@
+D:\My Documents\Visual Studio 2008\Projects\SerialPortConnection\SerialPortConnection\obj\Debug\ResolveAssemblyReference.cache
+D:\My Documents\Visual Studio 2008\Projects\SerialPortConnection\SerialPortConnection\obj\Debug\SerialPortConnection.Form1.resources
+D:\My Documents\Visual Studio 2008\Projects\SerialPortConnection\SerialPortConnection\obj\Debug\SerialPortConnection.Properties.Resources.resources
+D:\My Documents\Visual Studio 2008\Projects\SerialPortConnection\SerialPortConnection\obj\Debug\SerialPortConnection.csproj.GenerateResource.Cache
+D:\My Documents\Visual Studio 2008\Projects\SerialPortConnection\SerialPortConnection\bin\Debug\SerialPortConnection.exe
+D:\My Documents\Visual Studio 2008\Projects\SerialPortConnection\SerialPortConnection\bin\Debug\SerialPortConnection.pdb
+D:\My Documents\Visual Studio 2008\Projects\SerialPortConnection\SerialPortConnection\obj\Debug\SerialPortConnection.exe
+D:\My Documents\Visual Studio 2008\Projects\SerialPortConnection\SerialPortConnection\obj\Debug\SerialPortConnection.pdb
+D:\C#资料\用C#一步步写串口通信\SerialPortConnection-master\SerialPortConnection\bin\Debug\SerialPortConnection.exe
+D:\C#资料\用C#一步步写串口通信\SerialPortConnection-master\SerialPortConnection\bin\Debug\SerialPortConnection.pdb
+D:\C#资料\用C#一步步写串口通信\SerialPortConnection-master\SerialPortConnection\obj\Debug\SerialPortConnection.csprojAssemblyReference.cache
+D:\C#资料\用C#一步步写串口通信\SerialPortConnection-master\SerialPortConnection\obj\Debug\SerialPortConnection.Form1.resources
+D:\C#资料\用C#一步步写串口通信\SerialPortConnection-master\SerialPortConnection\obj\Debug\SerialPortConnection.Properties.Resources.resources
+D:\C#资料\用C#一步步写串口通信\SerialPortConnection-master\SerialPortConnection\obj\Debug\SerialPortConnection.csproj.GenerateResource.cache
+D:\C#资料\用C#一步步写串口通信\SerialPortConnection-master\SerialPortConnection\obj\Debug\SerialPortConnection.csproj.CoreCompileInputs.cache
+D:\C#资料\用C#一步步写串口通信\SerialPortConnection-master\SerialPortConnection\obj\Debug\SerialPortConnection.exe
+D:\C#资料\用C#一步步写串口通信\SerialPortConnection-master\SerialPortConnection\obj\Debug\SerialPortConnection.pdb

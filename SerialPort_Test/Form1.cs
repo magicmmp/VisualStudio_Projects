@@ -52,5 +52,21 @@ namespace SerialPort_Test
         {
 
         }
+
+        //到设计界面那里，双击界面后，会发现自动生成了Form1_load()，然后再进行代码编写。
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label6_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void cbTimeSend_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

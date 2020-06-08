@@ -132,6 +132,7 @@ namespace SerialPortConnection
                 MessageBox.Show("本机没有串口！", "Error");
                 return;
             }
+            
 
             //添加串口项目
             foreach (string s in System.IO.Ports.SerialPort.GetPortNames())
@@ -141,7 +142,7 @@ namespace SerialPortConnection
             }
 
             //串口设置默认选择项
-            cbSerial.SelectedIndex = 1;         //note：获得COM9口，但别忘修改
+            cbSerial.SelectedIndex = 0;         //note：获得COM9口，但别忘修改
             //cbBaudRate.SelectedIndex = 5;
            // cbDataBits.SelectedIndex = 3;
            // cbStop.SelectedIndex = 0;
@@ -152,7 +153,7 @@ namespace SerialPortConnection
             sp1.DataReceived += new SerialDataReceivedEventHandler(sp1_DataReceived);
             //sp1.ReceivedBytesThreshold = 1;
 
-            radio1.Checked = true;  //单选按钮默认是选中的
+            rdSendStr.Checked = true;  //单选按钮默认是选中的
             rbRcvStr.Checked = true;
 
             //准备就绪              
@@ -174,20 +175,24 @@ namespace SerialPortConnection
                 txtReceive.SelectAll();
                 txtReceive.SelectionColor = Color.Blue;         //改变字体的颜色
                 Thread.Sleep(100);
-                byte[] byteRead = new byte[sp1.BytesToRead];    //BytesToRead:sp1接收的字符个数
-                if (rdSendStr.Checked)                          //'发送字符串'单选按钮
+               // byte[] byteRead = new byte[sp1.BytesToRead];    //BytesToRead:sp1接收的字符个数
+
+                Byte[] receivedData = new Byte[sp1.BytesToRead];        //创建接收字节数组
+                sp1.Read(receivedData, 0, receivedData.Length);         //读取数据
+                //string text = sp1.Read();   //Encoding.ASCII.GetString(receivedData);
+                sp1.DiscardInBuffer();  
+                if (rbRcvStr.Checked)                          //'发送字符串'单选按钮
                 {
-                    txtReceive.Text += sp1.ReadLine() + "\r\n"; //注意：回车换行必须这样写，单独使用"\r"和"\n"都不会有效果
-                    sp1.DiscardInBuffer();                      //清空SerialPort控件的Buffer 
+                    //txtReceive.Text += sp1.ReadLine() + "\r\n"; //注意：回车换行必须这样写，单独使用"\r"和"\n"都不会有效果
+                    txtReceive.Text += Encoding.UTF8.GetString(receivedData) + "\r\n";
+
+                    //sp1.DiscardInBuffer();                      //清空SerialPort控件的Buffer 
                 }
                 else                                            //'发送16进制按钮'
                 {
                     try
                     {
-                        Byte[] receivedData = new Byte[sp1.BytesToRead];        //创建接收字节数组
-                        sp1.Read(receivedData, 0, receivedData.Length);         //读取数据
-                        //string text = sp1.Read();   //Encoding.ASCII.GetString(receivedData);
-                        sp1.DiscardInBuffer();                                  //清空SerialPort控件的Buffer
+                                                        //清空SerialPort控件的Buffer
                         //这是用以显示字符串
                         //    string strRcv = null;
                         //    for (int i = 0; i < receivedData.Length; i++ )
@@ -201,7 +206,7 @@ namespace SerialPortConnection
                         for (int i = 0; i < receivedData.Length; i++) //窗体显示
                         {
                           
-                            strRcv += receivedData[i].ToString("X2");  //16进制显示
+                            strRcv += receivedData[i].ToString("X2")+' ';  //16进制显示
                         }
                         txtReceive.Text += strRcv + "\r\n";
                     }
@@ -245,7 +250,7 @@ namespace SerialPortConnection
                 string sendNOComma = sendnoNull.Replace(',', ' ');    //去掉英文逗号
                 string sendNOComma1 = sendNOComma.Replace('，', ' '); //去掉中文逗号
                 string strSendNoComma2 = sendNOComma1.Replace("0x", "");   //去掉0x
-                strSendNoComma2.Replace("0X", "");   //去掉0X
+               // strSendNoComma2.Replace("0X", "");   //去掉0X
                 string[] strArray = strSendNoComma2.Split(' ');
 
                 int byteBufferLength = strArray.Length;
@@ -292,7 +297,9 @@ namespace SerialPortConnection
             }
             else		//以字符串形式发送时 
             {
-                sp1.WriteLine(txtSend.Text);    //写入数据
+                //sp1.WriteLine(txtSend.Text);    //写入数据
+                byte[] tmpBuffer = Encoding.UTF8.GetBytes(txtSend.Text);
+                sp1.Write(tmpBuffer, 0, tmpBuffer.Length);
             }
         }
 

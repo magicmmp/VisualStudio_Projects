@@ -15,3 +15,12 @@ D:\C#资料\用C#一步步写串口通信\SerialPortConnection-master\SerialPort
 D:\C#资料\用C#一步步写串口通信\SerialPortConnection-master\SerialPortConnection\obj\Debug\SerialPortConnection.csproj.CoreCompileInputs.cache
 D:\C#资料\用C#一步步写串口通信\SerialPortConnection-master\SerialPortConnection\obj\Debug\SerialPortConnection.exe
 D:\C#资料\用C#一步步写串口通信\SerialPortConnection-master\SerialPortConnection\obj\Debug\SerialPortConnection.pdb
+D:\VisualStudio_Projects\My_SerialPort_Test\SerialPortConnection\bin\Debug\SerialPortConnection.exe
+D:\VisualStudio_Projects\My_SerialPort_Test\SerialPortConnection\bin\Debug\SerialPortConnection.pdb
+D:\VisualStudio_Projects\My_SerialPort_Test\SerialPortConnection\obj\Debug\SerialPortConnection.csprojAssemblyReference.cache
+D:\VisualStudio_Projects\My_SerialPort_Test\SerialPortConnection\obj\Debug\SerialPortConnection.Form1.resources
+D:\VisualStudio_Projects\My_SerialPort_Test\SerialPortConnection\obj\Debug\SerialPortConnection.Properties.Resources.resources
+D:\VisualStudio_Projects\My_SerialPort_Test\SerialPortConnection\obj\Debug\SerialPortConnection.csproj.GenerateResource.cache
+D:\VisualStudio_Projects\My_SerialPort_Test\SerialPortConnection\obj\Debug\SerialPortConnection.csproj.CoreCompileInputs.cache
+D:\VisualStudio_Projects\My_SerialPort_Test\SerialPortConnection\obj\Debug\SerialPortConnection.exe
+D:\VisualStudio_Projects\My_SerialPort_Test\SerialPortConnection\obj\Debug\SerialPortConnection.pdb

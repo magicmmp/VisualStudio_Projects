@@ -15,6 +15,17 @@ namespace SerialPortConnection
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
+           
+
+            string s = "在循环外";
+            for(int i=0;i<1;i++)
+            {
+                s = "在循环内";
+                Console.WriteLine(s);
+            }
+            Console.WriteLine(s);
+
+
             Application.Run(new Form1());
         }
     }

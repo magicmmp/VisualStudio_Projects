@@ -1,0 +1,7 @@
+D:\VisualStudio_Projects\ExceptionTest\bin\Debug\ExceptionTest.exe.config
+D:\VisualStudio_Projects\ExceptionTest\bin\Debug\ExceptionTest.exe
+D:\VisualStudio_Projects\ExceptionTest\bin\Debug\ExceptionTest.pdb
+D:\VisualStudio_Projects\ExceptionTest\obj\Debug\ExceptionTest.csprojAssemblyReference.cache
+D:\VisualStudio_Projects\ExceptionTest\obj\Debug\ExceptionTest.csproj.CoreCompileInputs.cache
+D:\VisualStudio_Projects\ExceptionTest\obj\Debug\ExceptionTest.exe
+D:\VisualStudio_Projects\ExceptionTest\obj\Debug\ExceptionTest.pdb

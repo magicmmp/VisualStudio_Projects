@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace 定义部分类
 {
+    
     class Program
     {
         static void Main(string[] args)
@@ -15,10 +16,13 @@ namespace 定义部分类
             partia.j = 112;
 
             Console.WriteLine("partia.i = {0}; partia.j = {1}",partia.i, partia.j);
+
+
             Console.ReadKey();
       
         }
     }
+
 
 
 

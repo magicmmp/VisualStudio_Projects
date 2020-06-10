@@ -1,0 +1,7 @@
+D:\VisualStudio_Projects\定义部分类\bin\Debug\定义部分类.exe.config
+D:\VisualStudio_Projects\定义部分类\bin\Debug\定义部分类.exe
+D:\VisualStudio_Projects\定义部分类\bin\Debug\定义部分类.pdb
+D:\VisualStudio_Projects\定义部分类\obj\Debug\定义部分类.csprojAssemblyReference.cache
+D:\VisualStudio_Projects\定义部分类\obj\Debug\定义部分类.csproj.CoreCompileInputs.cache
+D:\VisualStudio_Projects\定义部分类\obj\Debug\定义部分类.exe
+D:\VisualStudio_Projects\定义部分类\obj\Debug\定义部分类.pdb

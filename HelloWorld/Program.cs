@@ -9,30 +9,40 @@ namespace HelloWorld
 {
     class Program
     {
-        static void fun()
+        public const int MyInt = 17;
+        private const string ss = "heheh";
+        public static int AutoVal
         {
-            int abc = 50;
-            int cd = 20;
-            Console.WriteLine("呵呵呵哈哈哈");
+            get;set;
         }
-
         static void Main(string[] args)
         {
-            Console.WriteLine("{0} command line arguments were specified:",args.Length);
-            string ss = "hehe";
-            string[] array = { "字符串1", "张三", "李四" };
-            int i = 200;
-            fun();
-            Debug.Assert(args.Length >= 3, "搞错了!","输入参数少于3个");
-            foreach (string arg in args)
-                Console.WriteLine(arg);
-            Debug.WriteLine(string.Format("参数1：{0}", "hehehh"));
-            ss = "haha";
+            AutoVal = 12;
+            Console.WriteLine("MyInt= {0,-8:X4}, ss={1}, AutoVal={2}", MyInt,ss,AutoVal);
+           
             Console.ReadKey();
 
             
         }
+    }
 
+    class BaseClass
+    {
+        public int i;
+        public int getInt()
+        {
+            return i;
+        }
+    }
+
+    class DriveClass:BaseClass,Imyhh
+    {
+        public int j;
+    }
+
+    interface Imyhh
+    {
 
     }
+
 }

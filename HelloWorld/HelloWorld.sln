@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HelloWorld", "HelloWorld.cs
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExceptionTest", "..\ExceptionTest\ExceptionTest.csproj", "{EB369ABC-2BE9-40B3-B0F1-0848A103285E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "定义部分类", "..\定义部分类\定义部分类.csproj", "{8FF12747-4F6C-4273-B875-EA74193DC80C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{EB369ABC-2BE9-40B3-B0F1-0848A103285E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EB369ABC-2BE9-40B3-B0F1-0848A103285E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EB369ABC-2BE9-40B3-B0F1-0848A103285E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8FF12747-4F6C-4273-B875-EA74193DC80C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8FF12747-4F6C-4273-B875-EA74193DC80C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8FF12747-4F6C-4273-B875-EA74193DC80C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8FF12747-4F6C-4273-B875-EA74193DC80C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

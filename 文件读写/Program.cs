@@ -11,6 +11,7 @@ namespace 文件读写
     {
         static void Main(string[] args)
         {
+            /**
             try
             {
                 FileStream aFile = new FileStream("Log.txt", FileMode.OpenOrCreate);
@@ -31,6 +32,57 @@ namespace 文件读写
                 Console.ReadLine();
                 return;
             }
+            */
+
+            string line;
+
+            try
+            {
+                FileStream aFile = new FileStream("Log.txt", FileMode.Open);
+
+                StreamReader sr = new StreamReader(aFile);
+
+                /**
+                 
+                line = sr.ReadLine();
+                // Read data in line by line.
+                while (line != null)
+                {
+                    Console.WriteLine(line);
+                    line = sr.ReadLine();
+                }
+                sr.Close();
+                */
+                
+                int nChar;
+                nChar = sr.Read();
+                while (nChar != -1)
+                {
+                    Console.Write(Convert.ToChar(nChar));
+                    nChar = sr.Read();
+                }
+                sr.Close();
+            }
+            catch (IOException e)
+            {
+                Console.WriteLine("An IO exception has been thrown!");
+                Console.WriteLine(e.ToString());
+                return;
+            }
+            Console.ReadKey();
+
+
+
+
+
+
+
+
+
+
+
+
+
 
         }
     }

@@ -15,6 +15,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "泛型类和接口", "..\�
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "事件和委托_练习", "..\事件和委托_练习\事件和委托_练习.csproj", "{F3B3BEF7-3485-4CB0-87BB-55157AFC1E99}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "匿名的对象数组", "..\匿名的对象数组\匿名的对象数组.csproj", "{43CA8B2A-2E9C-4172-9FC9-150A0CCAE47F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "文件读写", "..\文件读写\文件读写.csproj", "{F03A01D0-CBD4-41EB-9C1D-BFB9A6DC1EFA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -45,6 +49,14 @@ Global
 		{F3B3BEF7-3485-4CB0-87BB-55157AFC1E99}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F3B3BEF7-3485-4CB0-87BB-55157AFC1E99}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F3B3BEF7-3485-4CB0-87BB-55157AFC1E99}.Release|Any CPU.Build.0 = Release|Any CPU
+		{43CA8B2A-2E9C-4172-9FC9-150A0CCAE47F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{43CA8B2A-2E9C-4172-9FC9-150A0CCAE47F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{43CA8B2A-2E9C-4172-9FC9-150A0CCAE47F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{43CA8B2A-2E9C-4172-9FC9-150A0CCAE47F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F03A01D0-CBD4-41EB-9C1D-BFB9A6DC1EFA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F03A01D0-CBD4-41EB-9C1D-BFB9A6DC1EFA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F03A01D0-CBD4-41EB-9C1D-BFB9A6DC1EFA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F03A01D0-CBD4-41EB-9C1D-BFB9A6DC1EFA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

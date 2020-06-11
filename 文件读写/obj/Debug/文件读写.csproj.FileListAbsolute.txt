@@ -1,0 +1,7 @@
+D:\VisualStudio_Projects\文件读写\bin\Debug\文件读写.exe.config
+D:\VisualStudio_Projects\文件读写\bin\Debug\文件读写.exe
+D:\VisualStudio_Projects\文件读写\bin\Debug\文件读写.pdb
+D:\VisualStudio_Projects\文件读写\obj\Debug\文件读写.csprojAssemblyReference.cache
+D:\VisualStudio_Projects\文件读写\obj\Debug\文件读写.csproj.CoreCompileInputs.cache
+D:\VisualStudio_Projects\文件读写\obj\Debug\文件读写.exe
+D:\VisualStudio_Projects\文件读写\obj\Debug\文件读写.pdb

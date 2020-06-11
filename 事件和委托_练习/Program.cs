@@ -17,6 +17,7 @@ namespace 事件和委托_练习
             //行任务
             Connection myConnection = new Connection();
          
+            
             Display myDisplay = new Display();
             myConnection.MessageArrived +=
             new MessageHandler(myDisplay.DisplayMessage);

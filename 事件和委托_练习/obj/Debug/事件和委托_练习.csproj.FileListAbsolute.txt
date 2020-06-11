@@ -1,0 +1,7 @@
+D:\VisualStudio_Projects\事件和委托_练习\bin\Debug\事件和委托_练习.exe.config
+D:\VisualStudio_Projects\事件和委托_练习\bin\Debug\事件和委托_练习.exe
+D:\VisualStudio_Projects\事件和委托_练习\bin\Debug\事件和委托_练习.pdb
+D:\VisualStudio_Projects\事件和委托_练习\obj\Debug\事件和委托_练习.csprojAssemblyReference.cache
+D:\VisualStudio_Projects\事件和委托_练习\obj\Debug\事件和委托_练习.csproj.CoreCompileInputs.cache
+D:\VisualStudio_Projects\事件和委托_练习\obj\Debug\事件和委托_练习.exe
+D:\VisualStudio_Projects\事件和委托_练习\obj\Debug\事件和委托_练习.pdb

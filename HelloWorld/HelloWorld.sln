@@ -19,6 +19,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "匿名的对象数组", "..
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "文件读写", "..\文件读写\文件读写.csproj", "{F03A01D0-CBD4-41EB-9C1D-BFB9A6DC1EFA}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mutex_test", "..\Mutex_test\Mutex_test.csproj", "{607B2AF6-5BC8-4405-8661-14AE62D5D444}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -57,6 +59,10 @@ Global
 		{F03A01D0-CBD4-41EB-9C1D-BFB9A6DC1EFA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F03A01D0-CBD4-41EB-9C1D-BFB9A6DC1EFA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F03A01D0-CBD4-41EB-9C1D-BFB9A6DC1EFA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{607B2AF6-5BC8-4405-8661-14AE62D5D444}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{607B2AF6-5BC8-4405-8661-14AE62D5D444}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{607B2AF6-5BC8-4405-8661-14AE62D5D444}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{607B2AF6-5BC8-4405-8661-14AE62D5D444}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

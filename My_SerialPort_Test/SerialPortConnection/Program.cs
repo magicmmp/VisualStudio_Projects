@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Windows.Forms;
 
 namespace SerialPortConnection
@@ -13,6 +14,20 @@ namespace SerialPortConnection
         [STAThread]
         static void Main()
         {
+
+
+            //Mutex互斥类可以跨进程使用
+            bool CreatedNew = false;
+            Mutex mutex = new Mutex(false, "singletonWinAppMutex", out CreatedNew);
+            if (!CreatedNew)
+            {
+                MessageBox.Show("一次只能打开一个界面！");
+                Application.Exit();
+                return;
+            }
+
+
+
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
            

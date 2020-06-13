@@ -5,6 +5,16 @@ VisualStudioVersion = 16.0.30128.74
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WinForm练习", "WinForm练习\WinForm练习.csproj", "{EF8CC9AC-A51D-4C6D-97CE-CD653FBB6989}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TextBoxTest", "TextBox\TextBoxTest.csproj", "{075050D5-872A-497D-8242-9585A0DD960E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Radio and Check Buttons", "Radio and Check Buttons\Radio and Check Buttons.csproj", "{B7779650-0DCE-422F-B246-75F573BE0147}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ListViewTest", "ListViewTest\ListViewTest.csproj", "{1B1EB816-EBE3-4362-B495-7A47B30F0109}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TabControl", "TabControl\TabControl.csproj", "{E0A05A22-ED9D-4C36-A7AF-F7976A6847D0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MenuStripTest", "MenuStripTest\MenuStripTest.csproj", "{50D23A69-8D34-4902-A574-95599F3FA32A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +25,26 @@ Global
 		{EF8CC9AC-A51D-4C6D-97CE-CD653FBB6989}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EF8CC9AC-A51D-4C6D-97CE-CD653FBB6989}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EF8CC9AC-A51D-4C6D-97CE-CD653FBB6989}.Release|Any CPU.Build.0 = Release|Any CPU
+		{075050D5-872A-497D-8242-9585A0DD960E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{075050D5-872A-497D-8242-9585A0DD960E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{075050D5-872A-497D-8242-9585A0DD960E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{075050D5-872A-497D-8242-9585A0DD960E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B7779650-0DCE-422F-B246-75F573BE0147}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B7779650-0DCE-422F-B246-75F573BE0147}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B7779650-0DCE-422F-B246-75F573BE0147}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B7779650-0DCE-422F-B246-75F573BE0147}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1B1EB816-EBE3-4362-B495-7A47B30F0109}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1B1EB816-EBE3-4362-B495-7A47B30F0109}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1B1EB816-EBE3-4362-B495-7A47B30F0109}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1B1EB816-EBE3-4362-B495-7A47B30F0109}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E0A05A22-ED9D-4C36-A7AF-F7976A6847D0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E0A05A22-ED9D-4C36-A7AF-F7976A6847D0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E0A05A22-ED9D-4C36-A7AF-F7976A6847D0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E0A05A22-ED9D-4C36-A7AF-F7976A6847D0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{50D23A69-8D34-4902-A574-95599F3FA32A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{50D23A69-8D34-4902-A574-95599F3FA32A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{50D23A69-8D34-4902-A574-95599F3FA32A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{50D23A69-8D34-4902-A574-95599F3FA32A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

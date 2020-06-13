@@ -152,5 +152,38 @@
   <ItemGroup>
     <None Include="Resources\save.Image2.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\BLD.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\copy.Image3.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\cut.Image3.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ITL.ICO" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\new.Image3.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\open.Image3.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\paste.Image3.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\print.Image3.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\printPreview.Image3.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\save.Image3.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\UNDRLN.ICO" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -63,6 +63,16 @@ namespace MenuStripTest.Properties {
         /// <summary>
         ///   查找 System.Drawing.Bitmap 类型的本地化资源。
         /// </summary>
+        internal static System.Drawing.Bitmap BLD {
+            get {
+                object obj = ResourceManager.GetObject("BLD", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
         internal static System.Drawing.Bitmap copy_Image {
             get {
                 object obj = ResourceManager.GetObject("copy.Image", resourceCulture);
@@ -86,6 +96,16 @@ namespace MenuStripTest.Properties {
         internal static System.Drawing.Bitmap copy2 {
             get {
                 object obj = ResourceManager.GetObject("copy2", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap copy3 {
+            get {
+                object obj = ResourceManager.GetObject("copy3", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -123,6 +143,26 @@ namespace MenuStripTest.Properties {
         /// <summary>
         ///   查找 System.Drawing.Bitmap 类型的本地化资源。
         /// </summary>
+        internal static System.Drawing.Bitmap cut3 {
+            get {
+                object obj = ResourceManager.GetObject("cut3", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap ITL {
+            get {
+                object obj = ResourceManager.GetObject("ITL", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
         internal static System.Drawing.Bitmap new_Image {
             get {
                 object obj = ResourceManager.GetObject("new.Image", resourceCulture);
@@ -146,6 +186,16 @@ namespace MenuStripTest.Properties {
         internal static System.Drawing.Bitmap new2 {
             get {
                 object obj = ResourceManager.GetObject("new2", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap new3 {
+            get {
+                object obj = ResourceManager.GetObject("new3", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -183,6 +233,16 @@ namespace MenuStripTest.Properties {
         /// <summary>
         ///   查找 System.Drawing.Bitmap 类型的本地化资源。
         /// </summary>
+        internal static System.Drawing.Bitmap open3 {
+            get {
+                object obj = ResourceManager.GetObject("open3", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
         internal static System.Drawing.Bitmap paste_Image {
             get {
                 object obj = ResourceManager.GetObject("paste.Image", resourceCulture);
@@ -206,6 +266,16 @@ namespace MenuStripTest.Properties {
         internal static System.Drawing.Bitmap paste2 {
             get {
                 object obj = ResourceManager.GetObject("paste2", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap paste3 {
+            get {
+                object obj = ResourceManager.GetObject("paste3", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -243,6 +313,16 @@ namespace MenuStripTest.Properties {
         /// <summary>
         ///   查找 System.Drawing.Bitmap 类型的本地化资源。
         /// </summary>
+        internal static System.Drawing.Bitmap print3 {
+            get {
+                object obj = ResourceManager.GetObject("print3", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
         internal static System.Drawing.Bitmap printPreview_Image {
             get {
                 object obj = ResourceManager.GetObject("printPreview.Image", resourceCulture);
@@ -273,6 +353,16 @@ namespace MenuStripTest.Properties {
         /// <summary>
         ///   查找 System.Drawing.Bitmap 类型的本地化资源。
         /// </summary>
+        internal static System.Drawing.Bitmap printPreview3 {
+            get {
+                object obj = ResourceManager.GetObject("printPreview3", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
         internal static System.Drawing.Bitmap save_Image {
             get {
                 object obj = ResourceManager.GetObject("save.Image", resourceCulture);
@@ -296,6 +386,26 @@ namespace MenuStripTest.Properties {
         internal static System.Drawing.Bitmap save2 {
             get {
                 object obj = ResourceManager.GetObject("save2", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap save3 {
+            get {
+                object obj = ResourceManager.GetObject("save3", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap UNDRLN {
+            get {
+                object obj = ResourceManager.GetObject("UNDRLN", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

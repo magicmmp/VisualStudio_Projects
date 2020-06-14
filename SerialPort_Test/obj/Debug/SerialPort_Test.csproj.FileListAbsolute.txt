@@ -8,3 +8,13 @@ D:\VisualStudio_Projects\SerialPort_Test\obj\Debug\SerialPort_Test.csproj.Genera
 D:\VisualStudio_Projects\SerialPort_Test\obj\Debug\SerialPort_Test.csproj.CoreCompileInputs.cache
 D:\VisualStudio_Projects\SerialPort_Test\obj\Debug\SerialPort_Test.exe
 D:\VisualStudio_Projects\SerialPort_Test\obj\Debug\SerialPort_Test.pdb
+E:\VisualStudio_Projects\SerialPort_Test\bin\Debug\SerialPort_Test.exe.config
+E:\VisualStudio_Projects\SerialPort_Test\bin\Debug\SerialPort_Test.exe
+E:\VisualStudio_Projects\SerialPort_Test\bin\Debug\SerialPort_Test.pdb
+E:\VisualStudio_Projects\SerialPort_Test\obj\Debug\SerialPort_Test.csprojAssemblyReference.cache
+E:\VisualStudio_Projects\SerialPort_Test\obj\Debug\SerialPort_Test.Form1.resources
+E:\VisualStudio_Projects\SerialPort_Test\obj\Debug\SerialPort_Test.Properties.Resources.resources
+E:\VisualStudio_Projects\SerialPort_Test\obj\Debug\SerialPort_Test.csproj.GenerateResource.cache
+E:\VisualStudio_Projects\SerialPort_Test\obj\Debug\SerialPort_Test.csproj.CoreCompileInputs.cache
+E:\VisualStudio_Projects\SerialPort_Test\obj\Debug\SerialPort_Test.exe
+E:\VisualStudio_Projects\SerialPort_Test\obj\Debug\SerialPort_Test.pdb

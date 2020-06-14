@@ -61,6 +61,14 @@
             this.countClearButton = new System.Windows.Forms.Button();
             this.autoDetectionTimer = new System.Windows.Forms.Timer(this.components);
             this.autoSendTimer = new System.Windows.Forms.Timer(this.components);
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.radioButton1 = new System.Windows.Forms.RadioButton();
+            this.radioButton2 = new System.Windows.Forms.RadioButton();
+            this.radioButton3 = new System.Windows.Forms.RadioButton();
+            this.label10 = new System.Windows.Forms.Label();
+            this.textBoxLoraAddr = new System.Windows.Forms.TextBox();
+            this.checkBoxAutoAddr = new System.Windows.Forms.CheckBox();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // label1
@@ -192,35 +200,47 @@
             // 
             // sendTextBox
             // 
-            this.sendTextBox.Location = new System.Drawing.Point(409, 374);
+            this.sendTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.sendTextBox.BackColor = System.Drawing.SystemColors.InactiveCaption;
+            this.sendTextBox.Location = new System.Drawing.Point(409, 359);
+            this.sendTextBox.MinimumSize = new System.Drawing.Size(649, 135);
             this.sendTextBox.Multiline = true;
             this.sendTextBox.Name = "sendTextBox";
-            this.sendTextBox.Size = new System.Drawing.Size(649, 135);
+            this.sendTextBox.Size = new System.Drawing.Size(658, 216);
             this.sendTextBox.TabIndex = 22;
+            this.sendTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.sendTextBox_KeyPress);
             // 
             // receiveTextBox
             // 
-            this.receiveTextBox.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.receiveTextBox.Location = new System.Drawing.Point(409, 23);
+            this.receiveTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.receiveTextBox.BackColor = System.Drawing.SystemColors.InactiveCaption;
+            this.receiveTextBox.Location = new System.Drawing.Point(409, 17);
+            this.receiveTextBox.MinimumSize = new System.Drawing.Size(649, 312);
             this.receiveTextBox.Name = "receiveTextBox";
             this.receiveTextBox.ReadOnly = true;
-            this.receiveTextBox.Size = new System.Drawing.Size(649, 312);
+            this.receiveTextBox.Size = new System.Drawing.Size(658, 312);
             this.receiveTextBox.TabIndex = 23;
             this.receiveTextBox.Text = "";
+            this.receiveTextBox.TextChanged += new System.EventHandler(this.receiveTextBox_TextChanged);
             // 
             // SendButton
             // 
-            this.SendButton.Location = new System.Drawing.Point(294, 428);
+            this.SendButton.Location = new System.Drawing.Point(273, 510);
             this.SendButton.Name = "SendButton";
             this.SendButton.Size = new System.Drawing.Size(83, 47);
             this.SendButton.TabIndex = 31;
             this.SendButton.Text = "手动发送";
             this.SendButton.UseVisualStyleBackColor = true;
+            this.SendButton.Click += new System.EventHandler(this.SendButton_Click);
             // 
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(226, 317);
+            this.label6.Location = new System.Drawing.Point(208, 427);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(29, 12);
             this.label6.TabIndex = 30;
@@ -229,17 +249,19 @@
             // 
             // autoSendCycleTextBox
             // 
-            this.autoSendCycleTextBox.Location = new System.Drawing.Point(137, 314);
+            this.autoSendCycleTextBox.Location = new System.Drawing.Point(117, 427);
+            this.autoSendCycleTextBox.MaxLength = 6;
             this.autoSendCycleTextBox.Name = "autoSendCycleTextBox";
             this.autoSendCycleTextBox.Size = new System.Drawing.Size(60, 21);
             this.autoSendCycleTextBox.TabIndex = 29;
             this.autoSendCycleTextBox.Text = "1000";
             this.autoSendCycleTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.autoSendCycleTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.autoSendCycleTextBox_KeyPress);
             // 
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(35, 317);
+            this.label7.Location = new System.Drawing.Point(12, 427);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(77, 12);
             this.label7.TabIndex = 28;
@@ -248,13 +270,14 @@
             // AutoSendCheckBox
             // 
             this.AutoSendCheckBox.AutoSize = true;
-            this.AutoSendCheckBox.Location = new System.Drawing.Point(37, 376);
+            this.AutoSendCheckBox.Location = new System.Drawing.Point(17, 468);
             this.AutoSendCheckBox.Name = "AutoSendCheckBox";
             this.AutoSendCheckBox.Size = new System.Drawing.Size(72, 16);
             this.AutoSendCheckBox.TabIndex = 27;
             this.AutoSendCheckBox.Text = "自动发送";
             this.AutoSendCheckBox.UseVisualStyleBackColor = true;
-            this.AutoSendCheckBox.CheckedChanged += new System.EventHandler(this.cbTimeSend_CheckedChanged);
+            this.AutoSendCheckBox.CheckedChanged += new System.EventHandler(this.AutoSendCheckBox_CheckedChanged);
+            this.AutoSendCheckBox.CheckStateChanged += new System.EventHandler(this.AutoSendCheckBox_CheckStateChanged);
             // 
             // ClearReceiveButton
             // 
@@ -264,6 +287,7 @@
             this.ClearReceiveButton.TabIndex = 32;
             this.ClearReceiveButton.Text = "清空接收区";
             this.ClearReceiveButton.UseVisualStyleBackColor = true;
+            this.ClearReceiveButton.Click += new System.EventHandler(this.ClearReceiveButton_Click);
             // 
             // hexadecimalDisplayCheckBox
             // 
@@ -294,6 +318,7 @@
             this.turnOnButton.Size = new System.Drawing.Size(63, 22);
             this.turnOnButton.TabIndex = 36;
             this.turnOnButton.Text = "打开串口";
+            this.turnOnButton.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.turnOnButton.UseVisualStyleBackColor = true;
             this.turnOnButton.CheckedChanged += new System.EventHandler(this.turnOnButton_CheckedChanged);
             // 
@@ -307,11 +332,12 @@
             this.stopShowingButton.TabIndex = 37;
             this.stopShowingButton.Text = "停止显示";
             this.stopShowingButton.UseVisualStyleBackColor = true;
+            this.stopShowingButton.CheckedChanged += new System.EventHandler(this.stopShowingButton_CheckedChanged);
             // 
             // hexadecimalSendCheckBox
             // 
             this.hexadecimalSendCheckBox.AutoSize = true;
-            this.hexadecimalSendCheckBox.Location = new System.Drawing.Point(159, 376);
+            this.hexadecimalSendCheckBox.Location = new System.Drawing.Point(141, 468);
             this.hexadecimalSendCheckBox.Name = "hexadecimalSendCheckBox";
             this.hexadecimalSendCheckBox.Size = new System.Drawing.Size(96, 16);
             this.hexadecimalSendCheckBox.TabIndex = 38;
@@ -320,17 +346,18 @@
             // 
             // ClearSendButton
             // 
-            this.ClearSendButton.Location = new System.Drawing.Point(40, 428);
+            this.ClearSendButton.Location = new System.Drawing.Point(26, 510);
             this.ClearSendButton.Name = "ClearSendButton";
             this.ClearSendButton.Size = new System.Drawing.Size(83, 47);
             this.ClearSendButton.TabIndex = 39;
             this.ClearSendButton.Text = "清空重填";
             this.ClearSendButton.UseVisualStyleBackColor = true;
+            this.ClearSendButton.Click += new System.EventHandler(this.ClearSendButton_Click);
             // 
             // statusTextBlock
             // 
-            this.statusTextBlock.BackColor = System.Drawing.SystemColors.Info;
-            this.statusTextBlock.Location = new System.Drawing.Point(20, 518);
+            this.statusTextBlock.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.statusTextBlock.Location = new System.Drawing.Point(26, 593);
             this.statusTextBlock.Name = "statusTextBlock";
             this.statusTextBlock.ReadOnly = true;
             this.statusTextBlock.Size = new System.Drawing.Size(115, 21);
@@ -340,14 +367,16 @@
             // 
             // statusReceiveByteTextBlock
             // 
-            this.statusReceiveByteTextBlock.Location = new System.Drawing.Point(494, 518);
+            this.statusReceiveByteTextBlock.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
+            this.statusReceiveByteTextBlock.Location = new System.Drawing.Point(567, 593);
             this.statusReceiveByteTextBlock.Name = "statusReceiveByteTextBlock";
             this.statusReceiveByteTextBlock.Size = new System.Drawing.Size(109, 21);
             this.statusReceiveByteTextBlock.TabIndex = 41;
             // 
             // statusSendByteTextBlock
             // 
-            this.statusSendByteTextBlock.Location = new System.Drawing.Point(738, 524);
+            this.statusSendByteTextBlock.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
+            this.statusSendByteTextBlock.Location = new System.Drawing.Point(826, 593);
             this.statusSendByteTextBlock.Name = "statusSendByteTextBlock";
             this.statusSendByteTextBlock.Size = new System.Drawing.Size(107, 21);
             this.statusSendByteTextBlock.TabIndex = 42;
@@ -355,7 +384,7 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(640, 527);
+            this.label8.Location = new System.Drawing.Point(726, 596);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(65, 12);
             this.label8.TabIndex = 43;
@@ -364,7 +393,7 @@
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(407, 527);
+            this.label9.Location = new System.Drawing.Point(477, 596);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(65, 12);
             this.label9.TabIndex = 44;
@@ -372,12 +401,13 @@
             // 
             // countClearButton
             // 
-            this.countClearButton.Location = new System.Drawing.Point(955, 518);
+            this.countClearButton.Location = new System.Drawing.Point(989, 593);
             this.countClearButton.Name = "countClearButton";
             this.countClearButton.Size = new System.Drawing.Size(75, 23);
             this.countClearButton.TabIndex = 45;
             this.countClearButton.Text = "计数清零";
             this.countClearButton.UseVisualStyleBackColor = true;
+            this.countClearButton.Click += new System.EventHandler(this.countClearButton_Click);
             // 
             // autoDetectionTimer
             // 
@@ -388,11 +418,86 @@
             this.autoSendTimer.Interval = 1000;
             this.autoSendTimer.Tick += new System.EventHandler(this.AutoSendTimer_Tick);
             // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.radioButton3);
+            this.groupBox1.Controls.Add(this.radioButton2);
+            this.groupBox1.Controls.Add(this.radioButton1);
+            this.groupBox1.Location = new System.Drawing.Point(14, 252);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(112, 152);
+            this.groupBox1.TabIndex = 46;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "用途";
+            // 
+            // radioButton1
+            // 
+            this.radioButton1.AutoSize = true;
+            this.radioButton1.Checked = true;
+            this.radioButton1.Location = new System.Drawing.Point(3, 31);
+            this.radioButton1.Name = "radioButton1";
+            this.radioButton1.Size = new System.Drawing.Size(71, 16);
+            this.radioButton1.TabIndex = 0;
+            this.radioButton1.TabStop = true;
+            this.radioButton1.Text = "普通串口";
+            this.radioButton1.UseVisualStyleBackColor = true;
+            // 
+            // radioButton2
+            // 
+            this.radioButton2.AutoSize = true;
+            this.radioButton2.Location = new System.Drawing.Point(3, 69);
+            this.radioButton2.Name = "radioButton2";
+            this.radioButton2.Size = new System.Drawing.Size(71, 16);
+            this.radioButton2.TabIndex = 1;
+            this.radioButton2.Text = "LoRa测试";
+            this.radioButton2.UseVisualStyleBackColor = true;
+            // 
+            // radioButton3
+            // 
+            this.radioButton3.AutoSize = true;
+            this.radioButton3.Location = new System.Drawing.Point(3, 107);
+            this.radioButton3.Name = "radioButton3";
+            this.radioButton3.Size = new System.Drawing.Size(65, 16);
+            this.radioButton3.TabIndex = 2;
+            this.radioButton3.Text = "485测试";
+            this.radioButton3.UseVisualStyleBackColor = true;
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(136, 283);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(101, 12);
+            this.label10.TabIndex = 47;
+            this.label10.Text = "LoRa地址(16进制)";
+            // 
+            // textBoxLoraAddr
+            // 
+            this.textBoxLoraAddr.Location = new System.Drawing.Point(246, 274);
+            this.textBoxLoraAddr.MaxLength = 8;
+            this.textBoxLoraAddr.Name = "textBoxLoraAddr";
+            this.textBoxLoraAddr.Size = new System.Drawing.Size(119, 21);
+            this.textBoxLoraAddr.TabIndex = 48;
+            // 
+            // checkBoxAutoAddr
+            // 
+            this.checkBoxAutoAddr.AutoSize = true;
+            this.checkBoxAutoAddr.Location = new System.Drawing.Point(138, 332);
+            this.checkBoxAutoAddr.Name = "checkBoxAutoAddr";
+            this.checkBoxAutoAddr.Size = new System.Drawing.Size(96, 16);
+            this.checkBoxAutoAddr.TabIndex = 49;
+            this.checkBoxAutoAddr.Text = "地址自动递增";
+            this.checkBoxAutoAddr.UseVisualStyleBackColor = true;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1070, 629);
+            this.ClientSize = new System.Drawing.Size(1079, 629);
+            this.Controls.Add(this.checkBoxAutoAddr);
+            this.Controls.Add(this.textBoxLoraAddr);
+            this.Controls.Add(this.label10);
+            this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.countClearButton);
             this.Controls.Add(this.label9);
             this.Controls.Add(this.label8);
@@ -426,6 +531,8 @@
             this.Name = "Form1";
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -465,6 +572,13 @@
         private System.Windows.Forms.Button countClearButton;
         private System.Windows.Forms.Timer autoDetectionTimer;
         private System.Windows.Forms.Timer autoSendTimer;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.RadioButton radioButton3;
+        private System.Windows.Forms.RadioButton radioButton2;
+        private System.Windows.Forms.RadioButton radioButton1;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.TextBox textBoxLoraAddr;
+        private System.Windows.Forms.CheckBox checkBoxAutoAddr;
     }
 }
 

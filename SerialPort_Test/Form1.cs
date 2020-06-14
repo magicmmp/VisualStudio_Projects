@@ -9,6 +9,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Text.RegularExpressions;
+using System.Windows.Threading;
 
 namespace SerialPort_Test
 {
@@ -28,10 +30,21 @@ namespace SerialPort_Test
         public Form1()
         {
             InitializeComponent();
+            System.Windows.Forms.Control.CheckForIllegalCrossThreadCalls = false;//避免跨线程不能改变UI控件
+
+            turnOnButton.BackColor = Color.Yellow;
+            turnOnButton.ForeColor = Color.Purple;
             GetValuablePortName();
             autoDetectionTimer.Enabled = true;
+            AutoSendCheckBox.Checked = false;
             //设置状态栏提示
             statusTextBlock.Text = "准备就绪";
+
+            portNamesCombobox.SelectedIndex = 0;
+            baudRateCombobox.SelectedIndex = 2;
+            parityCombobox.SelectedIndex = 0;
+            dataBitsCombobox.SelectedIndex = 3;
+            stopBitsCombobox.SelectedIndex = 0;
         }
 
 
@@ -59,22 +72,7 @@ namespace SerialPort_Test
         }
 
 
-        private void timer1_UpdatePorts_Tick(object sender, EventArgs e)
-        {
-            // 枚举可用串口
-            List<string> listPort = new List<string>();
-            foreach (string portName in SerialPort.GetPortNames())
-            {
-                listPort.Add(portName);
-            }
-
-            if (this.portNamesCombobox.Items.Count != listPort.Count)
-            {
-                this.portNamesCombobox.Items.Clear();
-                this.portNamesCombobox.Items.AddRange(listPort.ToArray());
-                this.portNamesCombobox.SelectedIndex = (this.portNamesCombobox.Items.Count > 0) ? 0 : -1;
-            }
-        }
+       
 
         private void comboBox_byte_size_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -83,11 +81,6 @@ namespace SerialPort_Test
 
         //到设计界面那里，双击界面后，会发现自动生成了Form1_load()，然后再进行代码编写。
         private void Form1_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label6_Click(object sender, EventArgs e)
         {
 
         }
@@ -159,7 +152,11 @@ namespace SerialPort_Test
 
         private void AutoSendTimer_Tick(object sender, EventArgs e)
         {
-
+            //发送数据
+            SerialPortSend();
+            //设置新的定时时间 
+            autoSendTimer.Interval = Convert.ToInt32(autoSendCycleTextBox.Text);
+                  
         }
 
         private void turnOnButton_CheckedChanged(object sender, EventArgs e)
@@ -191,17 +188,20 @@ namespace SerialPort_Test
 
                     //显示提示文字
                     turnOnButton.Text = "关闭串口";
-                    turnOnButton.ForeColor = Color.Red;
-                   
+                    turnOnButton.BackColor = Color.Green;
+                    turnOnButton.ForeColor = Color.OrangeRed;
+
 
                     //使能发送面板
                     // sendControlBorder.IsEnabled = true;
 
 
                 }
-                catch
+                catch (System.Exception ex)
                 {
-                    statusTextBlock.Text = "配置串口出错！";
+                    statusTextBlock.Text = "配置串口出错";
+                    receiveTextBox.Text = ex.ToString();
+
                 }
             }
             else//关闭了串口
@@ -212,6 +212,7 @@ namespace SerialPort_Test
 
                     //关闭定时器
                     autoSendTimer.Stop();
+                    AutoSendCheckBox.Checked = false;
 
                     //使能串口配置面板
                     serialSettingControlState(true);
@@ -220,6 +221,7 @@ namespace SerialPort_Test
 
                     //显示提示文字
                     turnOnButton.Text = "打开串口";
+                    turnOnButton.BackColor = Color.Yellow;
 
                     turnOnButton.ForeColor = Color.Gray;
                     //使能发送面板
@@ -234,13 +236,15 @@ namespace SerialPort_Test
 
 
         //接收数据
-        //private delegate void UpdateUiTextDelegate(string text);
+       //public delegate void UpdateUiTextDelegate(string text);
         private void ReceiveData(object sender, System.IO.Ports.SerialDataReceivedEventArgs e)
         {
             receiveData = serial.ReadExisting();
+            
+            //receiveTextBox.AppendText(receiveData);
             ShowData(receiveData);
             //WPF中，为了使该后台线程能够访问 主线程UI控件的属性，该后台线程必须将此工作委托给与该 UI 线程关联的 Dispatcher。
-            //Dispatcher.Invoke(DispatcherPriority.Send, new UpdateUiTextDelegate(ShowData), receiveData);
+           // Dispatcher.Invoke(DispatcherPriority.Send, new UpdateUiTextDelegate(ShowData), receiveData);
         }
 
         //显示数据
@@ -274,6 +278,202 @@ namespace SerialPort_Test
 
         }
 
+        private void receiveTextBox_TextChanged(object sender, EventArgs e)
+        {
+            if (receiveTextBox.Lines.Length >= 50 && autoClearCheckBox.Checked == true)
+            {
 
+                receiveTextBox.Clear();
+            }
+            else
+            {
+                try
+                {
+                    receiveTextBox.ScrollToCaret();
+                }
+                catch
+                {
+                }
+            }
+        }
+
+        private void ClearReceiveButton_Click(object sender, EventArgs e)
+        {
+            receiveTextBox.Clear();
+        }
+
+
+        //发送数据
+        private void SerialPortSend()
+        {
+            if (!serial.IsOpen)
+            {
+                statusTextBlock.Text = "请先打开串口！";
+                return;
+            }
+            try
+            {
+                string sendData = sendTextBox.Text;    //复制发送数据
+
+                //字符串发送
+                if (hexadecimalSendCheckBox.Checked == false)
+                {
+                    serial.Write(sendData);
+
+                    //更新发送数据计数
+                    sendBytesCount += (UInt32)sendData.Length;
+                    statusSendByteTextBlock.Text = sendBytesCount.ToString();
+
+                }
+                else //十六进制发送
+                {
+                    try
+                    {
+
+                        sendData = sendData.Trim();
+                        sendData.Replace("0x", "");   //去掉0x
+                        sendData.Replace("0X", "");   //去掉0X
+                                                      //  sendData.
+
+
+                        string[] strArray = sendData.Split(new char[] { ',', '，', '\r', '\n', ' ', '\t' });
+                        int decNum = 0;
+                        int i = 0;
+                        byte[] sendBuffer = new byte[strArray.Length];  //发送数据缓冲区
+
+                        foreach (string str in strArray)
+                        {
+                            try
+                            {
+                                decNum = Convert.ToInt16(str, 16);
+                                sendBuffer[i++] = Convert.ToByte(decNum);
+                                
+                            }
+                            catch
+                            {
+                                //MessageBox.Show("字节越界，请逐个字节输入！", "Error");                          
+                            }
+                        }
+                        /**
+                        receiveTextBox.AppendText("\r\n "+"字节数=" + sendBuffer.Length+ "\r\n ");
+                        foreach (byte byt in sendBuffer)
+                        {
+                            
+                            receiveTextBox.AppendText(byt + " ");
+                        }
+                        */
+                        serial.Write(sendBuffer, 0, sendBuffer.Length);
+
+                        //更新发送数据计数
+                        sendBytesCount += (UInt32)sendBuffer.Length;
+                        statusSendByteTextBlock.Text = sendBytesCount.ToString();
+
+                    }
+                    catch //无法转为16进制时
+                    {
+                        AutoSendCheckBox.Checked = false;//关闭自动发送
+                        statusTextBlock.Text = "当前为16进制发送模式，请输入16进制数据";
+                        return;
+                    }
+
+                }
+
+            }
+            catch
+            {
+
+            }
+
+        }
+
+        private void SendButton_Click(object sender, EventArgs e)
+        {
+                SerialPortSend();          
+        }
+
+        private void AutoSendCheckBox_CheckStateChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        //自动发送开关
+        private void AutoSendCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+
+            if(AutoSendCheckBox.Checked)
+            {
+                autoSendTimer.Interval = Convert.ToInt32(autoSendCycleTextBox.Text);
+                autoSendTimer.Enabled = true;
+            }
+            else
+            {
+                autoSendTimer.Enabled = false;
+            }
+            
+        }
+
+        private void ClearSendButton_Click(object sender, EventArgs e)
+        {
+            sendTextBox.Clear();
+        }
+
+        private void autoSendCycleTextBox_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if ((e.KeyChar < 48 || e.KeyChar > 57) && e.KeyChar != 8)
+                e.Handled = true;
+        }
+
+        private void sendTextBox_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            //不让输入非16进制的字符
+            if (hexadecimalSendCheckBox.Checked)
+            {
+                bool flag = true;
+                for (int i = 0; i < 6; i++)
+                {
+                    if (e.KeyChar == (char)('a' + i) || e.KeyChar == (char)('A' + i))
+                    {
+                        flag = false;
+                    }
+                }
+
+                for (int i = 0; i < 10; i++)
+                {
+                    if (e.KeyChar == (char)('0' + i))
+                    {
+                        flag = false;
+                    }
+                }
+
+                if (e.KeyChar == (char)8 || e.KeyChar == (char)13 || e.KeyChar == (char)32)
+                {
+                    flag = false;
+                }
+                e.Handled = flag;
+            }
+        }
+
+        private void countClearButton_Click(object sender, EventArgs e)
+        {
+            //接收、发送计数清零
+            receiveBytesCount = 0;
+            sendBytesCount = 0;
+
+            //更新数据显示
+            statusReceiveByteTextBlock.Text = receiveBytesCount.ToString();
+            statusSendByteTextBlock.Text = sendBytesCount.ToString();
+        }
+
+        private void stopShowingButton_CheckedChanged(object sender, EventArgs e)
+        {
+            if(stopShowingButton.Checked)
+            {
+                stopShowingButton.Text = "恢复显示";
+            }
+            else
+            {
+                stopShowingButton.Text = "停止显示";
+            }
+        }
     }
 }

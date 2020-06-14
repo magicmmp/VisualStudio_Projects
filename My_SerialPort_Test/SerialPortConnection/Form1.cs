@@ -186,7 +186,7 @@ namespace SerialPortConnection
                     //txtReceive.Text += sp1.ReadLine() + "\r\n"; //注意：回车换行必须这样写，单独使用"\r"和"\n"都不会有效果
                     txtReceive.Text += Encoding.UTF8.GetString(receivedData) + "\r\n";
 
-                    //sp1.DiscardInBuffer();                      //清空SerialPort控件的Buffer 
+                    sp1.DiscardInBuffer();                      //清空SerialPort控件的Buffer 
                 }
                 else                                            //'发送16进制按钮'
                 {

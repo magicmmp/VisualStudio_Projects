@@ -26,9 +26,11 @@ namespace SerialPort_Test
         
         private byte[] arrayLoraCmdSetAddr = { 0xEE, 0x16, 0x08, 0x00, 0x00, 0x00, 0x80, 0x00, 0x21, 0xAD };
         private byte[] arrayLoraCmdCheck   = { 0xEE, 0x15, 0x06, 0x80, 0x00, 0x21, 0x01, 0xAB};
-        private byte[] arrayLoraCmdOff = { 0xEE, 0x15, 0x06, 0x80, 0x00, 0xaa };
+        private byte[] arrayLoraCmdOff = { 0xEE, 0x11, 0x07, 0x00, 0x00, 0x00, 0x00, 0x64,0x6a};//ee 11 07 00 00 00 00 64 6a
         private string[] HexCmdLines;//指令数组，一串指令一行
-        private int nCmdTosend = 0;//余下多少行命令要发送
+        private int nCmdLinesTosend = 0;//余下多少行命令要发送
+        private int n485ResendTimes = 1;
+        private int LoraAddr = 0x800021;
         private int HexCmdLinesIndex = 0;
 
         //EE 15 06 80 00 21 01 AB 
@@ -39,21 +41,7 @@ namespace SerialPort_Test
         public Form1()
         {
             InitializeComponent();
-            System.Windows.Forms.Control.CheckForIllegalCrossThreadCalls = false;//避免跨线程不能改变UI控件
-
-            turnOnButton.BackColor = Color.Yellow;
-            turnOnButton.ForeColor = Color.Purple;
-            GetValuablePortName();
-            autoDetectionTimer.Enabled = true;
-            AutoSendCheckBox.Checked = false;
-            //设置状态栏提示
-            statusTextBlock.Text = "准备就绪";
-
-            portNamesCombobox.SelectedIndex = 0;
-            baudRateCombobox.SelectedIndex = 2;
-            parityCombobox.SelectedIndex = 0;
-            dataBitsCombobox.SelectedIndex = 3;
-            stopBitsCombobox.SelectedIndex = 0;
+            
         }
 
 
@@ -91,9 +79,40 @@ namespace SerialPort_Test
         //到设计界面那里，双击界面后，会发现自动生成了Form1_load()，然后再进行代码编写。
         private void Form1_Load(object sender, EventArgs e)
         {
+            System.Windows.Forms.Control.CheckForIllegalCrossThreadCalls = false;//避免跨线程不能改变UI控件
 
+            turnOnButton.BackColor = Color.Yellow;
+            turnOnButton.ForeColor = Color.Purple;
+            GetValuablePortName();
+            autoDetectionTimer.Enabled = true;
+            AutoSendCheckBox.Checked = false;
+            //设置状态栏提示
+            statusDisplay(true, "准备就绪");
+            LoRaSettingControlState(false);
+            n485SettingControlState(false);
+            //textBoxLoraAddr.Text = string.Format("{0:X6}",LoraAddr);
+
+            portNamesCombobox.SelectedIndex = 0;
+            baudRateCombobox.SelectedIndex = 2;
+            parityCombobox.SelectedIndex = 0;
+            dataBitsCombobox.SelectedIndex = 3;
+            stopBitsCombobox.SelectedIndex = 0;
         }
 
+        private void statusDisplay(bool isNormal,string strMsg)
+        {
+            statusTextBlock.Text = strMsg;
+            if (isNormal)
+            {
+                statusTextBlock.BackColor = Color.LightYellow;
+                statusTextBlock.ForeColor = Color.Blue;
+            }
+            else
+            {
+                statusTextBlock.BackColor = Color.Red;
+                statusTextBlock.ForeColor = Color.Green;
+            }
+        }
 
         private void label6_Click_1(object sender, EventArgs e)
         {
@@ -121,7 +140,8 @@ namespace SerialPort_Test
                 portNamesCombobox.Items.Remove(serial.PortName);
                 portNamesCombobox.SelectedIndex = 0;
                 //提示消息
-                statusTextBlock.Text = "串口已失效！";
+                
+                statusDisplay(false, "串口已失效！");
             }
             else
             {
@@ -138,7 +158,8 @@ namespace SerialPort_Test
                     }
                     portNamesCombobox.SelectedIndex = 0;
 
-                    statusTextBlock.Text = "串口列表已更新！";
+                    
+                    statusDisplay(true, "串口列表已更新！");
 
                 }
             }
@@ -154,20 +175,56 @@ namespace SerialPort_Test
             stopBitsCombobox.Enabled = state;
         }
 
+        //使能或关闭LoRa配置相关的控件
+        private void LoRaSettingControlState(bool state)
+        {
+            label10.Enabled = state;
+            textBoxLoraAddr.Enabled = state;
+            checkBoxAutoAddr.Enabled = state;
+        }
+
+        //使能或关闭485配置相关的控件
+        private void n485SettingControlState(bool state)
+        {
+            label11.Enabled = state;
+            label12.Enabled = state;
+            textBox485ResendTimes.Enabled = state;
+            
+        }
 
         private void AutoSendTimer_Tick(object sender, EventArgs e)
         {
             //发送数据
             if(serialUsageMode==0)
                 SerialPortSend();
-            else if(nCmdTosend>0 && HexCmdLinesIndex< HexCmdLines.Length)
+            else if(nCmdLinesTosend>0)//如果还有几行命令要发送
             {
-                SendHexString(HexCmdLines[HexCmdLinesIndex++]);
-                nCmdTosend--;
+                SendHexString(HexCmdLines[HexCmdLinesIndex]);
+                HexCmdLinesIndex = (HexCmdLinesIndex + 1) % HexCmdLines.Length;
+                nCmdLinesTosend--;
+                label12.Text = "剩余次数： "+(nCmdLinesTosend / HexCmdLines.Length);
+                if(nCmdLinesTosend==0)
+                    autoSendTimer.Enabled = false;
+
+                if (serialUsageMode == 1 && nCmdLinesTosend ==0)//如果是LoRA指令且要处理地址自动递增
+                {
+                    if (radioButtonLora.Checked && checkBoxAutoAddr.Checked)
+                    {
+                        LoraAddr++;
+                        textBoxLoraAddr.Text = string.Format("{0:X6}", LoraAddr);
+                        sendTextBox.Text = generateLoraCmds(LoraAddr);
+                    }
+                }
             }
 
             //设置新的定时时间 
-            autoSendTimer.Interval = Convert.ToInt32(autoSendCycleTextBox.Text);
+            if(!string.IsNullOrEmpty(autoSendCycleTextBox.Text))
+            {
+                int tmpInterval= Convert.ToInt32(autoSendCycleTextBox.Text);
+                if(tmpInterval>0)
+                    autoSendTimer.Interval = tmpInterval;
+            }
+                
                   
         }
 
@@ -196,7 +253,8 @@ namespace SerialPort_Test
                     //关闭串口配置面板
                     serialSettingControlState(false);
 
-                    statusTextBlock.Text = "串口已开启";
+                    
+                    statusDisplay(true, "串口已开启");
 
                     //显示提示文字
                     turnOnButton.Text = "关闭串口";
@@ -211,7 +269,8 @@ namespace SerialPort_Test
                 }
                 catch (System.Exception ex)
                 {
-                    statusTextBlock.Text = "配置串口出错";
+                   
+                    statusDisplay(false, "配置串口出错");
                     receiveTextBox.Text = ex.ToString();
 
                 }
@@ -229,7 +288,8 @@ namespace SerialPort_Test
                     //使能串口配置面板
                     serialSettingControlState(true);
 
-                    statusTextBlock.Text = "串口已关闭";
+                    
+                    statusDisplay(true, "串口已关闭");
 
                     //显示提示文字
                     turnOnButton.Text = "打开串口";
@@ -318,11 +378,7 @@ namespace SerialPort_Test
         //发送数据
         private void SerialPortSend()
         {
-            if (!serial.IsOpen)
-            {
-                statusTextBlock.Text = "请先打开串口！";
-                return;
-            }
+            
             try
             {
                 string sendData = sendTextBox.Text;    //复制发送数据
@@ -389,15 +445,51 @@ namespace SerialPort_Test
             catch //无法转为16进制时
             {
                 AutoSendCheckBox.Checked = false;//关闭自动发送
-                statusTextBlock.Text = "当前为16进制发送模式，请输入16进制数据";
+                
+                statusDisplay(false, "当前为16进制发送模式，请输入16进制数据");
                 return;
             }
         }
 
+
+        /**
+         * else if(nCmdLinesTosend>0 && HexCmdLinesIndex< HexCmdLines.Length)
+            {
+                SendHexString(HexCmdLines[HexCmdLinesIndex++]);
+                nCmdTosend--;
+            }
+         */
         private void SendButton_Click(object sender, EventArgs e)
         {
+            if (!serial.IsOpen)
+            {
+
+                statusDisplay(false, "请先打开串口！");
+                return;
+            }
+
             if (serialUsageMode == 0)
-                SerialPortSend();          
+                SerialPortSend();
+            else if(nCmdLinesTosend==0)//发完上一组指令才能再发别的
+            {
+                //AutoSendCheckBox.Checked = true;//自动发送多组指令需要使用定时器
+                autoSendTimer.Enabled = true;
+                receiveTextBox.Text = "";
+                string CmdLines = sendTextBox.Text;
+                HexCmdLines = CmdLines.Split(new string[] { "\r\n" },
+                                   StringSplitOptions.RemoveEmptyEntries);
+                HexCmdLinesIndex = 0;
+                if (serialUsageMode == 1)//如果是LoRa测试
+                    nCmdLinesTosend = HexCmdLines.Length;
+                else
+                    nCmdLinesTosend = HexCmdLines.Length*n485ResendTimes;
+            }
+            else
+            {
+                autoSendTimer.Enabled = false;
+                nCmdLinesTosend = 0;
+                receiveTextBox.AppendText("\r\n\r\n已停止当前发送操作。\r\n\r\n");
+            }
         }
 
         private void AutoSendCheckBox_CheckStateChanged(object sender, EventArgs e)
@@ -514,29 +606,80 @@ namespace SerialPort_Test
             
         }
 
+
+        void howToUse(int mode)
+        {
+            StringBuilder sb = new StringBuilder(256);
+            int LineWidth = 96;
+            for (int i = 0; i < LineWidth; i++)
+                sb.Append('*');
+            sb.Append("\r\n");
+            for (int i = 0; i < LineWidth/2-3; i++)
+                sb.Append(' ');
+            sb.Append("串口使用说明\r\n");
+
+
+            switch (mode)
+            {
+                case 0 :
+                    
+                    break;
+
+                case 1:
+
+                    break;
+
+                case 2:
+
+                    break;
+            }
+            receiveTextBox.Text = sb.ToString();
+        }
+
+
         private void radioButtonPort_CheckedChanged(object sender, EventArgs e)
         {
             if(radioButtonPort.Checked)
             {
                 serialUsageMode = 0;
+                howToUse(0);
             }
             else
+            {
+                
                 AutoSendCheckBox.Checked = true;
+                hexadecimalDisplayCheckBox.Checked = true;
+                hexadecimalSendCheckBox.Checked = true;
+            }
+            
         }
 
         private void radioButtonLora_CheckedChanged(object sender, EventArgs e)
         {
-            if (radioButtonPort.Checked)
+            if (radioButtonLora.Checked)
             {
+                LoRaSettingControlState(true);
+                textBoxLoraAddr.Text = string.Format("{0:X6}", LoraAddr);
                 serialUsageMode = 1;
+            }
+            else
+            {
+                LoRaSettingControlState(false);
             }
         }
 
         private void radioButton485_CheckedChanged(object sender, EventArgs e)
         {
-            if (radioButtonPort.Checked)
+            if (radioButton485.Checked)
             {
+                n485SettingControlState(true);
+                textBox485ResendTimes.Text= string.Format("{0}", n485ResendTimes);
                 serialUsageMode = 2;
+
+            }
+            else
+            {
+                n485SettingControlState(false);
             }
         }
 
@@ -546,61 +689,80 @@ namespace SerialPort_Test
             private byte[] arrayLoraCmdOff = { 0xEE, 0x15, 0x06, 0x80, 0x00, 0xaa };
          * */
 
+        //根据LoRa地址自动生成多条命令
+        private string generateLoraCmds(int addrInt)
+        {
+            int i;
+            int sumTmp;
+            StringBuilder sb = new StringBuilder(128);
+
+            arrayLoraCmdSetAddr[8] = (byte)(addrInt & 0xff);
+            arrayLoraCmdSetAddr[7] = (byte)(addrInt >> 8 & 0xff);
+            arrayLoraCmdSetAddr[6] = (byte)(addrInt >> 16 & 0xff);
+            for (i = 0, sumTmp = 0; i < arrayLoraCmdSetAddr.Length - 1; i++)
+            {
+                sumTmp += arrayLoraCmdSetAddr[i];
+            }
+            arrayLoraCmdSetAddr[arrayLoraCmdSetAddr.Length - 1] = (byte)(sumTmp & 0xff);
+
+
+            arrayLoraCmdCheck[5] = (byte)(addrInt & 0xff);
+            arrayLoraCmdCheck[4] = (byte)(addrInt >> 8 & 0xff);
+            arrayLoraCmdCheck[3] = (byte)(addrInt >> 16 & 0xff);
+            for (i = 0, sumTmp = 0; i < arrayLoraCmdCheck.Length - 1; i++)
+            {
+                sumTmp += arrayLoraCmdCheck[i];
+            }
+            arrayLoraCmdCheck[arrayLoraCmdCheck.Length - 1] = (byte)(sumTmp & 0xff);
+
+
+            //sendTextBox.Text = "";
+            foreach (byte b in arrayLoraCmdSetAddr)
+            {
+                sb.AppendFormat("{0:X2} ", b);
+            }
+            sb.Append("\r\n");
+
+            foreach (byte b in arrayLoraCmdCheck)
+            {
+                sb.AppendFormat("{0:X2} ", b);
+            }
+            sb.Append("\r\n");
+
+            if(false)
+            foreach (byte b in arrayLoraCmdOff)
+            {
+                sb.AppendFormat("{0:X2} ", b);
+            }
+            sb.Append("\r\n");
+
+            return sb.ToString();  
+        }
+
+
+
         private void textBoxLoraAddr_Validating(object sender, CancelEventArgs e)
         {
+            //if(radioButtonLora.Checked)
             if (!string.IsNullOrEmpty(textBoxLoraAddr.Text))
             {
-                StringBuilder sb = new StringBuilder(128);
-                int addrInt = Convert.ToInt32(textBoxLoraAddr.Text, 16);
-                int i;
-                int sumTmp;
-
-                arrayLoraCmdSetAddr[8] =(byte)( addrInt & 0xff);
-                arrayLoraCmdSetAddr[7] = (byte)(addrInt>>8 & 0xff);
-                arrayLoraCmdSetAddr[6] = (byte)(addrInt>>16 & 0xff);
-                for(i=0,sumTmp=0;i < arrayLoraCmdSetAddr.Length - 1;i++)
-                {
-                    sumTmp += arrayLoraCmdSetAddr[i];
-                }
-                arrayLoraCmdSetAddr[arrayLoraCmdSetAddr.Length - 1] = (byte)(sumTmp & 0xff);
-
-
-                arrayLoraCmdCheck[5] = (byte)(addrInt & 0xff);
-                arrayLoraCmdCheck[4] = (byte)(addrInt >> 8 & 0xff);
-                arrayLoraCmdCheck[3] = (byte)(addrInt >> 16 & 0xff);
-                for (i = 0, sumTmp = 0; i < arrayLoraCmdCheck.Length - 1; i++)
-                {
-                    sumTmp += arrayLoraCmdCheck[i];
-                }
-                arrayLoraCmdCheck[arrayLoraCmdCheck.Length - 1] = (byte)(sumTmp & 0xff);
-
-
-                //sendTextBox.Text = "";
-                foreach (byte b in arrayLoraCmdSetAddr)
-                {
-                    sb.AppendFormat("{0:X2} ", b);
-                }
-                sb.Append("\r\n");
-
-                foreach (byte b in arrayLoraCmdCheck)
-                {
-                    sb.AppendFormat("{0:X2} ", b);
-                }
-                sb.Append("\r\n");
-
-                foreach (byte b in arrayLoraCmdOff)
-                {
-                    sb.AppendFormat("{0:X2} ", b);
-                }
-                sb.Append("\r\n");
-
-
-
-                sendTextBox.Text = sb.ToString();
+                LoraAddr = Convert.ToInt32(textBoxLoraAddr.Text, 16);
+                sendTextBox.Text = generateLoraCmds(LoraAddr);
             }
             
 
 
+        }
+
+        private void textBox485ResendTimes_Validating(object sender, CancelEventArgs e)
+        {
+            if (!string.IsNullOrEmpty(textBox485ResendTimes.Text))
+            {
+                n485ResendTimes = Convert.ToInt32(textBox485ResendTimes.Text, 10);
+                if(HexCmdLines!=null)
+                    nCmdLinesTosend = HexCmdLines.Length * n485ResendTimes;
+                //receiveTextBox.Text = n485ResendTimes+"";
+            }
         }
     }
 }

@@ -635,32 +635,22 @@ namespace SerialPort_Test
         }
 
 
-        void howToUse(int mode)
+        void howToUse()
         {
             StringBuilder sb = new StringBuilder(256);
-            int LineWidth = 96;
+            int LineWidth = 100;
             for (int i = 0; i < LineWidth; i++)
                 sb.Append('*');
             sb.Append("\r\n");
-            for (int i = 0; i < LineWidth/2-3; i++)
+            for (int i = 0; i < LineWidth/2-5; i++)
                 sb.Append(' ');
             sb.Append("串口使用说明\r\n");
-
-
-            switch (mode)
-            {
-                case 0 :
-                    
-                    break;
-
-                case 1:
-
-                    break;
-
-                case 2:
-
-                    break;
-            }
+            sb.Append("  1、用作“普通串口”时，使用方法和其他串口软件相同。\r\n");
+            sb.Append("  2、填写16进制数字时，各个数字间以空格或逗号分隔。可以省略0x前缀。\r\n");
+            sb.Append("  3、Lora测试：设置好 下一个LoRa地址 后，鼠标点一下输入框，本次地址相关的命令将自动填写。\r\n");
+            sb.Append("              这些命令将以“自动发送周期”的间隔逐条发出。\r\n");
+            sb.Append("  4、485测试：可以将多条命令写入发送框，每行一条。这些命令将逐行发出。\r\n");
+            receiveTextBox.Clear();
             receiveTextBox.Text = sb.ToString();
         }
 
@@ -670,14 +660,14 @@ namespace SerialPort_Test
             if(radioButtonPort.Checked)
             {
                 serialUsageMode = 0;
-                howToUse(0);
+                
             }
             else
             {
-                
                 AutoSendCheckBox.Checked = true;
                 hexadecimalDisplayCheckBox.Checked = true;
                 hexadecimalSendCheckBox.Checked = true;
+                howToUse();
             }
             
         }

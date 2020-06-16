@@ -71,6 +71,7 @@
             this.label11 = new System.Windows.Forms.Label();
             this.textBox485ResendTimes = new System.Windows.Forms.TextBox();
             this.label12 = new System.Windows.Forms.Label();
+            this.label13 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -212,6 +213,7 @@
             this.sendTextBox.Name = "sendTextBox";
             this.sendTextBox.Size = new System.Drawing.Size(683, 264);
             this.sendTextBox.TabIndex = 22;
+            this.sendTextBox.TextChanged += new System.EventHandler(this.sendTextBox_TextChanged);
             this.sendTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.sendTextBox_KeyPress);
             // 
             // receiveTextBox
@@ -258,7 +260,8 @@
             this.autoSendCycleTextBox.TabIndex = 29;
             this.autoSendCycleTextBox.Text = "1000";
             this.autoSendCycleTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.autoSendCycleTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.autoSendCycleTextBox_KeyPress);
+            this.autoSendCycleTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxLoraAddr_KeyPress);
+            this.autoSendCycleTextBox.Validating += new System.ComponentModel.CancelEventHandler(this.autoSendCycleTextBox_Validating);
             // 
             // label7
             // 
@@ -540,11 +543,21 @@
             this.label12.TabIndex = 52;
             this.label12.Text = "剩余次数：0";
             // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(271, 410);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(47, 12);
+            this.label13.TabIndex = 53;
+            this.label13.Text = "字数：0";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1089, 694);
+            this.Controls.Add(this.label13);
             this.Controls.Add(this.label12);
             this.Controls.Add(this.textBox485ResendTimes);
             this.Controls.Add(this.label11);
@@ -637,6 +650,7 @@
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.TextBox textBox485ResendTimes;
         private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.Label label13;
     }
 }
 

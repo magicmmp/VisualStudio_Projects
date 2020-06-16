@@ -92,11 +92,15 @@ namespace SerialPort_Test
             n485SettingControlState(false);
             //textBoxLoraAddr.Text = string.Format("{0:X6}",LoraAddr);
 
-            portNamesCombobox.SelectedIndex = 0;
-            baudRateCombobox.SelectedIndex = 2;
-            parityCombobox.SelectedIndex = 0;
-            dataBitsCombobox.SelectedIndex = 3;
-            stopBitsCombobox.SelectedIndex = 0;
+            if(portNamesCombobox.Items.Count>0)
+            {
+                portNamesCombobox.SelectedIndex = 0;
+                baudRateCombobox.SelectedIndex = 2;
+                parityCombobox.SelectedIndex = 0;
+                dataBitsCombobox.SelectedIndex = 3;
+                stopBitsCombobox.SelectedIndex = 0;
+            }
+           // receiveTextBox.Text = "串口个数是：" + portNamesCombobox.Items.Count;
         }
 
         private void statusDisplay(bool isNormal,string strMsg)
@@ -217,11 +221,17 @@ namespace SerialPort_Test
                 }
             }
 
+            
+            CheckAndResetSendCycleTextBox();
             //设置新的定时时间 
-            if(!string.IsNullOrEmpty(autoSendCycleTextBox.Text))
+            if (!string.IsNullOrEmpty(autoSendCycleTextBox.Text))
             {
                 int tmpInterval= Convert.ToInt32(autoSendCycleTextBox.Text);
-                if(tmpInterval>0)
+
+                int nBitsTosend = sendTextBox.Text.Length * 32;
+                int minPeriodNeeded=nBitsTosend*1000 / Convert.ToInt32(baudRateCombobox.Text);
+
+                if (tmpInterval>0)
                     autoSendTimer.Interval = tmpInterval;
             }
                 
@@ -230,7 +240,7 @@ namespace SerialPort_Test
 
         private void turnOnButton_CheckedChanged(object sender, EventArgs e)
         {
-            if(turnOnButton.Checked)//打开串口
+            if(turnOnButton.Checked && !serial.IsOpen)//打开串口
             {
                 try
                 {
@@ -279,16 +289,13 @@ namespace SerialPort_Test
             {
                 try
                 {
-                    serial.Close();
-
                     //关闭定时器
                     autoSendTimer.Stop();
                     AutoSendCheckBox.Checked = false;
-
                     //使能串口配置面板
                     serialSettingControlState(true);
 
-                    
+
                     statusDisplay(true, "串口已关闭");
 
                     //显示提示文字
@@ -296,6 +303,16 @@ namespace SerialPort_Test
                     turnOnButton.BackColor = Color.Yellow;
 
                     turnOnButton.ForeColor = Color.Gray;
+
+                    System.Threading.Thread.Sleep(1000); //毫秒
+
+
+                    serial.Close();
+
+                    
+                    
+
+                    
                     //使能发送面板
                     //sendControlBorder.IsEnabled = false;
                 }
@@ -311,7 +328,7 @@ namespace SerialPort_Test
        //public delegate void UpdateUiTextDelegate(string text);
         private void ReceiveData(object sender, System.IO.Ports.SerialDataReceivedEventArgs e)
         {
-            receiveData = serial.ReadExisting();
+            receiveData = serial.ReadExisting();//如果正在高速收发数据，突然关了的话，会有异常？
             
             //receiveTextBox.AppendText(receiveData);
             ShowData(receiveData);
@@ -352,20 +369,22 @@ namespace SerialPort_Test
 
         private void receiveTextBox_TextChanged(object sender, EventArgs e)
         {
-            if (receiveTextBox.Lines.Length >= 50 && autoClearCheckBox.Checked == true)
-            {
 
+            if (receiveTextBox.Text.Length > 102400) 
                 receiveTextBox.Clear();
-            }
-            else
+            else if (autoClearCheckBox.Checked == true && receiveTextBox.Lines.Length >= 100)
             {
-                try
-                {
-                    receiveTextBox.ScrollToCaret();
-                }
-                catch
-                {
-                }
+                    receiveTextBox.Clear();       
+            }
+
+            label13.Text = "字数： " + receiveTextBox.Text.Length;
+
+            try
+            {
+                receiveTextBox.ScrollToCaret();
+            }
+            catch
+            {
             }
         }
 
@@ -468,7 +487,14 @@ namespace SerialPort_Test
                 return;
             }
 
-            if (serialUsageMode == 0)
+            if (portNamesCombobox.Items.Count ==0 )
+            {
+                statusDisplay(false, "没有可用串口！");
+                return;
+            }
+
+
+                if (serialUsageMode == 0)
                 SerialPortSend();
             else if(nCmdLinesTosend==0)//发完上一组指令才能再发别的
             {
@@ -503,6 +529,8 @@ namespace SerialPort_Test
 
             if(AutoSendCheckBox.Checked)
             {
+                CheckAndResetSendCycleTextBox();
+
                 autoSendTimer.Interval = Convert.ToInt32(autoSendCycleTextBox.Text);
                 autoSendTimer.Enabled = true;
             }
@@ -764,5 +792,50 @@ namespace SerialPort_Test
                 //receiveTextBox.Text = n485ResendTimes+"";
             }
         }
+
+        private void autoSendCycleTextBox_Validating(object sender, CancelEventArgs e)
+        {
+            if (AutoSendCheckBox.Checked)
+                CheckAndResetSendCycleTextBox();
+        }
+
+        private void sendTextBox_TextChanged(object sender, EventArgs e)
+        {
+            if(AutoSendCheckBox.Checked)
+                CheckAndResetSendCycleTextBox();
+        }
+
+
+        //避免自动发送周期设置过小
+        void CheckAndResetSendCycleTextBox()
+        {
+            long LMinPeriodNeeded;
+            if (hexadecimalSendCheckBox.Checked)
+            {
+                LMinPeriodNeeded = 100;
+                long curInterval = 0;
+                if (!string.IsNullOrEmpty(autoSendCycleTextBox.Text))
+                    curInterval = Convert.ToInt32(autoSendCycleTextBox.Text);
+                if (curInterval < LMinPeriodNeeded)
+                    autoSendCycleTextBox.Text = string.Format("{0}", LMinPeriodNeeded);
+            } 
+            else
+            {
+                double nBitsTosend = sendTextBox.Text.Length * 32;
+                double minPeriodNeeded = nBitsTosend * 1500 / Convert.ToInt32(baudRateCombobox.Text);
+                LMinPeriodNeeded = (long)minPeriodNeeded;
+                if (LMinPeriodNeeded < 10)
+                    LMinPeriodNeeded = 10;
+                long curInterval = 0;
+                if (!string.IsNullOrEmpty(autoSendCycleTextBox.Text))
+                    curInterval = Convert.ToInt32(autoSendCycleTextBox.Text);
+                if (curInterval < LMinPeriodNeeded)
+                    autoSendCycleTextBox.Text = string.Format("{0}", LMinPeriodNeeded);
+ 
+            }
+            //receiveTextBox.Clear();
+            //receiveTextBox.AppendText("需要最小周期：" + LMinPeriodNeeded);
+        }
+
     }
 }

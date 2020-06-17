@@ -224,24 +224,28 @@ namespace SerialPort_Test
             
             CheckAndResetSendCycleTextBox();
             //设置新的定时时间 
-            if (!string.IsNullOrEmpty(autoSendCycleTextBox.Text))
-            {
-                int tmpInterval= Convert.ToInt32(autoSendCycleTextBox.Text);
-
-                int nBitsTosend = sendTextBox.Text.Length * 32;
-                int minPeriodNeeded=nBitsTosend*1000 / Convert.ToInt32(baudRateCombobox.Text);
-
-                if (tmpInterval>0)
-                    autoSendTimer.Interval = tmpInterval;
-            }
+           
                 
                   
         }
 
         private void turnOnButton_CheckedChanged(object sender, EventArgs e)
         {
-            if(turnOnButton.Checked && !serial.IsOpen)//打开串口
+            //测试清空combobox
+            //portNamesCombobox.Items.Clear();
+
+            if (portNamesCombobox.Items.Count == 0)
             {
+                statusDisplay(false, "没有可用串口！");
+                //按钮回弹
+                turnOnButton.Checked = false;
+                return;
+            }
+
+            if (turnOnButton.Checked && !serial.IsOpen)//打开串口
+            {
+                
+
                 try
                 {
                     //配置串口
@@ -487,11 +491,7 @@ namespace SerialPort_Test
                 return;
             }
 
-            if (portNamesCombobox.Items.Count ==0 )
-            {
-                statusDisplay(false, "没有可用串口！");
-                return;
-            }
+            
 
 
                 if (serialUsageMode == 0)
@@ -667,6 +667,7 @@ namespace SerialPort_Test
                 AutoSendCheckBox.Checked = true;
                 hexadecimalDisplayCheckBox.Checked = true;
                 hexadecimalSendCheckBox.Checked = true;
+                autoSendCycleTextBox.Text = string.Format("{0}", 1000);//默认一秒发一条命令
                 howToUse();
             }
             
@@ -678,6 +679,7 @@ namespace SerialPort_Test
             {
                 LoRaSettingControlState(true);
                 textBoxLoraAddr.Text = string.Format("{0:X6}", LoraAddr);
+                sendTextBox.Text = generateLoraCmds(LoraAddr);
                 serialUsageMode = 1;
             }
             else
@@ -690,6 +692,7 @@ namespace SerialPort_Test
         {
             if (radioButton485.Checked)
             {
+                sendTextBox.Text = generate485Cmds();
                 n485SettingControlState(true);
                 textBox485ResendTimes.Text= string.Format("{0}", n485ResendTimes);
                 serialUsageMode = 2;
@@ -757,7 +760,20 @@ namespace SerialPort_Test
             return sb.ToString();  
         }
 
+        private string generate485Cmds()
+        {
+            StringBuilder sb = new StringBuilder(128);
 
+            sb.Append("EE 15 06 01 00 01 01 0C\r\n");//查询指令
+            sb.Append("ee 11 07 00 00 00 01 64 6b\r\n");
+            sb.Append("ee 11 07 00 00 00 64 3C A6\r\n");
+            sb.Append("ee 11 07 00 00 00 64 28 92\r\n");
+            sb.Append("ee 11 07 00 00 00 64 14 7E\r\n");
+            sb.Append("ee 11 07 00 00 00 64 00 6A\r\n");
+            sb.Append("ee 11 07 00 00 00 00 64 6a\r\n");
+            //sb.Append("");
+            return sb.ToString();
+        }
 
         private void textBoxLoraAddr_Validating(object sender, CancelEventArgs e)
         {
@@ -776,9 +792,14 @@ namespace SerialPort_Test
         {
             if (!string.IsNullOrEmpty(textBox485ResendTimes.Text))
             {
-                n485ResendTimes = Convert.ToInt32(textBox485ResendTimes.Text, 10);
-                if(HexCmdLines!=null)
-                    nCmdLinesTosend = HexCmdLines.Length * n485ResendTimes;
+                int tmp= Convert.ToInt32(textBox485ResendTimes.Text, 10);
+                if(tmp!= n485ResendTimes && tmp >0)
+                {
+                    n485ResendTimes = Convert.ToInt32(textBox485ResendTimes.Text, 10);
+                    if (HexCmdLines != null)
+                        nCmdLinesTosend = HexCmdLines.Length * n485ResendTimes;
+                }
+                
                 //receiveTextBox.Text = n485ResendTimes+"";
             }
         }
@@ -802,7 +823,7 @@ namespace SerialPort_Test
             long LMinPeriodNeeded;
             if (hexadecimalSendCheckBox.Checked)
             {
-                LMinPeriodNeeded = 100;
+                LMinPeriodNeeded = 200;
                 long curInterval = 0;
                 if (!string.IsNullOrEmpty(autoSendCycleTextBox.Text))
                     curInterval = Convert.ToInt32(autoSendCycleTextBox.Text);
@@ -812,7 +833,7 @@ namespace SerialPort_Test
             else
             {
                 double nBitsTosend = sendTextBox.Text.Length * 32;
-                double minPeriodNeeded = nBitsTosend * 1500 / Convert.ToInt32(baudRateCombobox.Text);
+                double minPeriodNeeded = nBitsTosend * 1000 / Convert.ToInt32(baudRateCombobox.Text);
                 LMinPeriodNeeded = (long)minPeriodNeeded;
                 if (LMinPeriodNeeded < 10)
                     LMinPeriodNeeded = 10;
@@ -823,9 +844,23 @@ namespace SerialPort_Test
                     autoSendCycleTextBox.Text = string.Format("{0}", LMinPeriodNeeded);
  
             }
+
+            //设置新的定时时间 
+            if (!string.IsNullOrEmpty(autoSendCycleTextBox.Text))
+            {
+                int tmpInterval = Convert.ToInt32(autoSendCycleTextBox.Text);
+
+                if (tmpInterval > 0)
+                    autoSendTimer.Interval = tmpInterval;
+            }
             //receiveTextBox.Clear();
             //receiveTextBox.AppendText("需要最小周期：" + LMinPeriodNeeded);
         }
 
+        
+        private void label13_Click_1(object sender, EventArgs e)
+        {
+
+        }
     }
 }

@@ -551,6 +551,7 @@
             this.label13.Size = new System.Drawing.Size(47, 12);
             this.label13.TabIndex = 53;
             this.label13.Text = "字数：0";
+            this.label13.Click += new System.EventHandler(this.label13_Click_1);
             // 
             // Form1
             // 

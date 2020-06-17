@@ -93,13 +93,12 @@ namespace SerialPort_Test
             //textBoxLoraAddr.Text = string.Format("{0:X6}",LoraAddr);
 
             if(portNamesCombobox.Items.Count>0)
-            {
                 portNamesCombobox.SelectedIndex = 0;
-                baudRateCombobox.SelectedIndex = 2;
-                parityCombobox.SelectedIndex = 0;
-                dataBitsCombobox.SelectedIndex = 3;
-                stopBitsCombobox.SelectedIndex = 0;
-            }
+            baudRateCombobox.SelectedIndex = 2;
+            parityCombobox.SelectedIndex = 0;
+            dataBitsCombobox.SelectedIndex = 3;
+            stopBitsCombobox.SelectedIndex = 0;
+            
            // receiveTextBox.Text = "串口个数是：" + portNamesCombobox.Items.Count;
         }
 
@@ -221,12 +220,9 @@ namespace SerialPort_Test
                 }
             }
 
-            
-            CheckAndResetSendCycleTextBox();
             //设置新的定时时间 
-           
+            CheckAndResetSendCycleTextBox();
                 
-                  
         }
 
         private void turnOnButton_CheckedChanged(object sender, EventArgs e)
@@ -275,6 +271,7 @@ namespace SerialPort_Test
                     turnOnButton.BackColor = Color.Green;
                     turnOnButton.ForeColor = Color.OrangeRed;
 
+                    radioButtonPort.Checked = true;//默认使用普通串口模式
 
                     //使能发送面板
                     // sendControlBorder.IsEnabled = true;
@@ -494,7 +491,7 @@ namespace SerialPort_Test
             
 
 
-                if (serialUsageMode == 0)
+            if (serialUsageMode == 0)
                 SerialPortSend();
             else if(nCmdLinesTosend==0)//发完上一组指令才能再发别的
             {
@@ -660,11 +657,15 @@ namespace SerialPort_Test
             if(radioButtonPort.Checked)
             {
                 serialUsageMode = 0;
-                
+                AutoSendCheckBox.Checked = false;
+                hexadecimalDisplayCheckBox.Checked = false;
+                hexadecimalSendCheckBox.Checked = false;
             }
             else
             {
-                AutoSendCheckBox.Checked = true;
+                
+                autoSendTimer.Enabled = false;
+                nCmdLinesTosend = 0;
                 hexadecimalDisplayCheckBox.Checked = true;
                 hexadecimalSendCheckBox.Checked = true;
                 autoSendCycleTextBox.Text = string.Format("{0}", 1000);//默认一秒发一条命令
@@ -677,6 +678,7 @@ namespace SerialPort_Test
         {
             if (radioButtonLora.Checked)
             {
+                AutoSendCheckBox.Checked = true;
                 LoRaSettingControlState(true);
                 textBoxLoraAddr.Text = string.Format("{0:X6}", LoraAddr);
                 sendTextBox.Text = generateLoraCmds(LoraAddr);
@@ -685,6 +687,8 @@ namespace SerialPort_Test
             else
             {
                 LoRaSettingControlState(false);
+                autoSendTimer.Enabled = false;
+                nCmdLinesTosend = 0;
             }
         }
 
@@ -692,6 +696,7 @@ namespace SerialPort_Test
         {
             if (radioButton485.Checked)
             {
+                AutoSendCheckBox.Checked = true;
                 sendTextBox.Text = generate485Cmds();
                 n485SettingControlState(true);
                 textBox485ResendTimes.Text= string.Format("{0}", n485ResendTimes);
@@ -701,6 +706,8 @@ namespace SerialPort_Test
             else
             {
                 n485SettingControlState(false);
+                autoSendTimer.Enabled = false;
+                nCmdLinesTosend = 0;
             }
         }
 

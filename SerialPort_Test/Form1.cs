@@ -22,6 +22,7 @@ namespace SerialPort_Test
         private SerialPort serial = new SerialPort();
 
         private string receiveData;
+        private byte[] receiveByteBuffer;//存放收到的16进制字节
         private int serialUsageMode = 0;//用途分类
         
         private byte[] arrayLoraCmdSetAddr = { 0xEE, 0x16, 0x08, 0x00, 0x00, 0x00, 0x80, 0x00, 0x21, 0xAD };
@@ -141,7 +142,7 @@ namespace SerialPort_Test
                 turnOnButton.Checked = false;
                 //删除combobox中的名字
                 portNamesCombobox.Items.Remove(serial.PortName);
-                portNamesCombobox.SelectedIndex = 0;
+                //portNamesCombobox.SelectedIndex = 0;
                 //提示消息
                 
                 statusDisplay(false, "串口已失效！");
@@ -329,7 +330,28 @@ namespace SerialPort_Test
        //public delegate void UpdateUiTextDelegate(string text);
         private void ReceiveData(object sender, System.IO.Ports.SerialDataReceivedEventArgs e)
         {
-            receiveData = serial.ReadExisting();//如果正在高速收发数据，突然关了的话，会有异常？
+            //16进制数据接收解析有问题,读16进制字节应该用read()。2020-6-18
+            //16进制数据接收解析有问题,读16进制字节应该用read()。2020-6-18
+            if (hexadecimalDisplayCheckBox.Checked)
+            {
+                int byteLen = serial.BytesToRead;
+                if (byteLen > 0)
+                {
+                    receiveByteBuffer = new byte[byteLen];
+                    serial.Read(receiveByteBuffer, 0, byteLen);
+                    StringBuilder sb = new StringBuilder(4 * byteLen);
+                    foreach (byte b in receiveByteBuffer)
+                    {
+                        sb.AppendFormat("{0:X2} ", b);
+                    }
+                    receiveData = sb.ToString();
+                }
+                else
+                    receiveData = "";
+            }
+            else
+                receiveData = serial.ReadExisting();//如果正在高速收发数据，突然关了的话，会有异常？
+            
             
             //receiveTextBox.AppendText(receiveData);
             ShowData(receiveData);
@@ -350,20 +372,7 @@ namespace SerialPort_Test
             if (stopShowingButton.Checked == false)
             {
                 //字符串显示
-                if (hexadecimalDisplayCheckBox.Checked == false)
-                {
-                    receiveTextBox.AppendText(receiveText);
-
-                }
-                else //16进制显示
-                {
-                    byte[] recData = System.Text.Encoding.Default.GetBytes(receiveText);// 将接受到的字符串据转化成数组；  
-
-                    foreach (byte str in recData)
-                    {
-                        receiveTextBox.AppendText(string.Format("{0:X2} ", str));
-                    }
-                }
+                receiveTextBox.AppendText(receiveText);
             }
 
         }
@@ -456,6 +465,7 @@ namespace SerialPort_Test
                 }
 
                 serial.Write(sendBuffer, 0, sendBuffer.Length);
+                
 
                 //更新发送数据计数
                 sendBytesCount += (UInt32)sendBuffer.Length;

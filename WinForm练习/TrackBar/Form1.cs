@@ -105,8 +105,8 @@ namespace TrackBar
                 turnOnButton.Checked = false;
                 //删除combobox中的名字
                 portNamesCombobox.Items.Remove(serial.PortName);
-                
-                portNamesCombobox.SelectedIndex = 0;
+                if (portNamesCombobox.Items.Count > 0)
+                    portNamesCombobox.SelectedIndex = 0;
                     //提示消息
 
                     statusDisplay(false, "串口已失效！");
@@ -124,7 +124,8 @@ namespace TrackBar
                     {
                         portNamesCombobox.Items.Add(name);
                     }
-                    portNamesCombobox.SelectedIndex = 0;
+                    if (portNamesCombobox.Items.Count > 0)
+                        portNamesCombobox.SelectedIndex = 0;
 
 
                     statusDisplay(true, "串口列表已更新！");

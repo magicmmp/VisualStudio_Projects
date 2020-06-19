@@ -1,7 +1,0 @@
-D:\VisualStudio_Projects\匿名的对象数组\bin\Debug\匿名的对象数组.exe.config
-D:\VisualStudio_Projects\匿名的对象数组\bin\Debug\匿名的对象数组.exe
-D:\VisualStudio_Projects\匿名的对象数组\bin\Debug\匿名的对象数组.pdb
-D:\VisualStudio_Projects\匿名的对象数组\obj\Debug\匿名的对象数组.csprojAssemblyReference.cache
-D:\VisualStudio_Projects\匿名的对象数组\obj\Debug\匿名的对象数组.csproj.CoreCompileInputs.cache
-D:\VisualStudio_Projects\匿名的对象数组\obj\Debug\匿名的对象数组.exe
-D:\VisualStudio_Projects\匿名的对象数组\obj\Debug\匿名的对象数组.pdb

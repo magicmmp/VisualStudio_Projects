@@ -1,3 +1,0 @@
-Hello to you.
-It is now 2020年6月11日 and things are looking good.
-More than that, it’s True that C# is fun.

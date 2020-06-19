@@ -1,6 +1,0 @@
-D:\VisualStudio_Projects\C#高级编程第7版_第20章线程_源码\TaskSamples\bin\Release\TaskSamples.exe
-D:\VisualStudio_Projects\C#高级编程第7版_第20章线程_源码\TaskSamples\bin\Release\TaskSamples.pdb
-D:\VisualStudio_Projects\C#高级编程第7版_第20章线程_源码\TaskSamples\obj\x86\Release\TaskSamples.csprojAssemblyReference.cache
-D:\VisualStudio_Projects\C#高级编程第7版_第20章线程_源码\TaskSamples\obj\x86\Release\TaskSamples.csproj.CoreCompileInputs.cache
-D:\VisualStudio_Projects\C#高级编程第7版_第20章线程_源码\TaskSamples\obj\x86\Release\TaskSamples.exe
-D:\VisualStudio_Projects\C#高级编程第7版_第20章线程_源码\TaskSamples\obj\x86\Release\TaskSamples.pdb

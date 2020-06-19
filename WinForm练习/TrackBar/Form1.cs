@@ -9,19 +9,29 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+
+
 namespace TrackBar
 {
+    
+
     public partial class Form1 : Form
     {
+       
 
         private SerialPort serial = new SerialPort();
-
+        
+        
         private string receiveData;
         private byte[] receiveByteBuffer;
-        private byte[] AdjustLightCmds={ 0xEE, 0x11, 0x07, 0x01, 0x00,0x01, 0x50, 0x50, 0x0};
+        private byte[] AdjustLightCmds={ 0xEE, 0x11, 0x07, 0x00, 0x00,0x00, 0x50, 0x50, 0x0};
+
+        private int[] NewValueBytes = { 80, 80, 1 };//功率、色温、是否待发送
+
 
         static UInt32 receiveBytesCount = 0;
         static UInt32 sendBytesCount = 0;
+
 
 
         public Form1()
@@ -129,6 +139,8 @@ namespace TrackBar
             portNamesCombobox.Enabled = state;
             trackBarSetPower.Enabled = !state;
             trackBarSetColor.Enabled = !state;
+            labelPower.Enabled = !state;
+            labelColor.Enabled = !state;
         }
 
         private void autoSendTimer_Tick(object sender, EventArgs e)
@@ -173,6 +185,8 @@ namespace TrackBar
                     //开启串口
                     serial.Open();
 
+                    
+
                     //关闭串口配置面板
                     serialSettingControlState(false);
 
@@ -184,7 +198,8 @@ namespace TrackBar
                     turnOnButton.BackColor = Color.Green;
                     turnOnButton.ForeColor = Color.OrangeRed;
 
-                   
+                    NewValueBytes[2] = 1;//打开后发一次调光命令初始值
+                    timerSendCmd.Enabled = true;
 
                     //使能发送面板
                     // sendControlBorder.IsEnabled = true;
@@ -205,6 +220,7 @@ namespace TrackBar
                 {
                     //关闭定时器
                     autoSendTimer.Stop();
+                    timerSendCmd.Enabled = false;
                     AutoSendCheckBox.Checked = false;
                     //使能串口配置面板
                     serialSettingControlState(true);
@@ -394,15 +410,18 @@ namespace TrackBar
 
         private void trackBar2_ValueChanged(object sender, EventArgs e)
         {
-            AdjustPowerAndColor(trackBarSetPower.Value, trackBarSetColor.Value);
-            labelPower.Text = trackBarSetPower.Value + "";
+            NewValueBytes[0] = trackBarSetPower.Value;
+            NewValueBytes[2] = 1;
+            
+            labelPower.Text = string.Format("功率：{0} %", trackBarSetPower.Value); ;
         }
 
         
         private void trackBarSetColor_ValueChanged(object sender, EventArgs e)
         {
-            AdjustPowerAndColor(trackBarSetPower.Value, trackBarSetColor.Value);
-            labelColor.Text = trackBarSetColor.Value + "";
+            NewValueBytes[1] = trackBarSetColor.Value;
+            NewValueBytes[2] = 1;
+            labelColor.Text = string.Format("色温：{0} %", trackBarSetColor.Value); ;
         }
 
         private void AdjustPowerAndColor(int powerValue,int colorValue)
@@ -421,6 +440,14 @@ namespace TrackBar
             sendTextBox.Text = sb.ToString();
         }
 
+        private void timerSendCmd_Tick(object sender, EventArgs e)
+        {
+            if(NewValueBytes[2]==1)//数据有更新
+            {
+                NewValueBytes[2] = 0;
+                AdjustPowerAndColor(NewValueBytes[0], NewValueBytes[1]);
+            }
+        }
 
         private void AutoSendCheckBox_CheckedChanged(object sender, EventArgs e)
         {
@@ -572,5 +599,6 @@ namespace TrackBar
             
         }
 
+       
     }
 }

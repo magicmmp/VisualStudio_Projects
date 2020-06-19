@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.trackBarSetPower = new System.Windows.Forms.TrackBar();
             this.labelPower = new System.Windows.Forms.Label();
             this.labelColor = new System.Windows.Forms.Label();
@@ -58,6 +59,7 @@
             this.autoDetectionTimer = new System.Windows.Forms.Timer(this.components);
             this.autoSendTimer = new System.Windows.Forms.Timer(this.components);
             this.timerSendCmd = new System.Windows.Forms.Timer(this.components);
+            this.label2 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarSetPower)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarSetColor)).BeginInit();
             this.SuspendLayout();
@@ -376,12 +378,23 @@
             this.timerSendCmd.Interval = 500;
             this.timerSendCmd.Tick += new System.EventHandler(this.timerSendCmd_Tick);
             // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("宋体", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label2.Location = new System.Drawing.Point(112, 22);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(266, 21);
+            this.label2.TabIndex = 59;
+            this.label2.Text = "485控制器双色温演示系统";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(482, 590);
+            this.Controls.Add(this.label2);
             this.Controls.Add(this.countClearButton);
             this.Controls.Add(this.label9);
             this.Controls.Add(this.label8);
@@ -408,6 +421,7 @@
             this.Controls.Add(this.trackBarSetColor);
             this.Controls.Add(this.labelPower);
             this.Controls.Add(this.trackBarSetPower);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(2);
             this.MaximumSize = new System.Drawing.Size(498, 628);
             this.MinimumSize = new System.Drawing.Size(498, 628);
@@ -451,6 +465,7 @@
         private System.Windows.Forms.Timer autoDetectionTimer;
         private System.Windows.Forms.Timer autoSendTimer;
         private System.Windows.Forms.Timer timerSendCmd;
+        private System.Windows.Forms.Label label2;
     }
 }
 

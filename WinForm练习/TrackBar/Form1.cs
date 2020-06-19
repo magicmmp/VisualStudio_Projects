@@ -152,7 +152,7 @@ namespace TrackBar
 
         private void turnOnButton_CheckedChanged(object sender, EventArgs e)
         {
-            if (portNamesCombobox.Items.Count == 0)
+            if (portNamesCombobox.Items.Count  == 0)
             {
                 statusDisplay(false, "没有可用串口！");
                 //按钮回弹
@@ -257,6 +257,7 @@ namespace TrackBar
 
         private void ReceiveData(object sender, System.IO.Ports.SerialDataReceivedEventArgs e)
         {
+            serial.DiscardInBuffer();//不需要接收任何数据2020-6-19
             //16进制数据接收解析有问题,读16进制字节应该用read()。2020-6-18
             if(hexadecimalDisplayCheckBox.Checked)
             {

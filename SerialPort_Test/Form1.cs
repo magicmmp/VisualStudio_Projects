@@ -755,11 +755,15 @@ namespace SerialPort_Test
 
 
             //sendTextBox.Text = "";
-            foreach (byte b in arrayLoraCmdSetAddr)
+            if (false)
             {
-                sb.AppendFormat("{0:X2} ", b);
+                foreach (byte b in arrayLoraCmdSetAddr)
+                {
+                    sb.AppendFormat("{0:X2} ", b);
+                }
+                sb.Append("\r\n");
             }
-            sb.Append("\r\n");
+            
 
             foreach (byte b in arrayLoraCmdCheck)
             {

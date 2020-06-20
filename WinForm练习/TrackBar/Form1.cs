@@ -26,7 +26,7 @@ namespace TrackBar
         private byte[] receiveByteBuffer;
         private byte[] AdjustLightCmds={ 0xEE, 0x11, 0x07, 0x00, 0x00,0x00, 0x50, 0x50, 0x0};
 
-        private int[] NewValueBytes = { 80, 80, 1 };//功率、色温、是否待发送
+        private int[] NewValueBytes = { 80, 80, 1, 1 };//功率、色温、是否待发送、鼠标是否已释放
 
 
         static UInt32 receiveBytesCount = 0;
@@ -142,6 +142,9 @@ namespace TrackBar
             trackBarSetColor.Enabled = !state;
             labelPower.Enabled = !state;
             labelColor.Enabled = !state;
+            label3.Enabled = !state;
+            label4.Enabled = !state;
+
         }
 
         private void autoSendTimer_Tick(object sender, EventArgs e)
@@ -200,6 +203,7 @@ namespace TrackBar
                     turnOnButton.ForeColor = Color.OrangeRed;
 
                     NewValueBytes[2] = 1;//打开后发一次调光命令初始值
+                    NewValueBytes[3] = 1;
                     timerSendCmd.Enabled = true;
 
                     //使能发送面板
@@ -444,9 +448,10 @@ namespace TrackBar
 
         private void timerSendCmd_Tick(object sender, EventArgs e)
         {
-            if(NewValueBytes[2]==1)//数据有更新
+            if(NewValueBytes[2]==1 && NewValueBytes[3] == 1)//数据有更新
             {
                 NewValueBytes[2] = 0;
+                NewValueBytes[3] = 0;
                 AdjustPowerAndColor(NewValueBytes[0], NewValueBytes[1]);
             }
         }
@@ -601,6 +606,14 @@ namespace TrackBar
             
         }
 
-       
+        private void trackBarSetPower_MouseUp(object sender, MouseEventArgs e)
+        {
+            NewValueBytes[3] = 1;
+        }
+
+        private void trackBarSetColor_MouseUp(object sender, MouseEventArgs e)
+        {
+            NewValueBytes[3] = 1;
+        }
     }
 }

@@ -60,6 +60,8 @@
             this.autoSendTimer = new System.Windows.Forms.Timer(this.components);
             this.timerSendCmd = new System.Windows.Forms.Timer(this.components);
             this.label2 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarSetPower)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarSetColor)).BeginInit();
             this.SuspendLayout();
@@ -80,6 +82,7 @@
             this.trackBarSetPower.TickStyle = System.Windows.Forms.TickStyle.None;
             this.trackBarSetPower.Value = 80;
             this.trackBarSetPower.ValueChanged += new System.EventHandler(this.trackBar2_ValueChanged);
+            this.trackBarSetPower.MouseUp += new System.Windows.Forms.MouseEventHandler(this.trackBarSetPower_MouseUp);
             // 
             // labelPower
             // 
@@ -123,6 +126,7 @@
             this.trackBarSetColor.TickStyle = System.Windows.Forms.TickStyle.None;
             this.trackBarSetColor.Value = 80;
             this.trackBarSetColor.ValueChanged += new System.EventHandler(this.trackBarSetColor_ValueChanged);
+            this.trackBarSetColor.MouseUp += new System.Windows.Forms.MouseEventHandler(this.trackBarSetColor_MouseUp);
             // 
             // portNamesCombobox
             // 
@@ -293,19 +297,20 @@
             // 
             // sendTextBox
             // 
-            this.sendTextBox.BackColor = System.Drawing.SystemColors.InactiveCaption;
-            this.sendTextBox.Location = new System.Drawing.Point(205, 490);
+            this.sendTextBox.BackColor = System.Drawing.Color.White;
+            this.sendTextBox.Location = new System.Drawing.Point(25, 526);
             this.sendTextBox.Multiline = true;
             this.sendTextBox.Name = "sendTextBox";
-            this.sendTextBox.Size = new System.Drawing.Size(43, 16);
+            this.sendTextBox.Size = new System.Drawing.Size(223, 31);
             this.sendTextBox.TabIndex = 40;
+            this.sendTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.sendTextBox.Visible = false;
             this.sendTextBox.TextChanged += new System.EventHandler(this.sendTextBox_TextChanged);
             this.sendTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.sendTextBox_KeyPress);
             // 
             // countClearButton
             // 
-            this.countClearButton.Location = new System.Drawing.Point(275, 488);
+            this.countClearButton.Location = new System.Drawing.Point(205, 497);
             this.countClearButton.Name = "countClearButton";
             this.countClearButton.Size = new System.Drawing.Size(103, 23);
             this.countClearButton.TabIndex = 58;
@@ -337,7 +342,7 @@
             // statusSendByteTextBlock
             // 
             this.statusSendByteTextBlock.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
-            this.statusSendByteTextBlock.Location = new System.Drawing.Point(115, 542);
+            this.statusSendByteTextBlock.Location = new System.Drawing.Point(136, 542);
             this.statusSendByteTextBlock.Name = "statusSendByteTextBlock";
             this.statusSendByteTextBlock.Size = new System.Drawing.Size(88, 21);
             this.statusSendByteTextBlock.TabIndex = 55;
@@ -388,12 +393,36 @@
             this.label2.TabIndex = 59;
             this.label2.Text = "485控制器双色温演示系统";
             // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Enabled = false;
+            this.label3.Location = new System.Drawing.Point(374, 470);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(29, 12);
+            this.label3.TabIndex = 60;
+            this.label3.Text = "暖光";
+            this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Enabled = false;
+            this.label4.Location = new System.Drawing.Point(374, 148);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(29, 12);
+            this.label4.TabIndex = 61;
+            this.label4.Text = "冷光";
+            this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.White;
+            this.BackColor = System.Drawing.Color.SeaShell;
             this.ClientSize = new System.Drawing.Size(482, 590);
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.countClearButton);
             this.Controls.Add(this.label9);
@@ -466,6 +495,8 @@
         private System.Windows.Forms.Timer autoSendTimer;
         private System.Windows.Forms.Timer timerSendCmd;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label4;
     }
 }
 

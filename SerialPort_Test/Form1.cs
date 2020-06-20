@@ -27,11 +27,12 @@ namespace SerialPort_Test
         
         private byte[] arrayLoraCmdSetAddr = { 0xEE, 0x16, 0x08, 0x00, 0x00, 0x00, 0x80, 0x00, 0x21, 0xAD };
         private byte[] arrayLoraCmdCheck   = { 0xEE, 0x15, 0x06, 0x80, 0x00, 0x21, 0x01, 0xAB};
-        private byte[] arrayLoraCmdOff = { 0xEE, 0x11, 0x07, 0x00, 0x00, 0x00, 0x00, 0x64,0x6a};//ee 11 07 00 00 00 00 64 6a
+        private byte[] arrayLoraCmdOff = { 0xEE, 0x11, 0x07, 0x80, 0x00, 0x21, 0x00, 0x00, 0x6a };  //EE 11 07 02 00 01 00 00 09
+        private byte[] arrayLoraCmdON  = { 0xEE, 0x11, 0x07, 0x80, 0x00, 0x21, 0x64, 0x64, 0x6a };//EE 11 07 01 00 01 64 50 BC
         private string[] HexCmdLines;//指令数组，一串指令一行
         private int nCmdLinesTosend = 0;//余下多少行命令要发送
         private int n485ResendTimes = 1;
-        private int LoraAddr = 0x800021;
+        private int LoraAddr = 0x010051;
         private int HexCmdLinesIndex = 0;
 
         //EE 15 06 80 00 21 01 AB 
@@ -724,7 +725,9 @@ namespace SerialPort_Test
         /**
          *  private byte[] arrayLoraCmdSetAddr = { 0xEE, 0x16, 0x08, 0x00, 0x00, 0x00, 0x80, 0x00, 0x21, 0xAD };
             private byte[] arrayLoraCmdCheck   = { 0xEE, 0x15, 0x06, 0x80, 0x00, 0x21, 0x01, 0xAB};
-            private byte[] arrayLoraCmdOff = { 0xEE, 0x15, 0x06, 0x80, 0x00, 0xaa };
+           
+            private byte[] arrayLoraCmdOff = { 0xEE, 0x11, 0x07, 0x80, 0x00, 0x21, 0x00, 0x00,0x6a}; 
+            private byte[] arrayLoraCmdON  = { 0xEE, 0x11, 0x07, 0x80, 0x00, 0x21, 0x64, 0x64, 0x6a };
          * */
 
         //根据LoRa地址自动生成多条命令
@@ -754,8 +757,29 @@ namespace SerialPort_Test
             arrayLoraCmdCheck[arrayLoraCmdCheck.Length - 1] = (byte)(sumTmp & 0xff);
 
 
+            arrayLoraCmdOff[5] = (byte)(addrInt & 0xff);
+            arrayLoraCmdOff[4] = (byte)(addrInt >> 8 & 0xff);
+            arrayLoraCmdOff[3] = (byte)(addrInt >> 16 & 0xff);
+            for (i = 0, sumTmp = 0; i < arrayLoraCmdOff.Length - 1; i++)
+            {
+                sumTmp += arrayLoraCmdOff[i];
+            }
+            arrayLoraCmdOff[arrayLoraCmdOff.Length - 1] = (byte)(sumTmp & 0xff);
+
+
+            arrayLoraCmdON[5] = (byte)(addrInt & 0xff);
+            arrayLoraCmdON[4] = (byte)(addrInt >> 8 & 0xff);
+            arrayLoraCmdON[3] = (byte)(addrInt >> 16 & 0xff);
+            for (i = 0, sumTmp = 0; i < arrayLoraCmdON.Length - 1; i++)
+            {
+                sumTmp += arrayLoraCmdON[i];
+            }
+            arrayLoraCmdON[arrayLoraCmdON.Length - 1] = (byte)(sumTmp & 0xff);
+
+
+
             //sendTextBox.Text = "";
-            if (false)
+            // if (false)
             {
                 foreach (byte b in arrayLoraCmdSetAddr)
                 {
@@ -771,12 +795,40 @@ namespace SerialPort_Test
             }
             sb.Append("\r\n");
 
-            if(false)
+            //if(false)
             foreach (byte b in arrayLoraCmdOff)
             {
                 sb.AppendFormat("{0:X2} ", b);
             }
             sb.Append("\r\n");
+
+           
+            foreach (byte b in arrayLoraCmdCheck)
+            {
+                sb.AppendFormat("{0:X2} ", b);
+            }
+            sb.Append("\r\n");
+
+            foreach (byte b in arrayLoraCmdCheck)
+            {
+                sb.AppendFormat("{0:X2} ", b);
+            }
+            sb.Append("\r\n");
+
+            foreach (byte b in arrayLoraCmdCheck)
+            {
+                sb.AppendFormat("{0:X2} ", b);
+            }
+            sb.Append("\r\n");
+
+            
+
+            foreach (byte b in arrayLoraCmdON)
+            {
+                sb.AppendFormat("{0:X2} ", b);
+            }
+            sb.Append("\r\n");
+
 
             return sb.ToString();  
         }

@@ -81,7 +81,8 @@ namespace SerialPort_Test
         //到设计界面那里，双击界面后，会发现自动生成了Form1_load()，然后再进行代码编写。
         private void Form1_Load(object sender, EventArgs e)
         {
-            System.Windows.Forms.Control.CheckForIllegalCrossThreadCalls = false;//避免跨线程不能改变UI控件
+            //取消跨线程的检查,避免跨线程不能改变UI控件
+            System.Windows.Forms.Control.CheckForIllegalCrossThreadCalls = false;
 
             turnOnButton.BackColor = Color.Yellow;
             turnOnButton.ForeColor = Color.Purple;

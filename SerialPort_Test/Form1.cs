@@ -909,7 +909,7 @@ namespace SerialPort_Test
             else
             {
                 double nBitsTosend = sendTextBox.Text.Length * 32;
-                double minPeriodNeeded = nBitsTosend * 1000 / Convert.ToInt32(baudRateCombobox.Text);
+                double minPeriodNeeded = nBitsTosend * 1500 / Convert.ToInt32(baudRateCombobox.Text);
                 LMinPeriodNeeded = (long)minPeriodNeeded;
                 if (LMinPeriodNeeded < 10)
                     LMinPeriodNeeded = 10;

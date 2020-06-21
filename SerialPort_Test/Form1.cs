@@ -32,7 +32,7 @@ namespace SerialPort_Test
         private string[] HexCmdLines;//指令数组，一串指令一行
         private int nCmdLinesTosend = 0;//余下多少行命令要发送
         private int n485ResendTimes = 1;
-        private int LoraAddr = 0x010051;
+        private int LoraAddr = 0x0100B8;
         private int HexCmdLinesIndex = 0;
 
         //EE 15 06 80 00 21 01 AB 
@@ -186,6 +186,8 @@ namespace SerialPort_Test
             label10.Enabled = state;
             textBoxLoraAddr.Enabled = state;
             checkBoxAutoAddr.Enabled = state;
+            buttonPreAddr.Enabled = state;
+            buttonNextAddr.Enabled = state;
         }
 
         //使能或关闭485配置相关的控件
@@ -934,6 +936,20 @@ namespace SerialPort_Test
         private void label13_Click_1(object sender, EventArgs e)
         {
 
+        }
+
+        private void buttonPreAddr_Click(object sender, EventArgs e)
+        {
+            LoraAddr--;
+            textBoxLoraAddr.Text = string.Format("{0:X6}", LoraAddr);
+            sendTextBox.Text = generateLoraCmds(LoraAddr);
+        }
+
+        private void buttonNextAddr_Click(object sender, EventArgs e)
+        {
+            LoraAddr++;
+            textBoxLoraAddr.Text = string.Format("{0:X6}", LoraAddr);
+            sendTextBox.Text = generateLoraCmds(LoraAddr);
         }
     }
 }

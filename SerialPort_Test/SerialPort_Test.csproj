@@ -69,6 +69,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -86,6 +87,10 @@
   <ItemGroup>
     <Content Include="logo2.ico" />
     <Content Include="logo33.ico" />
+    <None Include="Resources\下一首图标1.jpg" />
+    <None Include="Resources\上一首图标1.jpg" />
+    <None Include="Resources\下一首图标.jpg" />
+    <None Include="Resources\上一首图标.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

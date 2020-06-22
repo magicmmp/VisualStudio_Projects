@@ -32,7 +32,7 @@ namespace SerialPort_Test
         private string[] HexCmdLines;//指令数组，一串指令一行
         private int nCmdLinesTosend = 0;//余下多少行命令要发送
         private int n485ResendTimes = 1;
-        private int LoraAddr = 0x0100B8;
+        private int LoraAddr = 0x010119;
         private int HexCmdLinesIndex = 0;
 
         //EE 15 06 80 00 21 01 AB 

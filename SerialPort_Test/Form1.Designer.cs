@@ -214,7 +214,7 @@
             this.sendTextBox.Location = new System.Drawing.Point(394, 358);
             this.sendTextBox.Multiline = true;
             this.sendTextBox.Name = "sendTextBox";
-            this.sendTextBox.Size = new System.Drawing.Size(683, 264);
+            this.sendTextBox.Size = new System.Drawing.Size(682, 262);
             this.sendTextBox.TabIndex = 22;
             this.sendTextBox.TextChanged += new System.EventHandler(this.sendTextBox_TextChanged);
             this.sendTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.sendTextBox_KeyPress);
@@ -229,7 +229,7 @@
             this.receiveTextBox.MinimumSize = new System.Drawing.Size(649, 312);
             this.receiveTextBox.Name = "receiveTextBox";
             this.receiveTextBox.ReadOnly = true;
-            this.receiveTextBox.Size = new System.Drawing.Size(683, 324);
+            this.receiveTextBox.Size = new System.Drawing.Size(682, 322);
             this.receiveTextBox.TabIndex = 23;
             this.receiveTextBox.Text = "";
             this.receiveTextBox.TextChanged += new System.EventHandler(this.receiveTextBox_TextChanged);
@@ -367,10 +367,10 @@
             this.statusTextBlock.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.statusTextBlock.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.statusTextBlock.Location = new System.Drawing.Point(17, 647);
+            this.statusTextBlock.Location = new System.Drawing.Point(17, 645);
             this.statusTextBlock.Name = "statusTextBlock";
             this.statusTextBlock.ReadOnly = true;
-            this.statusTextBlock.Size = new System.Drawing.Size(115, 21);
+            this.statusTextBlock.Size = new System.Drawing.Size(114, 21);
             this.statusTextBlock.TabIndex = 40;
             this.statusTextBlock.Text = "准备就绪";
             this.statusTextBlock.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
@@ -380,27 +380,29 @@
             this.statusReceiveByteTextBlock.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.statusReceiveByteTextBlock.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
-            this.statusReceiveByteTextBlock.Location = new System.Drawing.Point(567, 647);
+            this.statusReceiveByteTextBlock.Location = new System.Drawing.Point(567, 645);
             this.statusReceiveByteTextBlock.Name = "statusReceiveByteTextBlock";
-            this.statusReceiveByteTextBlock.Size = new System.Drawing.Size(109, 21);
+            this.statusReceiveByteTextBlock.Size = new System.Drawing.Size(108, 21);
             this.statusReceiveByteTextBlock.TabIndex = 41;
+            this.statusReceiveByteTextBlock.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // statusSendByteTextBlock
             // 
             this.statusSendByteTextBlock.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.statusSendByteTextBlock.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
-            this.statusSendByteTextBlock.Location = new System.Drawing.Point(826, 647);
+            this.statusSendByteTextBlock.Location = new System.Drawing.Point(826, 645);
             this.statusSendByteTextBlock.Name = "statusSendByteTextBlock";
-            this.statusSendByteTextBlock.Size = new System.Drawing.Size(107, 21);
+            this.statusSendByteTextBlock.Size = new System.Drawing.Size(106, 21);
             this.statusSendByteTextBlock.TabIndex = 42;
+            this.statusSendByteTextBlock.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // label8
             // 
             this.label8.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(726, 647);
+            this.label8.Location = new System.Drawing.Point(726, 645);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(65, 12);
             this.label8.TabIndex = 43;
@@ -411,7 +413,7 @@
             this.label9.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(474, 647);
+            this.label9.Location = new System.Drawing.Point(474, 645);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(65, 12);
             this.label9.TabIndex = 44;
@@ -421,9 +423,9 @@
             // 
             this.countClearButton.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.countClearButton.Location = new System.Drawing.Point(989, 647);
+            this.countClearButton.Location = new System.Drawing.Point(989, 645);
             this.countClearButton.Name = "countClearButton";
-            this.countClearButton.Size = new System.Drawing.Size(75, 23);
+            this.countClearButton.Size = new System.Drawing.Size(74, 23);
             this.countClearButton.TabIndex = 45;
             this.countClearButton.Text = "计数清零";
             this.countClearButton.UseVisualStyleBackColor = true;
@@ -581,7 +583,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1089, 694);
+            this.ClientSize = new System.Drawing.Size(1088, 692);
             this.Controls.Add(this.buttonNextAddr);
             this.Controls.Add(this.buttonPreAddr);
             this.Controls.Add(this.label13);
@@ -623,6 +625,7 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximumSize = new System.Drawing.Size(1104, 730);
             this.MinimumSize = new System.Drawing.Size(1104, 730);
             this.Name = "Form1";
             this.Text = "串口调试助手";

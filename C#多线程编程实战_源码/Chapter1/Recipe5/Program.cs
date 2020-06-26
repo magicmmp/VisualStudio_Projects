@@ -10,7 +10,7 @@ namespace Chapter1.Recipe5
 			Console.WriteLine("Starting program...");
 			Thread t = new Thread(PrintNumbersWithStatus);
 			Thread t2 = new Thread(DoNothing);
-			Console.WriteLine(t.ThreadState.ToString());//状态：Unstarted
+			Console.WriteLine(t.ThreadState.ToString());
 			t2.Start();
 			t.Start();
 			for (int i = 1; i < 30; i++)
@@ -20,10 +20,8 @@ namespace Chapter1.Recipe5
 			Thread.Sleep(TimeSpan.FromSeconds(6));
 			t.Abort();
 			Console.WriteLine("A thread has been aborted");
-			Console.WriteLine(t.ThreadState.ToString());//状态：AbortRequested
-			Console.WriteLine(t2.ThreadState.ToString());//状态：Stopped
-
-			Console.ReadKey();
+			Console.WriteLine(t.ThreadState.ToString());
+			Console.WriteLine(t2.ThreadState.ToString());
 		}
 
 		static void DoNothing()
@@ -33,7 +31,7 @@ namespace Chapter1.Recipe5
 
 		static void PrintNumbersWithStatus()
 		{
-			Console.WriteLine("PrintNumbersWithStatus Starting...");
+			Console.WriteLine("Starting...");
 			Console.WriteLine(Thread.CurrentThread.ThreadState.ToString());
 			for (int i = 1; i < 10; i++)
 			{

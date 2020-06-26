@@ -10,8 +10,6 @@ namespace Chapter1.Recipe1
 			Thread t = new Thread(PrintNumbers);
 			t.Start();
 			PrintNumbers();
-
-			Console.ReadKey();
 		}
 
 		static void PrintNumbers()

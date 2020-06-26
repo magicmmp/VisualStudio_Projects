@@ -9,14 +9,12 @@ namespace Chapter1.Recipe2
 		{
 			Thread t = new Thread(PrintNumbersWithDelay);
 			t.Start();
-			t.Join();
 			PrintNumbers();
-			Console.ReadKey();
 		}
 
 		static void PrintNumbers()
 		{
-			Console.WriteLine("PrintNumbers Starting...");
+			Console.WriteLine("Starting...");
 			for (int i = 1; i < 10; i++)
 			{
 				Console.WriteLine(i);
@@ -25,10 +23,10 @@ namespace Chapter1.Recipe2
 
 		static void PrintNumbersWithDelay()
 		{
-			Console.WriteLine("PrintNumbersWithDelay Starting...");
+			Console.WriteLine("Starting...");
 			for (int i = 1; i < 10; i++)
 			{
-				Thread.Sleep(TimeSpan.FromSeconds(1));
+				Thread.Sleep(TimeSpan.FromSeconds(2));
 				Console.WriteLine(i);
 			}
 		}

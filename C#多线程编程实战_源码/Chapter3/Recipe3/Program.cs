@@ -20,6 +20,7 @@ namespace Chapter3.Recipe3
 			UseThreadPool(numberOfOperations);
 			sw.Stop();
 			Console.WriteLine("Execution time using threads: {0}", sw.ElapsedMilliseconds);
+			Console.ReadKey();
 		}
 
 		static void UseThreads(int numberOfOperations)

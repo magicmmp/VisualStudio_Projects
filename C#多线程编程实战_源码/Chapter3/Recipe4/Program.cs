@@ -71,7 +71,7 @@ namespace Chapter3.Recipe4
 		private static void AsyncOperation3(CancellationToken token)
 		{
 			bool cancellationFlag = false;
-			token.Register(() => cancellationFlag = true);
+			token.Register(() => cancellationFlag = true);//注册一个回调函数，当发生取消时调用
 			Console.WriteLine("Starting the third task");
 			for (int i = 0; i < 5; i++)
 			{

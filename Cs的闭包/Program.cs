@@ -14,6 +14,12 @@ namespace Cs的闭包
         {
             Console.WriteLine(GetClosureFunction()(30));//打印60=30+30，会引用局部变量val的最终值30
 
+            int x = 5;
+            Console.WriteLine("x1= {0}", x);
+            outParaFunc(out x);
+            Console.WriteLine("x2= {0}", x);
+
+
             Console.ReadKey();
         }
 
@@ -29,5 +35,15 @@ namespace Cs的闭包
 
             return internalAdd;//返回了委托
         }
+
+
+        static void outParaFunc(out int x)
+        {
+            x = 100;
+        }
+
+
+
+
     }
 }

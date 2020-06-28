@@ -13,6 +13,8 @@ namespace Chapter4.Recipe8
 			var secondTask = new Task<int>(() => TaskMethod("Second Task", 2));
 			var whenAllTask = Task.WhenAll(firstTask, secondTask);
 
+
+			//该任务在所有任务都完成后 执行
 			whenAllTask.ContinueWith(t =>
 				Console.WriteLine("The first answer is {0}, the second is {1}", t.Result[0], t.Result[1]),
 				TaskContinuationOptions.OnlyOnRanToCompletion
@@ -23,6 +25,7 @@ namespace Chapter4.Recipe8
 
 			Thread.Sleep(TimeSpan.FromSeconds(4));
 
+			
 			var tasks = new List<Task<int>>();
 			for (int i = 1; i < 4; i++)
 			{
@@ -34,12 +37,14 @@ namespace Chapter4.Recipe8
 
 			while (tasks.Count > 0)
 			{
-				var completedTask = Task.WhenAny(tasks).Result;
+				var completedTask = Task.WhenAny(tasks).Result;//该任务在任一任务完成后 返回
 				tasks.Remove(completedTask);
 				Console.WriteLine("A task has been completed with result {0}.", completedTask.Result);
-			}
+			} 
 
 			Thread.Sleep(TimeSpan.FromSeconds(1));
+
+			Console.ReadKey();
 		}
 
 		static int TaskMethod(string name, int seconds)

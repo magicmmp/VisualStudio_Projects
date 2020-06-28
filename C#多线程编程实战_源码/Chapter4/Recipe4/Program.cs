@@ -16,15 +16,15 @@ namespace Chapter4.Recipe4
 			Task<string> task = Task<string>.Factory.FromAsync(
 				d.BeginInvoke("AsyncTaskThread", Callback, "a delegate asynchronous call"), d.EndInvoke);
 
-			task.ContinueWith(t => Console.WriteLine("Callback is finished, now running a continuation! Result: {0}",
+			task.ContinueWith(t => Console.WriteLine("Callback_1 is finished, now running a continuation! Result: {0}",
 				t.Result));
 
 			while (!task.IsCompleted)
 			{
-				Console.WriteLine(task.Status);
+				Console.WriteLine("任务状态11："+task.Status);
 				Thread.Sleep(TimeSpan.FromSeconds(0.5));
 			}
-			Console.WriteLine(task.Status);
+			Console.WriteLine("任务状态12：" + task.Status);
 			Thread.Sleep(TimeSpan.FromSeconds(1));
 
 			Console.WriteLine("----------------------------------------------");
@@ -33,14 +33,14 @@ namespace Chapter4.Recipe4
 
 			task = Task<string>.Factory.FromAsync(
 				d.BeginInvoke, d.EndInvoke, "AsyncTaskThread", "a delegate asynchronous call");
-			task.ContinueWith(t => Console.WriteLine("Task is completed, now running a continuation! Result: {0}",
+			task.ContinueWith(t => Console.WriteLine("Task_2 is completed, now running a continuation! Result: {0}",
 				t.Result));
 			while (!task.IsCompleted)
 			{
-				Console.WriteLine(task.Status);
+				Console.WriteLine("任务状态21：" + task.Status);
 				Thread.Sleep(TimeSpan.FromSeconds(0.5));
 			}
-			Console.WriteLine(task.Status);
+			Console.WriteLine("任务状态22：" + task.Status);
 			Thread.Sleep(TimeSpan.FromSeconds(1));
 
 			Console.WriteLine("----------------------------------------------");
@@ -50,17 +50,19 @@ namespace Chapter4.Recipe4
 			IAsyncResult ar = e.BeginInvoke(out threadId, Callback, "a delegate asynchronous call");
 			task = Task<string>.Factory.FromAsync(ar, _ => e.EndInvoke(out threadId, ar));
 			task.ContinueWith(t => 
-				Console.WriteLine("Task is completed, now running a continuation! Result: {0}, ThreadId: {1}",
+				Console.WriteLine("Task_3 is completed, now running a continuation! Result: {0}, ThreadId: {1}",
 					t.Result, threadId));
 
 			while (!task.IsCompleted)
 			{
-				Console.WriteLine(task.Status);
+				Console.WriteLine("任务状态31：" + task.Status);
 				Thread.Sleep(TimeSpan.FromSeconds(0.5));
 			}
-			Console.WriteLine(task.Status);
+			Console.WriteLine("任务状态32：" + task.Status);
 
 			Thread.Sleep(TimeSpan.FromSeconds(1));
+			Console.ReadKey();
+
 		}
 
 		private delegate string AsynchronousTask(string threadName);

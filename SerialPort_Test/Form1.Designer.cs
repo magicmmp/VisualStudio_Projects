@@ -75,6 +75,8 @@
             this.label13 = new System.Windows.Forms.Label();
             this.buttonNextAddr = new System.Windows.Forms.Button();
             this.buttonPreAddr = new System.Windows.Forms.Button();
+            this.label_LoRaPreAddr = new System.Windows.Forms.Label();
+            this.textBoxPreAddr = new System.Windows.Forms.TextBox();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -522,7 +524,7 @@
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(132, 346);
+            this.label11.Location = new System.Drawing.Point(132, 366);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(95, 12);
             this.label11.TabIndex = 50;
@@ -530,7 +532,7 @@
             // 
             // textBox485ResendTimes
             // 
-            this.textBox485ResendTimes.Location = new System.Drawing.Point(257, 343);
+            this.textBox485ResendTimes.Location = new System.Drawing.Point(257, 363);
             this.textBox485ResendTimes.MaxLength = 8;
             this.textBox485ResendTimes.Name = "textBox485ResendTimes";
             this.textBox485ResendTimes.Size = new System.Drawing.Size(100, 21);
@@ -543,7 +545,7 @@
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(132, 378);
+            this.label12.Location = new System.Drawing.Point(132, 392);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(71, 12);
             this.label12.TabIndex = 52;
@@ -552,11 +554,12 @@
             // label13
             // 
             this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(271, 410);
+            this.label13.Location = new System.Drawing.Point(330, 427);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(47, 12);
             this.label13.TabIndex = 53;
             this.label13.Text = "字数：0";
+            this.label13.Visible = false;
             this.label13.Click += new System.EventHandler(this.label13_Click_1);
             // 
             // buttonNextAddr
@@ -579,11 +582,36 @@
             this.buttonPreAddr.UseVisualStyleBackColor = true;
             this.buttonPreAddr.Click += new System.EventHandler(this.buttonPreAddr_Click);
             // 
+            // label_LoRaPreAddr
+            // 
+            this.label_LoRaPreAddr.AutoSize = true;
+            this.label_LoRaPreAddr.Font = new System.Drawing.Font("宋体", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label_LoRaPreAddr.Location = new System.Drawing.Point(131, 332);
+            this.label_LoRaPreAddr.Name = "label_LoRaPreAddr";
+            this.label_LoRaPreAddr.Size = new System.Drawing.Size(98, 14);
+            this.label_LoRaPreAddr.TabIndex = 56;
+            this.label_LoRaPreAddr.Text = "原始地址(Hex)";
+            // 
+            // textBoxPreAddr
+            // 
+            this.textBoxPreAddr.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.textBoxPreAddr.Font = new System.Drawing.Font("宋体", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.textBoxPreAddr.Location = new System.Drawing.Point(257, 329);
+            this.textBoxPreAddr.MaxLength = 6;
+            this.textBoxPreAddr.Name = "textBoxPreAddr";
+            this.textBoxPreAddr.Size = new System.Drawing.Size(120, 23);
+            this.textBoxPreAddr.TabIndex = 57;
+            this.textBoxPreAddr.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.textBoxPreAddr.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxLoraAddr_KeyPress);
+            this.textBoxPreAddr.Validating += new System.ComponentModel.CancelEventHandler(this.textBoxPreAddr_Validating);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1088, 692);
+            this.Controls.Add(this.textBoxPreAddr);
+            this.Controls.Add(this.label_LoRaPreAddr);
             this.Controls.Add(this.buttonNextAddr);
             this.Controls.Add(this.buttonPreAddr);
             this.Controls.Add(this.label13);
@@ -684,6 +712,8 @@
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.Button buttonPreAddr;
         private System.Windows.Forms.Button buttonNextAddr;
+        private System.Windows.Forms.Label label_LoRaPreAddr;
+        private System.Windows.Forms.TextBox textBoxPreAddr;
     }
 }
 

@@ -32,7 +32,8 @@ namespace SerialPort_Test
         private string[] HexCmdLines;//指令数组，一串指令一行
         private int nCmdLinesTosend = 0;//余下多少行命令要发送
         private int n485ResendTimes = 1;
-        private int LoraAddr = 0x010119;
+        private int LoraAddr = 0x01024E;
+        private int LoraPreAddr = 0x010101;//要修改的原始地址
         private int HexCmdLinesIndex = 0;
 
         //EE 15 06 80 00 21 01 AB 
@@ -189,6 +190,8 @@ namespace SerialPort_Test
             checkBoxAutoAddr.Enabled = state;
             buttonPreAddr.Enabled = state;
             buttonNextAddr.Enabled = state;
+            textBoxPreAddr.Enabled = state;
+            label_LoRaPreAddr.Enabled = state;
         }
 
         //使能或关闭485配置相关的控件
@@ -658,7 +661,7 @@ namespace SerialPort_Test
             sb.Append("串口使用说明\r\n");
             sb.Append("  1、用作“普通串口”时，使用方法和其他串口软件相同。\r\n");
             sb.Append("  2、填写16进制数字时，各个数字间以空格或逗号分隔。可以省略0x前缀。\r\n");
-            sb.Append("  3、Lora测试：设置好 下一个LoRa地址 后，鼠标点一下输入框，本次地址相关的命令将自动填写。\r\n");
+            sb.Append("  3、Lora测试：更改“下一个LoRa地址”或“原始地址”后，鼠标点一下输入框，本次地址相关的命令将自动填写。\r\n");
             sb.Append("              这些命令将以“自动发送周期”的间隔逐条发出。\r\n");
             sb.Append("  4、485测试：可以将多条命令写入发送框，每行一条。这些命令将逐行发出。\r\n");
             receiveTextBox.Clear();
@@ -695,6 +698,7 @@ namespace SerialPort_Test
                 AutoSendCheckBox.Checked = true;
                 LoRaSettingControlState(true);
                 textBoxLoraAddr.Text = string.Format("{0:X6}", LoraAddr);
+                textBoxPreAddr.Text  = string.Format("{0:X6}", LoraPreAddr);
                 sendTextBox.Text = generateLoraCmds(LoraAddr);
                 serialUsageMode = 1;
             }
@@ -739,6 +743,10 @@ namespace SerialPort_Test
             int i;
             int sumTmp;
             StringBuilder sb = new StringBuilder(128);
+
+            arrayLoraCmdSetAddr[5] = (byte)(LoraPreAddr & 0xff);
+            arrayLoraCmdSetAddr[4] = (byte)(LoraPreAddr >> 8 & 0xff);
+            arrayLoraCmdSetAddr[3] = (byte)(LoraPreAddr >> 16 & 0xff);
 
             arrayLoraCmdSetAddr[8] = (byte)(addrInt & 0xff);
             arrayLoraCmdSetAddr[7] = (byte)(addrInt >> 8 & 0xff);
@@ -951,6 +959,16 @@ namespace SerialPort_Test
             LoraAddr++;
             textBoxLoraAddr.Text = string.Format("{0:X6}", LoraAddr);
             sendTextBox.Text = generateLoraCmds(LoraAddr);
+        }
+
+        private void textBoxPreAddr_Validating(object sender, CancelEventArgs e)
+        {
+            if (!string.IsNullOrEmpty(textBoxPreAddr.Text))
+            {
+                LoraPreAddr = Convert.ToInt32(textBoxPreAddr.Text, 16);
+                if (nCmdLinesTosend == 0)
+                    sendTextBox.Text = generateLoraCmds(LoraAddr);
+            }
         }
     }
 }

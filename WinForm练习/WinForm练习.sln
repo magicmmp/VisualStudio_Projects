@@ -19,7 +19,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrackBar", "TrackBar\TrackB
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WpfApp1", "WpfApp1\WpfApp1.csproj", "{715AB050-FB03-4D8F-A1D9-937C8C0D7D52}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "浏览器控件", "浏览器控件\浏览器控件.csproj", "{CEA7FFE0-B090-4F94-938E-3E3767E27391}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "菜单", "浏览器控件\菜单.csproj", "{CEA7FFE0-B090-4F94-938E-3E3767E27391}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

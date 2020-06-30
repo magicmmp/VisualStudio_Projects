@@ -65,6 +65,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -78,6 +79,39 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\BLD.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\copy.Image.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\cut.Image.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ITL.ICO" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\new.Image.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\open.Image.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\paste.Image.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\print.Image.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\printPreview.Image.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\save.Image.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\UNDRLN.ICO" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

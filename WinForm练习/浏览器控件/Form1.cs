@@ -10,12 +10,14 @@ using System.Windows.Forms;
 
 namespace 浏览器控件
 {
-    public partial class Form1 : Form
+    public partial class frmEditor : Form
     {
-        public Form1()
+        public frmEditor(frmContainer parent, int counter)
         {
             InitializeComponent();
             fontsToolStripComboBox.SelectedIndex = 0;
+            MdiParent = parent;
+            Text = "Editor " + counter.ToString();
         }
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
@@ -76,6 +78,8 @@ namespace 浏览器控件
             boldToolStripMenuItem.Checked = checkState;
             boldToolStripMenuItem.CheckedChanged += new
             EventHandler(boldToolStripMenuItem_CheckedChanged);
+
+            toolStripStatusLabelBold.Enabled = checkState;
         }
 
        
@@ -113,6 +117,8 @@ namespace 浏览器控件
             italicToolStripMenuItem.Checked = checkState;
             italicToolStripMenuItem.CheckedChanged += new
             EventHandler(italicToolStripMenuItem_CheckedChanged);
+
+            toolStripStatusLabelItalic.Enabled = checkState;
         }
 
         private void underlineToolStripButton_CheckedChanged(object sender, EventArgs e)
@@ -131,6 +137,29 @@ namespace 浏览器控件
             underlineToolStripMenuItem.Checked = checkState;
             underlineToolStripMenuItem.CheckedChanged += new
             EventHandler(underlineToolStripMenuItem_CheckedChanged);
+            toolStripStatusLabelUnderline.Enabled = checkState;
+        }
+
+        private void fontsToolStripComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            string text = ((ToolStripComboBox)sender).SelectedItem.ToString();
+            Font newFont = null;
+            if (richTextBoxText.SelectionFont == null)
+                newFont = new Font(text, richTextBoxText.Font.Size);
+            else
+                newFont = new Font(text, richTextBoxText.SelectionFont.Size,
+                richTextBoxText.SelectionFont.Style);
+            richTextBoxText.SelectionFont = newFont;
+        }
+
+        private void 呵呵呵ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void richTextBoxText_TextChanged(object sender, EventArgs e)
+        {
+            toolStripStatusLabelText.Text = "Number of characters: " + richTextBoxText.Text.Length;
         }
     }
 }

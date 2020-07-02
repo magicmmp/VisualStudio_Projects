@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace 浏览器控件
+namespace MDI多窗口程序
 {
     static class Program
     {

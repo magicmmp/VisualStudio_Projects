@@ -21,6 +21,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WpfApp1", "WpfApp1\WpfApp1.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "菜单", "浏览器控件\菜单.csproj", "{CEA7FFE0-B090-4F94-938E-3E3767E27391}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MDI多窗口程序", "MDI多窗口程序\MDI多窗口程序.csproj", "{71EF40B3-AD0C-4CCC-AAD5-E1EE5F99AB76}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -63,6 +65,10 @@ Global
 		{CEA7FFE0-B090-4F94-938E-3E3767E27391}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CEA7FFE0-B090-4F94-938E-3E3767E27391}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CEA7FFE0-B090-4F94-938E-3E3767E27391}.Release|Any CPU.Build.0 = Release|Any CPU
+		{71EF40B3-AD0C-4CCC-AAD5-E1EE5F99AB76}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{71EF40B3-AD0C-4CCC-AAD5-E1EE5F99AB76}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{71EF40B3-AD0C-4CCC-AAD5-E1EE5F99AB76}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{71EF40B3-AD0C-4CCC-AAD5-E1EE5F99AB76}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

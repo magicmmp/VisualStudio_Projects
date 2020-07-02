@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{CEA7FFE0-B090-4F94-938E-3E3767E27391}</ProjectGuid>
+    <ProjectGuid>{71EF40B3-AD0C-4CCC-AAD5-E1EE5F99AB76}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>浏览器控件</RootNamespace>
-    <AssemblyName>浏览器控件</AssemblyName>
+    <RootNamespace>MDI多窗口程序</RootNamespace>
+    <AssemblyName>MDI多窗口程序</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -34,9 +34,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
-    <Reference Include="System.Configuration.Install" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Management" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -60,6 +58,12 @@
     <Compile Include="Form2.Designer.cs">
       <DependentUpon>Form2.cs</DependentUpon>
     </Compile>
+    <Compile Include="Form3.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form3.Designer.cs">
+      <DependentUpon>Form3.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Form1.resx">
@@ -67,6 +71,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Form2.resx">
       <DependentUpon>Form2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form3.resx">
+      <DependentUpon>Form3.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -76,7 +83,6 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
-      <DesignTime>True</DesignTime>
     </Compile>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -90,39 +96,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\BLD.ico" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\copy.Image.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\cut.Image.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\ITL.ICO" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\new.Image.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\open.Image.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\paste.Image.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\print.Image.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\printPreview.Image.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\save.Image.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\UNDRLN.ICO" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

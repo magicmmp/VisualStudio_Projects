@@ -67,7 +67,7 @@ namespace Wrox.ProCSharp.Assemblies
 
                 returnData = writer.ToString();
             }
-
+            
             return returnData;
         }
     }

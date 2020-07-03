@@ -227,11 +227,10 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.receiveTextBox.BackColor = System.Drawing.SystemColors.InactiveCaption;
-            this.receiveTextBox.Location = new System.Drawing.Point(394, 16);
-            this.receiveTextBox.MinimumSize = new System.Drawing.Size(649, 312);
+            this.receiveTextBox.Location = new System.Drawing.Point(394, 12);
             this.receiveTextBox.Name = "receiveTextBox";
             this.receiveTextBox.ReadOnly = true;
-            this.receiveTextBox.Size = new System.Drawing.Size(682, 322);
+            this.receiveTextBox.Size = new System.Drawing.Size(682, 325);
             this.receiveTextBox.TabIndex = 23;
             this.receiveTextBox.Text = "";
             this.receiveTextBox.TextChanged += new System.EventHandler(this.receiveTextBox_TextChanged);
@@ -263,7 +262,7 @@
             this.autoSendCycleTextBox.Name = "autoSendCycleTextBox";
             this.autoSendCycleTextBox.Size = new System.Drawing.Size(60, 21);
             this.autoSendCycleTextBox.TabIndex = 29;
-            this.autoSendCycleTextBox.Text = "1000";
+            this.autoSendCycleTextBox.Text = "1500";
             this.autoSendCycleTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.autoSendCycleTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxLoraAddr_KeyPress);
             this.autoSendCycleTextBox.Validating += new System.ComponentModel.CancelEventHandler(this.autoSendCycleTextBox_Validating);
@@ -439,7 +438,7 @@
             // 
             // autoSendTimer
             // 
-            this.autoSendTimer.Interval = 1000;
+            this.autoSendTimer.Interval = 1500;
             this.autoSendTimer.Tick += new System.EventHandler(this.AutoSendTimer_Tick);
             // 
             // groupBox1

@@ -1,0 +1,10 @@
+D:\VisualStudio_Projects\Test\bin\Release\Test.exe.config
+D:\VisualStudio_Projects\Test\bin\Release\Test.exe
+D:\VisualStudio_Projects\Test\bin\Release\Test.pdb
+D:\VisualStudio_Projects\Test\obj\Release\Test.csprojAssemblyReference.cache
+D:\VisualStudio_Projects\Test\obj\Release\Test.Form1.resources
+D:\VisualStudio_Projects\Test\obj\Release\Test.Properties.Resources.resources
+D:\VisualStudio_Projects\Test\obj\Release\Test.csproj.GenerateResource.cache
+D:\VisualStudio_Projects\Test\obj\Release\Test.csproj.CoreCompileInputs.cache
+D:\VisualStudio_Projects\Test\obj\Release\Test.exe
+D:\VisualStudio_Projects\Test\obj\Release\Test.pdb

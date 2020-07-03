@@ -14,7 +14,16 @@ using System.Windows.Threading;
 
 namespace SerialPort_Test
 {
-    
+
+
+    /**
+     *  private string receiveTextBox_Text_1s_before;//1秒前接收框的文本
+        private string cmdLineSent_1s_before;//1秒前发送的指令
+        private string cmdLineReply_1s_before;//1秒前发送指令的回复，即是接收框字符串比1秒前增加的内容
+        private string cmdAndReplyTmp;
+     */
+
+
     public partial class Form1 : Form
     {
 
@@ -22,17 +31,25 @@ namespace SerialPort_Test
         private SerialPort serial = new SerialPort();
 
         private string receiveData;
+        private string receiveTextBox_Text_1s_before="";//1秒前接收框的文本
+        private string cmdLineSent_1s_before="";//1秒前发送的指令
+        private string cmdLineReply_1s_before="";//1秒前发送指令的回复，即是接收框字符串比1秒前增加的内容
+        private string cmdAndReplyTmp="";
+        private bool isLoRaCmdAllSentFlag = false;
+        private bool isLoRaCmdSendingFlag = false;
+
+
         private byte[] receiveByteBuffer;//存放收到的16进制字节
         private int serialUsageMode = 0;//用途分类
         
         private byte[] arrayLoraCmdSetAddr = { 0xEE, 0x16, 0x08, 0x00, 0x00, 0x00, 0x80, 0x00, 0x21, 0xAD };
-        private byte[] arrayLoraCmdCheck   = { 0xEE, 0x15, 0x06, 0x80, 0x00, 0x21, 0x01, 0xAB};
+        private byte[] arrayLoraCmdCheck   = { 0xEE, 0x19, 0x07, 0x80, 0x00, 0x21, 0x01, 0x01, 0x01 };
         private byte[] arrayLoraCmdOff = { 0xEE, 0x11, 0x07, 0x80, 0x00, 0x21, 0x00, 0x00, 0x6a };  //EE 11 07 02 00 01 00 00 09
         private byte[] arrayLoraCmdON  = { 0xEE, 0x11, 0x07, 0x80, 0x00, 0x21, 0x64, 0x64, 0x6a };//EE 11 07 01 00 01 64 50 BC
         private string[] HexCmdLines;//指令数组，一串指令一行
         private int nCmdLinesTosend = 0;//余下多少行命令要发送
         private int n485ResendTimes = 1;
-        private int LoraAddr = 0x01024E;
+        private int LoraAddr = 0x010218;
         private int LoraPreAddr = 0x010101;//要修改的原始地址
         private int HexCmdLinesIndex = 0;
 
@@ -203,30 +220,80 @@ namespace SerialPort_Test
             
         }
 
+        /**
+     *  private string receiveTextBox_Text_1s_before;//1秒前接收框的文本
+        private string cmdLineSent_1s_before;//1秒前发送的指令
+        private string cmdLineReply_1s_before;//1秒前发送指令的回复，即是接收框字符串比1秒前增加的内容
+        private string cmdAndReplyTmp;
+     */
+
         private void AutoSendTimer_Tick(object sender, EventArgs e)
         {
             //发送数据
             if(serialUsageMode==0)
                 SerialPortSend();
-            else if(nCmdLinesTosend>0)//如果还有几行命令要发送
+            else
             {
-                SendHexString(HexCmdLines[HexCmdLinesIndex]);
-                HexCmdLinesIndex = (HexCmdLinesIndex + 1) % HexCmdLines.Length;
-                nCmdLinesTosend--;
-                label12.Text = "剩余次数： "+(nCmdLinesTosend / HexCmdLines.Length);
-                if(nCmdLinesTosend==0)
-                    autoSendTimer.Enabled = false;
 
-                if (serialUsageMode == 1 && nCmdLinesTosend ==0)//如果是LoRA指令且要处理地址自动递增
+                
+                if(serialUsageMode == 1)
                 {
-                    if (radioButtonLora.Checked && checkBoxAutoAddr.Checked)
+                    if (receiveTextBox.Text.Length > 0 && receiveTextBox.Text.StartsWith(receiveTextBox_Text_1s_before))
                     {
-                        LoraAddr++;
-                        textBoxLoraAddr.Text = string.Format("{0:X6}", LoraAddr);
-                        sendTextBox.Text = generateLoraCmds(LoraAddr);
+                        cmdLineReply_1s_before = receiveTextBox.Text.Substring(cmdLineReply_1s_before.Length);
+                    }
+                    else
+                        cmdLineReply_1s_before = " ......";
+                    receiveTextBox_Text_1s_before = receiveTextBox.Text;
+                    
+
+                    if(isLoRaCmdSendingFlag && nCmdLinesTosend<HexCmdLines.Length)
+                    {
+
+                        cmdAndReplyTmp += "\r\n" + cmdLineSent_1s_before + " 对应回复:  " + cmdLineReply_1s_before;
+
+                        if (isLoRaCmdAllSentFlag)//发送完成1秒后
+                        {
+
+                            isLoRaCmdSendingFlag = false;//不再处于命令发送或接收状态
+                            isLoRaCmdAllSentFlag = false;
+                            receiveTextBox.AppendText("\r\n" + cmdAndReplyTmp);
+                        }
+                    }
+                    
+                }
+                
+
+                if (nCmdLinesTosend > 0)//如果还有几行命令要发送
+                {
+                    if (nCmdLinesTosend == HexCmdLines.Length)
+                        cmdAndReplyTmp = "";//开始发送前先置空字符串。
+
+                    cmdLineSent_1s_before = HexCmdLines[HexCmdLinesIndex];
+  
+                    SendHexString(HexCmdLines[HexCmdLinesIndex]);
+                    HexCmdLinesIndex = (HexCmdLinesIndex + 1) % HexCmdLines.Length;
+                    nCmdLinesTosend--;
+                    label12.Text = "剩余次数： " + (nCmdLinesTosend / HexCmdLines.Length);
+                    if (nCmdLinesTosend == 0 && false)
+                        autoSendTimer.Enabled = false;
+
+                    if (serialUsageMode == 1 && nCmdLinesTosend == 0)//如果是LoRA指令且要处理地址自动递增
+                    {
+                        if (radioButtonLora.Checked && checkBoxAutoAddr.Checked)
+                        {
+                            LoraAddr++;
+                            textBoxLoraAddr.Text = string.Format("{0:X6}", LoraAddr);
+                            sendTextBox.Text = generateLoraCmds(LoraAddr);
+                        }
+                        isLoRaCmdAllSentFlag = true;//指令刚发完
                     }
                 }
+
+
+              
             }
+            
 
             //设置新的定时时间 
             CheckAndResetSendCycleTextBox();
@@ -513,7 +580,7 @@ namespace SerialPort_Test
             else if(nCmdLinesTosend==0)//发完上一组指令才能再发别的
             {
                 //AutoSendCheckBox.Checked = true;//自动发送多组指令需要使用定时器
-                autoSendTimer.Enabled = true;
+                //autoSendTimer.Enabled = true;
                 receiveTextBox.Text = "";
                 string CmdLines = sendTextBox.Text;
                 HexCmdLines = CmdLines.Split(new string[] { "\r\n" },
@@ -523,11 +590,15 @@ namespace SerialPort_Test
                     nCmdLinesTosend = HexCmdLines.Length;
                 else
                     nCmdLinesTosend = HexCmdLines.Length*n485ResendTimes;
+                isLoRaCmdSendingFlag = true;
+                isLoRaCmdAllSentFlag = false;
             }
             else
             {
-                autoSendTimer.Enabled = false;
+                //autoSendTimer.Enabled = false;
                 nCmdLinesTosend = 0;
+                isLoRaCmdSendingFlag = false;
+                isLoRaCmdAllSentFlag = false;
                 receiveTextBox.AppendText("\r\n\r\n已停止当前发送操作。\r\n\r\n");
             }
         }
@@ -685,7 +756,7 @@ namespace SerialPort_Test
                 nCmdLinesTosend = 0;
                 hexadecimalDisplayCheckBox.Checked = true;
                 hexadecimalSendCheckBox.Checked = true;
-                autoSendCycleTextBox.Text = string.Format("{0}", 1000);//默认一秒发一条命令
+                autoSendCycleTextBox.Text = string.Format("{0}", 1500);//默认一秒发一条命令
                 howToUse();
             }
             

@@ -631,10 +631,12 @@ namespace SerialPort_Test
                 HexCmdLinesIndex = 0;
                 if (serialUsageMode == 1)//如果是LoRa测试
                 {
-                    labelLoraStaus.Text = "正在发送LoRa指令...";
+                    
                     foreach (string labelNname in statusDisplayLabels.Keys)
                         SetLoraLabelColor(labelNname, true);
                     nCmdLinesTosend = HexCmdLines.Length;
+                    if(nCmdLinesTosend>0)
+                        labelLoraStaus.Text = "正在发送LoRa指令...";
                 }
                 
                 else

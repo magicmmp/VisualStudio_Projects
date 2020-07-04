@@ -24,7 +24,9 @@ namespace SerialPort_Test
         private SerialPort serial = new SerialPort();
 
         private string receiveData;
-        
+        Dictionary<string, Label> statusDisplayLabels;//显示查询指令返回的状态
+
+
         private string cmdLineSent_1s_before="";//1秒前发送的指令
         private List<byte> DataGotLastSecond=new List<byte>();//串口上一秒接收的字节数据，是1秒前发送的指令 的回复
         private string cmdAndReplyTmp="";//临时变量，非必要
@@ -54,7 +56,7 @@ namespace SerialPort_Test
         public Form1()
         {
             InitializeComponent();
-            
+            statusDisplayLabels = InitDisplayLabels();//把这些标签的引用放入字典里，方便遍历
         }
 
 
@@ -102,6 +104,10 @@ namespace SerialPort_Test
             AutoSendCheckBox.Checked = false;
             //设置状态栏提示
             statusDisplay(true, "准备就绪");
+            
+            foreach (string labelNname in statusDisplayLabels.Keys)
+                SetLoraLabelColor(labelNname, true);
+
             LoRaSettingControlState(false);
             n485SettingControlState(false);
             //textBoxLoraAddr.Text = string.Format("{0:X6}",LoraAddr);
@@ -112,7 +118,9 @@ namespace SerialPort_Test
             parityCombobox.SelectedIndex = 0;
             dataBitsCombobox.SelectedIndex = 3;
             stopBitsCombobox.SelectedIndex = 0;
+
             
+
            // receiveTextBox.Text = "串口个数是：" + portNamesCombobox.Items.Count;
         }
 
@@ -202,6 +210,11 @@ namespace SerialPort_Test
             buttonNextAddr.Enabled = state;
             textBoxPreAddr.Enabled = state;
             label_LoRaPreAddr.Enabled = state;
+
+            foreach(Label label in statusDisplayLabels.Values)
+            {
+                label.Enabled = state;
+            }
         }
 
         //使能或关闭485配置相关的控件
@@ -237,12 +250,39 @@ namespace SerialPort_Test
                     if(isLoRaCmdSendingFlag && nCmdLinesTosend<HexCmdLines.Length)//至少发送一条命令1秒之后
                     {
 
-                        string StringReplytmp;
+                        string StringReplytmp="无回复";
+                        int loraAddrTmp;
+                        if(isCmdCheck_Sent(cmdLineSent_1s_before,out loraAddrTmp))
+                        {
+                            if (DataGotLastSecond.Count > 0 && isReplyOfCmdCheck(DataGotLastSecond,loraAddrTmp))
+                            {
+                                Dictionary<string, string> results = GetResults(DataGotLastSecond);
+                                StringBuilder sb = new StringBuilder(4 * DataGotLastSecond.Count);
+                                foreach (string labelName in results.Keys)
+                                {
+                                    statusDisplayLabels[labelName].Text = results[labelName];
+                                    sb.Append(results[labelName] + "\r\n");
+                                }
+
+                                foreach (string labelNname in statusDisplayLabels.Keys)
+                                    SetLoraLabelColor(labelNname, true);
+
+
+                                StringReplytmp = sb.ToString();
+                            }
+                            else
+                            {
+                                
+                                foreach (string labelNname in statusDisplayLabels.Keys)
+                                    SetLoraLabelColor(labelNname, false);
+                            }
+                                
+                        }
+
                         if (DataGotLastSecond.Count > 0)
                         {
-                            
-                            StringBuilder sb = new StringBuilder(4 * DataGotLastSecond.Count);
-                            foreach (byte b in DataGotLastSecond)
+                            StringBuilder sb = new StringBuilder(DataGotLastSecond.Count*4);
+                            foreach(byte b in DataGotLastSecond)
                             {
                                 sb.AppendFormat("{0:X2} ", b);
                             }
@@ -258,6 +298,7 @@ namespace SerialPort_Test
 
                             isLoRaCmdSendingFlag = false;//不再处于命令发送或接收状态
                             isLoRaCmdAllSentFlag = false;
+                            labelLoraStaus.Text = "发送完成√";
                             receiveTextBox.AppendText("\r\n" + cmdAndReplyTmp);
                         }
                     }
@@ -589,7 +630,13 @@ namespace SerialPort_Test
                                    StringSplitOptions.RemoveEmptyEntries);
                 HexCmdLinesIndex = 0;
                 if (serialUsageMode == 1)//如果是LoRa测试
+                {
+                    labelLoraStaus.Text = "正在发送LoRa指令...";
+                    foreach (string labelNname in statusDisplayLabels.Keys)
+                        SetLoraLabelColor(labelNname, true);
                     nCmdLinesTosend = HexCmdLines.Length;
+                }
+                
                 else
                     nCmdLinesTosend = HexCmdLines.Length*n485ResendTimes;
                 isLoRaCmdSendingFlag = true;
@@ -602,6 +649,10 @@ namespace SerialPort_Test
                 isLoRaCmdSendingFlag = false;
                 isLoRaCmdAllSentFlag = false;
                 receiveTextBox.AppendText("\r\n\r\n已停止当前发送操作。\r\n\r\n");
+                if (serialUsageMode == 1)//如果是LoRa测试
+                {
+                    labelLoraStaus.Text = "发送操作已取消";
+                }
             }
             DataGotLastSecond.Clear();//把之前收到的数据清空
         }
@@ -1047,6 +1098,266 @@ namespace SerialPort_Test
                 if (nCmdLinesTosend == 0)
                     sendTextBox.Text = generateLoraCmds(LoraAddr);
             }
+        }
+
+
+
+
+        public  bool isCmdCheck_Sent(string hexString, out int LoRaAddr)
+        {
+            bool isValidFlag = true;
+            LoRaAddr = 0xfffffff;
+            try
+            {
+
+                hexString = hexString.Trim();
+                hexString.Replace("0x", "");   //去掉0x
+                hexString.Replace("0X", "");   //去掉0X
+
+                string[] strArray = hexString.Split(new char[] { ',', '，', '\r', '\n', ' ', '\t' });
+                int decNum = 0;
+                int i = 0;
+                byte[] sendBuffer = new byte[strArray.Length];  //发送数据缓冲区
+
+                foreach (string str in strArray)
+                {
+                    try
+                    {
+                        decNum = Convert.ToInt16(str, 16);
+                        sendBuffer[i++] = Convert.ToByte(decNum);
+
+                    }
+                    catch
+                    {
+                        isValidFlag = false;
+                    }
+                }
+                //EE 19 07 01 02 18 01 01 2B 
+                if (isValidFlag && sendBuffer.Length == 9)
+                {
+                    if (sendBuffer[0] != 0xEE)
+                        isValidFlag = false;
+                    if (sendBuffer[1] != 0x19)
+                        isValidFlag = false;
+                    if (sendBuffer[2] != 0x07)
+                        isValidFlag = false;
+                    if (sendBuffer[6] != 0x01)
+                        isValidFlag = false;
+                    if (sendBuffer[7] != 0x01)
+                        isValidFlag = false;
+                    int sumTmp = 0;
+                    foreach (byte b in sendBuffer)
+                        sumTmp += b;
+                    sumTmp -= sendBuffer[8];
+                    if ((byte)(sumTmp & 0xff) != sendBuffer[8])
+                        isValidFlag = false;
+
+                    if (isValidFlag)
+                    {
+                        LoRaAddr = sendBuffer[3];
+                        LoRaAddr = LoRaAddr << 8;
+                        LoRaAddr += sendBuffer[4];
+                        LoRaAddr = LoRaAddr << 8;
+                        LoRaAddr += sendBuffer[5];
+                    }
+                }
+                else
+                    isValidFlag = false;
+            }
+            catch //无法转为16进制时
+            {
+                isValidFlag = false;
+            }
+
+            return isValidFlag;
+        }
+
+        public  bool isReplyOfCmdCheck(List<byte> DataGotLastSecond, int LoraAddr)
+        {
+            bool isValidFlag = true;
+            string tmpString = "回复正确";
+
+            if (DataGotLastSecond == null)
+            {
+                tmpString = "错误：引用为空";
+                isValidFlag = false;
+            }
+            else
+            {
+                if (DataGotLastSecond.Count == 26)
+                {
+                    byte[] dataBuffer = DataGotLastSecond.ToArray();
+                    if (dataBuffer[0] != 0xCC)
+                        isValidFlag = false;
+                    if (dataBuffer[1] != 0x19)
+                        isValidFlag = false;
+                    if (dataBuffer[2] != 0x18)
+                        isValidFlag = false;
+                    if (dataBuffer[6] != 0x81)
+                        isValidFlag = false;
+                    int tmpSum = 0;
+                    foreach (byte b in dataBuffer)
+                        tmpSum += b;
+                    tmpSum -= dataBuffer[25];
+                    if ((byte)(tmpSum & 0xff) != dataBuffer[25])
+                    {
+                        isValidFlag = false;
+                    }
+
+                    int tmpAddr;
+                    if (isValidFlag)
+                    {
+                        tmpAddr = dataBuffer[3];
+                        tmpAddr = tmpAddr << 8;
+                        tmpAddr += dataBuffer[4];
+                        tmpAddr = tmpAddr << 8;
+                        tmpAddr += dataBuffer[5];
+                        if (tmpAddr != LoraAddr)
+                        {
+                            tmpString = "错误：地址错";
+                            isValidFlag = false;
+                        }
+
+                    }
+                    else
+                        tmpString = "错误：数据格式错";
+                }
+                else
+                {
+                    tmpString = "错误：数据长度不对";
+                    isValidFlag = false;
+                }
+            }
+
+            return isValidFlag;
+            //return tmpString;
+        }
+
+        public  Dictionary<string, string> GetResults(List<byte> DataGotLastSecond)
+        {
+            Dictionary<string, string> result = new Dictionary<string, string>();
+            if (DataGotLastSecond.Count == 26)
+            {
+                byte[] dataBuffer = DataGotLastSecond.ToArray();
+                sbyte sbyteTmp;
+                int IntTmp;
+                int baseIdx = 6;
+                string stringTmp;
+                stringTmp = string.Format("数据标识: 0x{0:X2}", dataBuffer[baseIdx + 0]);
+                result.Add("数据标识", stringTmp);
+
+
+                stringTmp = string.Format("设备类型: 0x{0:X2}", dataBuffer[baseIdx + 1]);
+                if (dataBuffer[baseIdx + 1] >= 0x70 && dataBuffer[baseIdx + 1] <= 0x7F)
+                {
+                    stringTmp = "设备类型: 路灯控制器";
+                    if (dataBuffer[baseIdx + 1] == 0x73)
+                        stringTmp = "设备类型: 500W单灯控制器";
+                    else if (dataBuffer[baseIdx + 1] == 0x7A)
+                        stringTmp = "设备类型: 500W双灯控制器";
+                }
+                result.Add("设备类型", stringTmp);
+
+                sbyteTmp = (sbyte)dataBuffer[baseIdx + 2];
+                stringTmp = string.Format("温度: {0} ℃", sbyteTmp);
+                result.Add("温度", stringTmp);
+
+                IntTmp = dataBuffer[baseIdx + 3];
+                IntTmp <<= 8;
+                IntTmp += dataBuffer[baseIdx + 4];
+                stringTmp = string.Format("输入电压: {0} V", IntTmp * 0.1);
+                result.Add("输入电压", stringTmp);
+
+                IntTmp = dataBuffer[baseIdx + 5];
+                IntTmp <<= 8;
+                IntTmp += dataBuffer[baseIdx + 6];
+                stringTmp = string.Format("A路输入电流: {0} mA", IntTmp);
+                result.Add("A路输入电流", stringTmp);
+
+                IntTmp = dataBuffer[baseIdx + 7];
+                IntTmp <<= 8;
+                IntTmp += dataBuffer[baseIdx + 8];
+                stringTmp = string.Format("B路输入电流: {0} mA", IntTmp);
+                result.Add("B路输入电流", stringTmp);
+
+                IntTmp = dataBuffer[baseIdx + 9];
+                IntTmp <<= 8;
+                IntTmp += dataBuffer[baseIdx + 10];
+                stringTmp = string.Format("A路有功功率: {0} W", IntTmp * 0.1);
+                result.Add("A路有功功率", stringTmp);
+
+                IntTmp = dataBuffer[baseIdx + 11];
+                IntTmp <<= 8;
+                IntTmp += dataBuffer[baseIdx + 12];
+                stringTmp = string.Format("B路有功功率: {0} W", IntTmp * 0.1);
+                result.Add("B路有功功率", stringTmp);
+
+                stringTmp = string.Format("A路功率因素: {0} %", dataBuffer[baseIdx + 13]);
+                result.Add("A路功率因素", stringTmp);
+
+                stringTmp = string.Format("B路功率因素: {0} %", dataBuffer[baseIdx + 14]);
+                result.Add("B路功率因素", stringTmp);
+
+                stringTmp = string.Format("A路亮度: {0} %", dataBuffer[baseIdx + 15]/2);
+                result.Add("A路亮度", stringTmp);
+
+                stringTmp = string.Format("B路亮度: {0} %", dataBuffer[baseIdx + 16]/2);
+                result.Add("B路亮度", stringTmp);
+            }
+
+            return result;
+        }
+
+        private Dictionary<string,Label> InitDisplayLabels()
+        {
+            Dictionary<string, Label> DisplayLabels = new Dictionary<string, Label>();
+            DisplayLabels.Add("数据标识", labelDataCode);
+            DisplayLabels.Add("设备类型", labelDeviceType);
+            DisplayLabels.Add("温度", labelTemperature);
+            DisplayLabels.Add("输入电压", labelInputVoltage);
+            DisplayLabels.Add("A路输入电流", label_A_InputCurrent);
+            DisplayLabels.Add("B路输入电流", label_B_InputCurrent);
+            DisplayLabels.Add("A路有功功率", label_A_Power);
+            DisplayLabels.Add("B路有功功率", label_B_Power);
+
+            DisplayLabels.Add("A路功率因素", label_A_PowerFactor);
+            DisplayLabels.Add("B路功率因素", label_B_PowerFactor);
+            DisplayLabels.Add("A路亮度", label_A_luminosity);
+            DisplayLabels.Add("B路亮度", label_B_luminosity);
+            DisplayLabels.Add("Lora命令发送状态", labelLoraStaus);
+            return DisplayLabels;
+        }
+
+        /**
+         * 
+         * if (isNormal)
+            {
+                statusTextBlock.BackColor = Color.LightYellow;
+                statusTextBlock.ForeColor = Color.Blue;
+            }
+            else
+            {
+                statusTextBlock.BackColor = Color.Red;
+                statusTextBlock.ForeColor = Color.Green;
+            }
+         */
+        private void SetLoraLabelColor(string labelName,bool isNormal)
+        {
+            if(isNormal)
+            {
+                statusDisplayLabels[labelName].BackColor = Color.LightYellow;
+                statusDisplayLabels[labelName].ForeColor = Color.Blue;
+            }
+            else
+            {
+                statusDisplayLabels[labelName].BackColor = Color.Red;
+                statusDisplayLabels[labelName].ForeColor = Color.Green;
+            }
+        }
+
+        private void label9_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

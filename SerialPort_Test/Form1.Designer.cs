@@ -77,6 +77,19 @@
             this.buttonPreAddr = new System.Windows.Forms.Button();
             this.label_LoRaPreAddr = new System.Windows.Forms.Label();
             this.textBoxPreAddr = new System.Windows.Forms.TextBox();
+            this.labelDataCode = new System.Windows.Forms.Label();
+            this.labelDeviceType = new System.Windows.Forms.Label();
+            this.labelTemperature = new System.Windows.Forms.Label();
+            this.labelInputVoltage = new System.Windows.Forms.Label();
+            this.label_A_InputCurrent = new System.Windows.Forms.Label();
+            this.label_B_InputCurrent = new System.Windows.Forms.Label();
+            this.label_A_Power = new System.Windows.Forms.Label();
+            this.label_B_PowerFactor = new System.Windows.Forms.Label();
+            this.label_A_luminosity = new System.Windows.Forms.Label();
+            this.label_A_PowerFactor = new System.Windows.Forms.Label();
+            this.label_B_Power = new System.Windows.Forms.Label();
+            this.label_B_luminosity = new System.Windows.Forms.Label();
+            this.labelLoraStaus = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -213,10 +226,10 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.sendTextBox.BackColor = System.Drawing.SystemColors.InactiveCaption;
-            this.sendTextBox.Location = new System.Drawing.Point(394, 358);
+            this.sendTextBox.Location = new System.Drawing.Point(394, 424);
             this.sendTextBox.Multiline = true;
             this.sendTextBox.Name = "sendTextBox";
-            this.sendTextBox.Size = new System.Drawing.Size(682, 262);
+            this.sendTextBox.Size = new System.Drawing.Size(682, 196);
             this.sendTextBox.TabIndex = 22;
             this.sendTextBox.TextChanged += new System.EventHandler(this.sendTextBox_TextChanged);
             this.sendTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.sendTextBox_KeyPress);
@@ -227,10 +240,10 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.receiveTextBox.BackColor = System.Drawing.SystemColors.InactiveCaption;
-            this.receiveTextBox.Location = new System.Drawing.Point(394, 12);
+            this.receiveTextBox.Location = new System.Drawing.Point(394, 223);
             this.receiveTextBox.Name = "receiveTextBox";
             this.receiveTextBox.ReadOnly = true;
-            this.receiveTextBox.Size = new System.Drawing.Size(682, 325);
+            this.receiveTextBox.Size = new System.Drawing.Size(682, 181);
             this.receiveTextBox.TabIndex = 23;
             this.receiveTextBox.Text = "";
             this.receiveTextBox.TextChanged += new System.EventHandler(this.receiveTextBox_TextChanged);
@@ -419,6 +432,7 @@
             this.label9.Size = new System.Drawing.Size(65, 12);
             this.label9.TabIndex = 44;
             this.label9.Text = "接收字节数";
+            this.label9.Click += new System.EventHandler(this.label9_Click);
             // 
             // countClearButton
             // 
@@ -604,11 +618,154 @@
             this.textBoxPreAddr.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxLoraAddr_KeyPress);
             this.textBoxPreAddr.Validating += new System.ComponentModel.CancelEventHandler(this.textBoxPreAddr_Validating);
             // 
+            // labelDataCode
+            // 
+            this.labelDataCode.AutoSize = true;
+            this.labelDataCode.Enabled = false;
+            this.labelDataCode.Location = new System.Drawing.Point(413, 16);
+            this.labelDataCode.Name = "labelDataCode";
+            this.labelDataCode.Size = new System.Drawing.Size(53, 12);
+            this.labelDataCode.TabIndex = 58;
+            this.labelDataCode.Text = "数据标识";
+            // 
+            // labelDeviceType
+            // 
+            this.labelDeviceType.AutoSize = true;
+            this.labelDeviceType.Enabled = false;
+            this.labelDeviceType.Location = new System.Drawing.Point(413, 57);
+            this.labelDeviceType.Name = "labelDeviceType";
+            this.labelDeviceType.Size = new System.Drawing.Size(41, 12);
+            this.labelDeviceType.TabIndex = 59;
+            this.labelDeviceType.Text = "设备码";
+            // 
+            // labelTemperature
+            // 
+            this.labelTemperature.AutoSize = true;
+            this.labelTemperature.Enabled = false;
+            this.labelTemperature.Location = new System.Drawing.Point(413, 139);
+            this.labelTemperature.Name = "labelTemperature";
+            this.labelTemperature.Size = new System.Drawing.Size(29, 12);
+            this.labelTemperature.TabIndex = 60;
+            this.labelTemperature.Text = "温度";
+            // 
+            // labelInputVoltage
+            // 
+            this.labelInputVoltage.AutoSize = true;
+            this.labelInputVoltage.Enabled = false;
+            this.labelInputVoltage.Location = new System.Drawing.Point(413, 98);
+            this.labelInputVoltage.Name = "labelInputVoltage";
+            this.labelInputVoltage.Size = new System.Drawing.Size(53, 12);
+            this.labelInputVoltage.TabIndex = 61;
+            this.labelInputVoltage.Text = "输入电压";
+            // 
+            // label_A_InputCurrent
+            // 
+            this.label_A_InputCurrent.AutoSize = true;
+            this.label_A_InputCurrent.Enabled = false;
+            this.label_A_InputCurrent.Location = new System.Drawing.Point(655, 16);
+            this.label_A_InputCurrent.Name = "label_A_InputCurrent";
+            this.label_A_InputCurrent.Size = new System.Drawing.Size(71, 12);
+            this.label_A_InputCurrent.TabIndex = 62;
+            this.label_A_InputCurrent.Text = "A路输入电流";
+            // 
+            // label_B_InputCurrent
+            // 
+            this.label_B_InputCurrent.AutoSize = true;
+            this.label_B_InputCurrent.Enabled = false;
+            this.label_B_InputCurrent.Location = new System.Drawing.Point(915, 16);
+            this.label_B_InputCurrent.Name = "label_B_InputCurrent";
+            this.label_B_InputCurrent.Size = new System.Drawing.Size(71, 12);
+            this.label_B_InputCurrent.TabIndex = 63;
+            this.label_B_InputCurrent.Text = "B路输入电流";
+            // 
+            // label_A_Power
+            // 
+            this.label_A_Power.AutoSize = true;
+            this.label_A_Power.Enabled = false;
+            this.label_A_Power.Location = new System.Drawing.Point(655, 71);
+            this.label_A_Power.Name = "label_A_Power";
+            this.label_A_Power.Size = new System.Drawing.Size(71, 12);
+            this.label_A_Power.TabIndex = 64;
+            this.label_A_Power.Text = "A路有功功率";
+            // 
+            // label_B_PowerFactor
+            // 
+            this.label_B_PowerFactor.AutoSize = true;
+            this.label_B_PowerFactor.Enabled = false;
+            this.label_B_PowerFactor.Location = new System.Drawing.Point(915, 181);
+            this.label_B_PowerFactor.Name = "label_B_PowerFactor";
+            this.label_B_PowerFactor.Size = new System.Drawing.Size(71, 12);
+            this.label_B_PowerFactor.TabIndex = 68;
+            this.label_B_PowerFactor.Text = "B路功率因素";
+            // 
+            // label_A_luminosity
+            // 
+            this.label_A_luminosity.AutoSize = true;
+            this.label_A_luminosity.Enabled = false;
+            this.label_A_luminosity.Location = new System.Drawing.Point(655, 126);
+            this.label_A_luminosity.Name = "label_A_luminosity";
+            this.label_A_luminosity.Size = new System.Drawing.Size(47, 12);
+            this.label_A_luminosity.TabIndex = 67;
+            this.label_A_luminosity.Text = "A路亮度";
+            // 
+            // label_A_PowerFactor
+            // 
+            this.label_A_PowerFactor.AutoSize = true;
+            this.label_A_PowerFactor.Enabled = false;
+            this.label_A_PowerFactor.Location = new System.Drawing.Point(655, 181);
+            this.label_A_PowerFactor.Name = "label_A_PowerFactor";
+            this.label_A_PowerFactor.Size = new System.Drawing.Size(71, 12);
+            this.label_A_PowerFactor.TabIndex = 66;
+            this.label_A_PowerFactor.Text = "A路功率因素";
+            // 
+            // label_B_Power
+            // 
+            this.label_B_Power.AutoSize = true;
+            this.label_B_Power.Enabled = false;
+            this.label_B_Power.Location = new System.Drawing.Point(915, 71);
+            this.label_B_Power.Name = "label_B_Power";
+            this.label_B_Power.Size = new System.Drawing.Size(71, 12);
+            this.label_B_Power.TabIndex = 65;
+            this.label_B_Power.Text = "B路有功功率";
+            // 
+            // label_B_luminosity
+            // 
+            this.label_B_luminosity.AutoSize = true;
+            this.label_B_luminosity.Enabled = false;
+            this.label_B_luminosity.Location = new System.Drawing.Point(915, 126);
+            this.label_B_luminosity.Name = "label_B_luminosity";
+            this.label_B_luminosity.Size = new System.Drawing.Size(47, 12);
+            this.label_B_luminosity.TabIndex = 69;
+            this.label_B_luminosity.Text = "B路亮度";
+            // 
+            // labelLoraStaus
+            // 
+            this.labelLoraStaus.AutoSize = true;
+            this.labelLoraStaus.Enabled = false;
+            this.labelLoraStaus.Location = new System.Drawing.Point(413, 180);
+            this.labelLoraStaus.Name = "labelLoraStaus";
+            this.labelLoraStaus.Size = new System.Drawing.Size(29, 12);
+            this.labelLoraStaus.TabIndex = 70;
+            this.labelLoraStaus.Text = "状态";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1088, 692);
+            this.Controls.Add(this.labelLoraStaus);
+            this.Controls.Add(this.label_B_luminosity);
+            this.Controls.Add(this.label_B_PowerFactor);
+            this.Controls.Add(this.label_A_luminosity);
+            this.Controls.Add(this.label_A_PowerFactor);
+            this.Controls.Add(this.label_B_Power);
+            this.Controls.Add(this.label_A_Power);
+            this.Controls.Add(this.label_B_InputCurrent);
+            this.Controls.Add(this.label_A_InputCurrent);
+            this.Controls.Add(this.labelInputVoltage);
+            this.Controls.Add(this.labelTemperature);
+            this.Controls.Add(this.labelDeviceType);
+            this.Controls.Add(this.labelDataCode);
             this.Controls.Add(this.textBoxPreAddr);
             this.Controls.Add(this.label_LoRaPreAddr);
             this.Controls.Add(this.buttonNextAddr);
@@ -713,6 +870,19 @@
         private System.Windows.Forms.Button buttonNextAddr;
         private System.Windows.Forms.Label label_LoRaPreAddr;
         private System.Windows.Forms.TextBox textBoxPreAddr;
+        private System.Windows.Forms.Label labelDataCode;
+        private System.Windows.Forms.Label labelDeviceType;
+        private System.Windows.Forms.Label labelTemperature;
+        private System.Windows.Forms.Label labelInputVoltage;
+        private System.Windows.Forms.Label label_A_InputCurrent;
+        private System.Windows.Forms.Label label_B_InputCurrent;
+        private System.Windows.Forms.Label label_A_Power;
+        private System.Windows.Forms.Label label_B_PowerFactor;
+        private System.Windows.Forms.Label label_A_luminosity;
+        private System.Windows.Forms.Label label_A_PowerFactor;
+        private System.Windows.Forms.Label label_B_Power;
+        private System.Windows.Forms.Label label_B_luminosity;
+        private System.Windows.Forms.Label labelLoraStaus;
     }
 }
 

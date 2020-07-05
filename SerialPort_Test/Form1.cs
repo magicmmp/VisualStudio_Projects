@@ -254,6 +254,25 @@ namespace SerialPort_Test
                         int loraAddrTmp;
                         if(isCmdCheck_Sent(cmdLineSent_1s_before,out loraAddrTmp))
                         {
+                            if(true)//仅用于测试2020-7-5
+                            {
+                                Dictionary<string, string> results =cmdCheckClass.getResetResults();
+                                
+                                foreach (string labelName in results.Keys)//使所有标签显示数据为0
+                                {
+                                    statusDisplayLabels[labelName].Text = results[labelName];
+                                    
+                                }
+
+                                string fakeLoraReply = "CC 19 18 01 02 18 81 73 22 01 CD 02 DA 00 00 01 50 00 00 61 00 C8 00 00 01 53";
+                                List<byte> listTmp = cmdCheckClass.ParseHexString(fakeLoraReply);
+                                DataGotLastSecond.Clear();
+                                DataGotLastSecond.AddRange(listTmp);
+
+                            }
+                            
+
+
                             if (DataGotLastSecond.Count > 0 && isReplyOfCmdCheck(DataGotLastSecond,loraAddrTmp))
                             {
                                 Dictionary<string, string> results = GetResults(DataGotLastSecond);

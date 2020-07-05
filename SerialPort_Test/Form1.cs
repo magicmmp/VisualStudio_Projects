@@ -337,7 +337,7 @@ namespace SerialPort_Test
                     SendHexString(HexCmdLines[HexCmdLinesIndex]);
                     HexCmdLinesIndex = (HexCmdLinesIndex + 1) % HexCmdLines.Length;
                     nCmdLinesTosend--;
-                    label12.Text = "剩余次数： " + (nCmdLinesTosend / HexCmdLines.Length);
+                    label12.Text = "剩余行数： " + (nCmdLinesTosend );
                     
 
                     if (serialUsageMode == 1 && nCmdLinesTosend == 0)//如果是LoRA指令且要处理地址自动递增
@@ -828,14 +828,14 @@ namespace SerialPort_Test
             else
             {
                 
-                autoSendTimer.Enabled = false;
-                nCmdLinesTosend = 0;
+                
+                
                 hexadecimalDisplayCheckBox.Checked = true;
                 hexadecimalSendCheckBox.Checked = true;
                 autoSendCycleTextBox.Text = string.Format("{0}", 1500);//默认一秒发一条命令
                 howToUse();
             }
-            
+            nCmdLinesTosend = 0;
         }
 
         private void radioButtonLora_CheckedChanged(object sender, EventArgs e)
@@ -852,8 +852,11 @@ namespace SerialPort_Test
             else
             {
                 LoRaSettingControlState(false);
-                autoSendTimer.Enabled = false;
+                
+                
                 nCmdLinesTosend = 0;
+                isLoRaCmdSendingFlag = false;
+                isLoRaCmdAllSentFlag = false;
             }
         }
 
@@ -871,8 +874,10 @@ namespace SerialPort_Test
             else
             {
                 n485SettingControlState(false);
-                autoSendTimer.Enabled = false;
                 nCmdLinesTosend = 0;
+                isLoRaCmdSendingFlag = false;
+                isLoRaCmdAllSentFlag = false;
+                
             }
         }
 

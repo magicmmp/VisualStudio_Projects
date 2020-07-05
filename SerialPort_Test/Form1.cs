@@ -203,6 +203,7 @@ namespace SerialPort_Test
         //使能或关闭LoRa配置相关的控件
         private void LoRaSettingControlState(bool state)
         {
+            checkBoxOnlySendCheckCmd.Enabled = state;
             label10.Enabled = state;
             textBoxLoraAddr.Enabled = state;
             checkBoxAutoAddr.Enabled = state;
@@ -935,55 +936,44 @@ namespace SerialPort_Test
 
 
 
-            //sendTextBox.Text = "";
-            // if (false)
+            
+
+            if (!checkBoxOnlySendCheckCmd.Checked)
             {
                 foreach (byte b in arrayLoraCmdSetAddr)
                 {
                     sb.AppendFormat("{0:X2} ", b);
                 }
                 sb.Append("\r\n");
-            }
 
-            if (false)
-            {
+                foreach (byte b in arrayLoraCmdOff)
+                {
+                    sb.AppendFormat("{0:X2} ", b);
+                }
+                sb.Append("\r\n");
+
                 foreach (byte b in arrayLoraCmdCheck)
                 {
                     sb.AppendFormat("{0:X2} ", b);
                 }
                 sb.Append("\r\n");
+
+                foreach (byte b in arrayLoraCmdCheck)
+                {
+                    sb.AppendFormat("{0:X2} ", b);
+                }
+                sb.Append("\r\n");
+
+                foreach (byte b in arrayLoraCmdON)
+                {
+                    sb.AppendFormat("{0:X2} ", b);
+                }
+                sb.Append("\r\n");
+
             }
-            
 
-            //if(false)
-            foreach (byte b in arrayLoraCmdOff)
-            {
-                sb.AppendFormat("{0:X2} ", b);
-            }
-            sb.Append("\r\n");
 
-           
-            foreach (byte b in arrayLoraCmdCheck)
-            {
-                sb.AppendFormat("{0:X2} ", b);
-            }
-            sb.Append("\r\n");
 
-            foreach (byte b in arrayLoraCmdCheck)
-            {
-                sb.AppendFormat("{0:X2} ", b);
-            }
-            sb.Append("\r\n");
-
-         
-
-            
-
-            foreach (byte b in arrayLoraCmdON)
-            {
-                sb.AppendFormat("{0:X2} ", b);
-            }
-            sb.Append("\r\n");
 
             foreach (byte b in arrayLoraCmdCheck)
             {
@@ -1379,6 +1369,11 @@ namespace SerialPort_Test
         private void label9_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void checkBoxOnlySendCheckCmd_CheckedChanged(object sender, EventArgs e)
+        {
+            sendTextBox.Text = generateLoraCmds(LoraAddr);
         }
     }
 }

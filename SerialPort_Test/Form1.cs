@@ -255,7 +255,7 @@ namespace SerialPort_Test
                         int loraAddrTmp;
                         if(isCmdCheck_Sent(cmdLineSent_1s_before,out loraAddrTmp))
                         {
-                            if(true)//仅用于测试2020-7-5
+                            if(false)//仅用于测试2020-7-5
                             {
                                 Dictionary<string, string> results =cmdCheckClass.getResetResults();
                                 

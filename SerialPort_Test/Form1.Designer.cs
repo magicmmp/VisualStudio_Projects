@@ -151,7 +151,7 @@
             this.portNamesCombobox.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.portNamesCombobox.FormattingEnabled = true;
             this.portNamesCombobox.Location = new System.Drawing.Point(104, 20);
-            this.portNamesCombobox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.portNamesCombobox.Margin = new System.Windows.Forms.Padding(4);
             this.portNamesCombobox.Name = "portNamesCombobox";
             this.portNamesCombobox.Size = new System.Drawing.Size(131, 33);
             this.portNamesCombobox.TabIndex = 5;
@@ -180,7 +180,7 @@
             "460800",
             "921600"});
             this.baudRateCombobox.Location = new System.Drawing.Point(104, 79);
-            this.baudRateCombobox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.baudRateCombobox.Margin = new System.Windows.Forms.Padding(4);
             this.baudRateCombobox.Name = "baudRateCombobox";
             this.baudRateCombobox.Size = new System.Drawing.Size(131, 33);
             this.baudRateCombobox.TabIndex = 6;
@@ -195,7 +195,7 @@
             "7",
             "8"});
             this.dataBitsCombobox.Location = new System.Drawing.Point(104, 196);
-            this.dataBitsCombobox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.dataBitsCombobox.Margin = new System.Windows.Forms.Padding(4);
             this.dataBitsCombobox.Name = "dataBitsCombobox";
             this.dataBitsCombobox.Size = new System.Drawing.Size(131, 33);
             this.dataBitsCombobox.TabIndex = 13;
@@ -210,7 +210,7 @@
             "1.5",
             "2"});
             this.stopBitsCombobox.Location = new System.Drawing.Point(104, 255);
-            this.stopBitsCombobox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.stopBitsCombobox.Margin = new System.Windows.Forms.Padding(4);
             this.stopBitsCombobox.Name = "stopBitsCombobox";
             this.stopBitsCombobox.Size = new System.Drawing.Size(131, 33);
             this.stopBitsCombobox.TabIndex = 14;
@@ -226,7 +226,7 @@
             "Mark",
             "Space"});
             this.parityCombobox.Location = new System.Drawing.Point(104, 138);
-            this.parityCombobox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.parityCombobox.Margin = new System.Windows.Forms.Padding(4);
             this.parityCombobox.Name = "parityCombobox";
             this.parityCombobox.Size = new System.Drawing.Size(131, 33);
             this.parityCombobox.TabIndex = 15;
@@ -238,7 +238,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.sendTextBox.BackColor = System.Drawing.SystemColors.InactiveCaption;
             this.sendTextBox.Location = new System.Drawing.Point(525, 530);
-            this.sendTextBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.sendTextBox.Margin = new System.Windows.Forms.Padding(4);
             this.sendTextBox.Multiline = true;
             this.sendTextBox.Name = "sendTextBox";
             this.sendTextBox.Size = new System.Drawing.Size(908, 244);
@@ -252,11 +252,11 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.receiveTextBox.BackColor = System.Drawing.SystemColors.InactiveCaption;
-            this.receiveTextBox.Location = new System.Drawing.Point(525, 279);
-            this.receiveTextBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.receiveTextBox.Location = new System.Drawing.Point(525, 20);
+            this.receiveTextBox.Margin = new System.Windows.Forms.Padding(4);
             this.receiveTextBox.Name = "receiveTextBox";
             this.receiveTextBox.ReadOnly = true;
-            this.receiveTextBox.Size = new System.Drawing.Size(908, 225);
+            this.receiveTextBox.Size = new System.Drawing.Size(908, 484);
             this.receiveTextBox.TabIndex = 23;
             this.receiveTextBox.Text = "";
             this.receiveTextBox.TextChanged += new System.EventHandler(this.receiveTextBox_TextChanged);
@@ -264,7 +264,7 @@
             // SendButton
             // 
             this.SendButton.Location = new System.Drawing.Point(364, 638);
-            this.SendButton.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.SendButton.Margin = new System.Windows.Forms.Padding(4);
             this.SendButton.Name = "SendButton";
             this.SendButton.Size = new System.Drawing.Size(111, 59);
             this.SendButton.TabIndex = 31;
@@ -286,7 +286,7 @@
             // autoSendCycleTextBox
             // 
             this.autoSendCycleTextBox.Location = new System.Drawing.Point(127, 530);
-            this.autoSendCycleTextBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.autoSendCycleTextBox.Margin = new System.Windows.Forms.Padding(4);
             this.autoSendCycleTextBox.MaxLength = 6;
             this.autoSendCycleTextBox.Name = "autoSendCycleTextBox";
             this.autoSendCycleTextBox.Size = new System.Drawing.Size(79, 25);
@@ -310,7 +310,7 @@
             // 
             this.AutoSendCheckBox.AutoSize = true;
             this.AutoSendCheckBox.Location = new System.Drawing.Point(23, 585);
-            this.AutoSendCheckBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.AutoSendCheckBox.Margin = new System.Windows.Forms.Padding(4);
             this.AutoSendCheckBox.Name = "AutoSendCheckBox";
             this.AutoSendCheckBox.Size = new System.Drawing.Size(89, 19);
             this.AutoSendCheckBox.TabIndex = 27;
@@ -321,8 +321,8 @@
             // 
             // ClearReceiveButton
             // 
-            this.ClearReceiveButton.Location = new System.Drawing.Point(419, 88);
-            this.ClearReceiveButton.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.ClearReceiveButton.Location = new System.Drawing.Point(418, 143);
+            this.ClearReceiveButton.Margin = new System.Windows.Forms.Padding(4);
             this.ClearReceiveButton.Name = "ClearReceiveButton";
             this.ClearReceiveButton.Size = new System.Drawing.Size(84, 28);
             this.ClearReceiveButton.TabIndex = 32;
@@ -334,7 +334,7 @@
             // 
             this.hexadecimalDisplayCheckBox.AutoSize = true;
             this.hexadecimalDisplayCheckBox.Location = new System.Drawing.Point(267, 146);
-            this.hexadecimalDisplayCheckBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.hexadecimalDisplayCheckBox.Margin = new System.Windows.Forms.Padding(4);
             this.hexadecimalDisplayCheckBox.Name = "hexadecimalDisplayCheckBox";
             this.hexadecimalDisplayCheckBox.Size = new System.Drawing.Size(119, 19);
             this.hexadecimalDisplayCheckBox.TabIndex = 34;
@@ -345,7 +345,7 @@
             // 
             this.autoClearCheckBox.AutoSize = true;
             this.autoClearCheckBox.Location = new System.Drawing.Point(267, 88);
-            this.autoClearCheckBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.autoClearCheckBox.Margin = new System.Windows.Forms.Padding(4);
             this.autoClearCheckBox.Name = "autoClearCheckBox";
             this.autoClearCheckBox.Size = new System.Drawing.Size(89, 19);
             this.autoClearCheckBox.TabIndex = 35;
@@ -357,7 +357,7 @@
             this.turnOnButton.Appearance = System.Windows.Forms.Appearance.Button;
             this.turnOnButton.AutoSize = true;
             this.turnOnButton.Location = new System.Drawing.Point(328, 228);
-            this.turnOnButton.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.turnOnButton.Margin = new System.Windows.Forms.Padding(4);
             this.turnOnButton.Name = "turnOnButton";
             this.turnOnButton.Size = new System.Drawing.Size(77, 25);
             this.turnOnButton.TabIndex = 36;
@@ -370,12 +370,13 @@
             // 
             this.stopShowingButton.Appearance = System.Windows.Forms.Appearance.Button;
             this.stopShowingButton.AutoSize = true;
-            this.stopShowingButton.Location = new System.Drawing.Point(419, 140);
-            this.stopShowingButton.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.stopShowingButton.Location = new System.Drawing.Point(419, 83);
+            this.stopShowingButton.Margin = new System.Windows.Forms.Padding(4);
             this.stopShowingButton.Name = "stopShowingButton";
             this.stopShowingButton.Size = new System.Drawing.Size(77, 25);
             this.stopShowingButton.TabIndex = 37;
             this.stopShowingButton.Text = "停止显示";
+            this.stopShowingButton.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.stopShowingButton.UseVisualStyleBackColor = true;
             this.stopShowingButton.CheckedChanged += new System.EventHandler(this.stopShowingButton_CheckedChanged);
             // 
@@ -383,7 +384,7 @@
             // 
             this.hexadecimalSendCheckBox.AutoSize = true;
             this.hexadecimalSendCheckBox.Location = new System.Drawing.Point(188, 585);
-            this.hexadecimalSendCheckBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.hexadecimalSendCheckBox.Margin = new System.Windows.Forms.Padding(4);
             this.hexadecimalSendCheckBox.Name = "hexadecimalSendCheckBox";
             this.hexadecimalSendCheckBox.Size = new System.Drawing.Size(119, 19);
             this.hexadecimalSendCheckBox.TabIndex = 38;
@@ -393,7 +394,7 @@
             // ClearSendButton
             // 
             this.ClearSendButton.Location = new System.Drawing.Point(35, 638);
-            this.ClearSendButton.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.ClearSendButton.Margin = new System.Windows.Forms.Padding(4);
             this.ClearSendButton.Name = "ClearSendButton";
             this.ClearSendButton.Size = new System.Drawing.Size(111, 59);
             this.ClearSendButton.TabIndex = 39;
@@ -407,7 +408,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.statusTextBlock.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.statusTextBlock.Location = new System.Drawing.Point(23, 806);
-            this.statusTextBlock.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.statusTextBlock.Margin = new System.Windows.Forms.Padding(4);
             this.statusTextBlock.Name = "statusTextBlock";
             this.statusTextBlock.ReadOnly = true;
             this.statusTextBlock.Size = new System.Drawing.Size(151, 25);
@@ -421,7 +422,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.statusReceiveByteTextBlock.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
             this.statusReceiveByteTextBlock.Location = new System.Drawing.Point(756, 806);
-            this.statusReceiveByteTextBlock.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.statusReceiveByteTextBlock.Margin = new System.Windows.Forms.Padding(4);
             this.statusReceiveByteTextBlock.Name = "statusReceiveByteTextBlock";
             this.statusReceiveByteTextBlock.Size = new System.Drawing.Size(143, 25);
             this.statusReceiveByteTextBlock.TabIndex = 41;
@@ -433,7 +434,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.statusSendByteTextBlock.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
             this.statusSendByteTextBlock.Location = new System.Drawing.Point(1101, 806);
-            this.statusSendByteTextBlock.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.statusSendByteTextBlock.Margin = new System.Windows.Forms.Padding(4);
             this.statusSendByteTextBlock.Name = "statusSendByteTextBlock";
             this.statusSendByteTextBlock.Size = new System.Drawing.Size(140, 25);
             this.statusSendByteTextBlock.TabIndex = 42;
@@ -469,7 +470,7 @@
             this.countClearButton.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.countClearButton.Location = new System.Drawing.Point(1319, 806);
-            this.countClearButton.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.countClearButton.Margin = new System.Windows.Forms.Padding(4);
             this.countClearButton.Name = "countClearButton";
             this.countClearButton.Size = new System.Drawing.Size(99, 29);
             this.countClearButton.TabIndex = 45;
@@ -493,9 +494,9 @@
             this.groupBox1.Controls.Add(this.radioButtonLora);
             this.groupBox1.Controls.Add(this.radioButtonPort);
             this.groupBox1.Location = new System.Drawing.Point(19, 315);
-            this.groupBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox1.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox1.Padding = new System.Windows.Forms.Padding(4);
             this.groupBox1.Size = new System.Drawing.Size(149, 190);
             this.groupBox1.TabIndex = 46;
             this.groupBox1.TabStop = false;
@@ -505,7 +506,7 @@
             // 
             this.radioButton485.AutoSize = true;
             this.radioButton485.Location = new System.Drawing.Point(16, 134);
-            this.radioButton485.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.radioButton485.Margin = new System.Windows.Forms.Padding(4);
             this.radioButton485.Name = "radioButton485";
             this.radioButton485.Size = new System.Drawing.Size(82, 19);
             this.radioButton485.TabIndex = 2;
@@ -517,7 +518,7 @@
             // 
             this.radioButtonLora.AutoSize = true;
             this.radioButtonLora.Location = new System.Drawing.Point(16, 86);
-            this.radioButtonLora.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.radioButtonLora.Margin = new System.Windows.Forms.Padding(4);
             this.radioButtonLora.Name = "radioButtonLora";
             this.radioButtonLora.Size = new System.Drawing.Size(90, 19);
             this.radioButtonLora.TabIndex = 1;
@@ -530,7 +531,7 @@
             this.radioButtonPort.AutoSize = true;
             this.radioButtonPort.Checked = true;
             this.radioButtonPort.Location = new System.Drawing.Point(16, 38);
-            this.radioButtonPort.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.radioButtonPort.Margin = new System.Windows.Forms.Padding(4);
             this.radioButtonPort.Name = "radioButtonPort";
             this.radioButtonPort.Size = new System.Drawing.Size(88, 19);
             this.radioButtonPort.TabIndex = 0;
@@ -553,7 +554,7 @@
             // 
             this.textBoxLoraAddr.Font = new System.Drawing.Font("宋体", 26.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.textBoxLoraAddr.Location = new System.Drawing.Point(343, 339);
-            this.textBoxLoraAddr.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.textBoxLoraAddr.Margin = new System.Windows.Forms.Padding(4);
             this.textBoxLoraAddr.MaxLength = 6;
             this.textBoxLoraAddr.Name = "textBoxLoraAddr";
             this.textBoxLoraAddr.Size = new System.Drawing.Size(159, 57);
@@ -566,7 +567,7 @@
             // 
             this.checkBoxAutoAddr.AutoSize = true;
             this.checkBoxAutoAddr.Location = new System.Drawing.Point(179, 378);
-            this.checkBoxAutoAddr.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.checkBoxAutoAddr.Margin = new System.Windows.Forms.Padding(4);
             this.checkBoxAutoAddr.Name = "checkBoxAutoAddr";
             this.checkBoxAutoAddr.Size = new System.Drawing.Size(119, 19);
             this.checkBoxAutoAddr.TabIndex = 49;
@@ -586,7 +587,7 @@
             // textBox485ResendTimes
             // 
             this.textBox485ResendTimes.Location = new System.Drawing.Point(343, 454);
-            this.textBox485ResendTimes.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.textBox485ResendTimes.Margin = new System.Windows.Forms.Padding(4);
             this.textBox485ResendTimes.MaxLength = 8;
             this.textBox485ResendTimes.Name = "textBox485ResendTimes";
             this.textBox485ResendTimes.Size = new System.Drawing.Size(132, 25);
@@ -622,7 +623,7 @@
             // 
             this.buttonNextAddr.Image = global::SerialPort_Test.Properties.Resources.下一首图标1;
             this.buttonNextAddr.Location = new System.Drawing.Point(455, 296);
-            this.buttonNextAddr.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.buttonNextAddr.Margin = new System.Windows.Forms.Padding(4);
             this.buttonNextAddr.Name = "buttonNextAddr";
             this.buttonNextAddr.Size = new System.Drawing.Size(48, 29);
             this.buttonNextAddr.TabIndex = 55;
@@ -633,7 +634,7 @@
             // 
             this.buttonPreAddr.Image = global::SerialPort_Test.Properties.Resources.上一首图标1;
             this.buttonPreAddr.Location = new System.Drawing.Point(343, 296);
-            this.buttonPreAddr.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.buttonPreAddr.Margin = new System.Windows.Forms.Padding(4);
             this.buttonPreAddr.Name = "buttonPreAddr";
             this.buttonPreAddr.Size = new System.Drawing.Size(48, 29);
             this.buttonPreAddr.TabIndex = 54;
@@ -656,7 +657,7 @@
             this.textBoxPreAddr.BackColor = System.Drawing.Color.WhiteSmoke;
             this.textBoxPreAddr.Font = new System.Drawing.Font("宋体", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.textBoxPreAddr.Location = new System.Drawing.Point(343, 411);
-            this.textBoxPreAddr.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.textBoxPreAddr.Margin = new System.Windows.Forms.Padding(4);
             this.textBoxPreAddr.MaxLength = 6;
             this.textBoxPreAddr.Name = "textBoxPreAddr";
             this.textBoxPreAddr.Size = new System.Drawing.Size(159, 27);
@@ -675,6 +676,7 @@
             this.labelDataCode.Size = new System.Drawing.Size(67, 15);
             this.labelDataCode.TabIndex = 58;
             this.labelDataCode.Text = "数据标识";
+            this.labelDataCode.Visible = false;
             // 
             // labelDeviceType
             // 
@@ -686,6 +688,7 @@
             this.labelDeviceType.Size = new System.Drawing.Size(52, 15);
             this.labelDeviceType.TabIndex = 59;
             this.labelDeviceType.Text = "设备码";
+            this.labelDeviceType.Visible = false;
             // 
             // labelTemperature
             // 
@@ -697,6 +700,7 @@
             this.labelTemperature.Size = new System.Drawing.Size(37, 15);
             this.labelTemperature.TabIndex = 60;
             this.labelTemperature.Text = "温度";
+            this.labelTemperature.Visible = false;
             // 
             // labelInputVoltage
             // 
@@ -708,6 +712,7 @@
             this.labelInputVoltage.Size = new System.Drawing.Size(67, 15);
             this.labelInputVoltage.TabIndex = 61;
             this.labelInputVoltage.Text = "输入电压";
+            this.labelInputVoltage.Visible = false;
             // 
             // label_A_InputCurrent
             // 
@@ -719,6 +724,7 @@
             this.label_A_InputCurrent.Size = new System.Drawing.Size(90, 15);
             this.label_A_InputCurrent.TabIndex = 62;
             this.label_A_InputCurrent.Text = "A路输入电流";
+            this.label_A_InputCurrent.Visible = false;
             // 
             // label_B_InputCurrent
             // 
@@ -730,6 +736,7 @@
             this.label_B_InputCurrent.Size = new System.Drawing.Size(90, 15);
             this.label_B_InputCurrent.TabIndex = 63;
             this.label_B_InputCurrent.Text = "B路输入电流";
+            this.label_B_InputCurrent.Visible = false;
             // 
             // label_A_Power
             // 
@@ -741,6 +748,7 @@
             this.label_A_Power.Size = new System.Drawing.Size(90, 15);
             this.label_A_Power.TabIndex = 64;
             this.label_A_Power.Text = "A路有功功率";
+            this.label_A_Power.Visible = false;
             // 
             // label_B_PowerFactor
             // 
@@ -752,6 +760,7 @@
             this.label_B_PowerFactor.Size = new System.Drawing.Size(90, 15);
             this.label_B_PowerFactor.TabIndex = 68;
             this.label_B_PowerFactor.Text = "B路功率因素";
+            this.label_B_PowerFactor.Visible = false;
             // 
             // label_A_luminosity
             // 
@@ -763,6 +772,7 @@
             this.label_A_luminosity.Size = new System.Drawing.Size(60, 15);
             this.label_A_luminosity.TabIndex = 67;
             this.label_A_luminosity.Text = "A路亮度";
+            this.label_A_luminosity.Visible = false;
             // 
             // label_A_PowerFactor
             // 
@@ -774,6 +784,7 @@
             this.label_A_PowerFactor.Size = new System.Drawing.Size(90, 15);
             this.label_A_PowerFactor.TabIndex = 66;
             this.label_A_PowerFactor.Text = "A路功率因素";
+            this.label_A_PowerFactor.Visible = false;
             // 
             // label_B_Power
             // 
@@ -785,6 +796,7 @@
             this.label_B_Power.Size = new System.Drawing.Size(90, 15);
             this.label_B_Power.TabIndex = 65;
             this.label_B_Power.Text = "B路有功功率";
+            this.label_B_Power.Visible = false;
             // 
             // label_B_luminosity
             // 
@@ -796,6 +808,7 @@
             this.label_B_luminosity.Size = new System.Drawing.Size(60, 15);
             this.label_B_luminosity.TabIndex = 69;
             this.label_B_luminosity.Text = "B路亮度";
+            this.label_B_luminosity.Visible = false;
             // 
             // labelLoraStaus
             // 
@@ -807,6 +820,7 @@
             this.labelLoraStaus.Size = new System.Drawing.Size(37, 15);
             this.labelLoraStaus.TabIndex = 70;
             this.labelLoraStaus.Text = "状态";
+            this.labelLoraStaus.Visible = false;
             // 
             // checkBoxOnlySendCheckCmd
             // 
@@ -882,7 +896,7 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.MaximumSize = new System.Drawing.Size(1466, 901);
             this.MinimumSize = new System.Drawing.Size(1466, 901);
             this.Name = "Form1";

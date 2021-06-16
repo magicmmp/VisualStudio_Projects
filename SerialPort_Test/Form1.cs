@@ -114,7 +114,7 @@ namespace SerialPort_Test
 
             if(portNamesCombobox.Items.Count>0)
                 portNamesCombobox.SelectedIndex = 0;
-            baudRateCombobox.SelectedIndex = 2;
+            baudRateCombobox.SelectedIndex = 11;
             parityCombobox.SelectedIndex = 0;
             dataBitsCombobox.SelectedIndex = 3;
             stopBitsCombobox.SelectedIndex = 0;

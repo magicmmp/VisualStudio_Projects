@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{35EBE7EF-9B0F-44FA-B1C4-F0843B0EBBC7}</ProjectGuid>
+    <ProjectGuid>{35151D1A-3665-4A31-91E5-BA60F0E10FB0}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>控制台程序</RootNamespace>
-    <AssemblyName>控制台程序</AssemblyName>
+    <RootNamespace>LeetCode</RootNamespace>
+    <AssemblyName>LeetCode</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -43,15 +43,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Computer.cs" />
-    <Compile Include="IUSB.cs" />
-    <Compile Include="Monkey.cs" />
-    <Compile Include="OuterClass.cs" />
+    <Compile Include="L1_TwoSum.cs" />
+    <Compile Include="L2_AddTwoNumbers.cs" />
+    <Compile Include="L3_LengthOfLongestSubstring.cs" />
+    <Compile Include="L4_FindMedianSortedArrays.cs" />
+    <Compile Include="L5_longestPalindrome.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Shape.cs" />
-    <Compile Include="StaticClassTest.cs" />
-    <Compile Include="UDisk.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

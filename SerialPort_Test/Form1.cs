@@ -456,7 +456,7 @@ namespace SerialPort_Test
                 }
                 catch
                 {
-
+                    
                 }
             }
         }

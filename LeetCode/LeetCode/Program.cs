@@ -10,7 +10,7 @@ namespace LeetCode
     {
         static void Main(string[] args)
         {
-            L5_longestPalindrome.Test();
+            // L69_MySqrt.Test();
             Console.ReadKey();
         }
     }

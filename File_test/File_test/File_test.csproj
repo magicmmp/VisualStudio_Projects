@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{35151D1A-3665-4A31-91E5-BA60F0E10FB0}</ProjectGuid>
+    <ProjectGuid>{4052A604-4186-4979-9CF8-B47B5FE29B49}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>LeetCode</RootNamespace>
-    <AssemblyName>LeetCode</AssemblyName>
+    <RootNamespace>File_test</RootNamespace>
+    <AssemblyName>File_test</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -43,18 +43,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="L1_TwoSum.cs" />
-    <Compile Include="L242_IsAnagram.cs" />
-    <Compile Include="L2_AddTwoNumbers.cs" />
-    <Compile Include="L3_LengthOfLongestSubstring.cs" />
-    <Compile Include="L455_FindContentChildren.cs" />
-    <Compile Include="L4_FindMedianSortedArrays.cs" />
-    <Compile Include="L5_longestPalindrome.cs" />
-    <Compile Include="L69_MySqrt.cs" />
-    <Compile Include="L6_Convert.cs" />
-    <Compile Include="L7_Reverse.cs" />
+    <Compile Include="Directory_test.cs" />
+    <Compile Include="FileStream _test.cs" />
+    <Compile Include="File_test.cs" />
+    <Compile Include="Md5_test.cs" />
+    <Compile Include="Path_test.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Serialize_test.cs" />
+    <Compile Include="StreamReader_StreamWriter.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

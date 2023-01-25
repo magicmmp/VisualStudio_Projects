@@ -1380,5 +1380,10 @@ namespace SerialPort_Test
         {
             sendTextBox.Text = generateLoraCmds(LoraAddr);
         }
+
+        private void groupBox1_Enter(object sender, EventArgs e)
+        {
+
+        }
     }
 }

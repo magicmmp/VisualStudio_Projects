@@ -43,6 +43,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="L1814_CountNicePairs.cs" />
     <Compile Include="L1_TwoSum.cs" />
     <Compile Include="L242_IsAnagram.cs" />
     <Compile Include="L2_AddTwoNumbers.cs" />

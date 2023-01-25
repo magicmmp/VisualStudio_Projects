@@ -1,0 +1,86 @@
+﻿namespace WebBrowser
+{
+    partial class Form1
+    {
+        /// <summary>
+        /// 必需的设计器变量。
+        /// </summary>
+        private System.ComponentModel.IContainer components = null;
+
+        /// <summary>
+        /// 清理所有正在使用的资源。
+        /// </summary>
+        /// <param name="disposing">如果应释放托管资源，为 true；否则为 false。</param>
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing && (components != null))
+            {
+                components.Dispose();
+            }
+            base.Dispose(disposing);
+        }
+
+        #region Windows 窗体设计器生成的代码
+
+        /// <summary>
+        /// 设计器支持所需的方法 - 不要修改
+        /// 使用代码编辑器修改此方法的内容。
+        /// </summary>
+        private void InitializeComponent()
+        {
+            this.webBrowser1 = new System.Windows.Forms.WebBrowser();
+            this.button_go = new System.Windows.Forms.Button();
+            this.textBox_URL = new System.Windows.Forms.TextBox();
+            this.SuspendLayout();
+            // 
+            // webBrowser1
+            // 
+            this.webBrowser1.Location = new System.Drawing.Point(12, 82);
+            this.webBrowser1.MinimumSize = new System.Drawing.Size(20, 20);
+            this.webBrowser1.Name = "webBrowser1";
+            this.webBrowser1.Size = new System.Drawing.Size(958, 466);
+            this.webBrowser1.TabIndex = 0;
+            this.webBrowser1.Url = new System.Uri("https://www.baidu.com/", System.UriKind.Absolute);
+            // 
+            // button_go
+            // 
+            this.button_go.Location = new System.Drawing.Point(814, 31);
+            this.button_go.Name = "button_go";
+            this.button_go.Size = new System.Drawing.Size(75, 23);
+            this.button_go.TabIndex = 1;
+            this.button_go.Text = "搜索";
+            this.button_go.UseVisualStyleBackColor = true;
+            this.button_go.Click += new System.EventHandler(this.button_go_Click);
+            // 
+            // textBox_URL
+            // 
+            this.textBox_URL.Location = new System.Drawing.Point(22, 29);
+            this.textBox_URL.Name = "textBox_URL";
+            this.textBox_URL.Size = new System.Drawing.Size(726, 25);
+            this.textBox_URL.TabIndex = 2;
+            this.textBox_URL.Text = "https://www.baidu.com/";
+            // 
+            // Form1
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.ClientSize = new System.Drawing.Size(982, 580);
+            this.Controls.Add(this.textBox_URL);
+            this.Controls.Add(this.button_go);
+            this.Controls.Add(this.webBrowser1);
+            this.Name = "Form1";
+            this.Text = "Form1";
+            this.Load += new System.EventHandler(this.Form1_Load);
+            this.ResumeLayout(false);
+            this.PerformLayout();
+
+        }
+
+        #endregion
+
+        private System.Windows.Forms.WebBrowser webBrowser1;
+        private System.Windows.Forms.Button button_go;
+        private System.Windows.Forms.TextBox textBox_URL;
+    }
+}
+

@@ -28,21 +28,38 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
+            this.musicPlayer = new AxWMPLib.AxWindowsMediaPlayer();
+            ((System.ComponentModel.ISupportInitialize)(this.musicPlayer)).BeginInit();
             this.SuspendLayout();
+            // 
+            // musicPlayer
+            // 
+            this.musicPlayer.Enabled = true;
+            this.musicPlayer.Location = new System.Drawing.Point(21, 12);
+            this.musicPlayer.Name = "musicPlayer";
+            this.musicPlayer.OcxState = ((System.Windows.Forms.AxHost.State)(resources.GetObject("musicPlayer.OcxState")));
+            this.musicPlayer.Size = new System.Drawing.Size(668, 441);
+            this.musicPlayer.TabIndex = 0;
+            this.musicPlayer.Enter += new System.EventHandler(this.musicPlayer_Enter);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(967, 572);
+            this.Controls.Add(this.musicPlayer);
             this.Name = "Form1";
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.musicPlayer)).EndInit();
             this.ResumeLayout(false);
 
         }
 
         #endregion
+
+        private AxWMPLib.AxWindowsMediaPlayer musicPlayer;
     }
 }
 

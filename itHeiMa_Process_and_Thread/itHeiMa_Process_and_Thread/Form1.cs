@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+
 namespace itHeiMa_Process_and_Thread
 {
     public partial class Form1 : Form
@@ -18,6 +19,12 @@ namespace itHeiMa_Process_and_Thread
         }
 
         private void Form1_Load(object sender, EventArgs e)
+        {
+            
+
+        }
+
+        private void musicPlayer_Enter(object sender, EventArgs e)
         {
 
         }

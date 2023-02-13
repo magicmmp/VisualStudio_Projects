@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{5D91EAC9-F145-4190-9F09-850903CBC46C}</ProjectGuid>
+    <ProjectGuid>{C21E2EDA-1CC1-4A01-A619-807141463F9C}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>itHeiMa_Process_and_Thread</RootNamespace>
-    <AssemblyName>itHeiMa_Process_and_Thread</AssemblyName>
+    <RootNamespace>MusicPlayer_20230212</RootNamespace>
+    <AssemblyName>MusicPlayer_20230212</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -33,8 +33,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="IrisSkin2">
+      <HintPath>Winform皮肤\IrisSkin2.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Design" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />

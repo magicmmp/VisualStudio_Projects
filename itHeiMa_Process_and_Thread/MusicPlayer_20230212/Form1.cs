@@ -255,7 +255,9 @@ namespace MusicPlayer_20230212
         {
             //如果音乐播放器的状态是 "正在播放中"
             if (musicPlayer.playState == WMPLib.WMPPlayState.wmppsPlaying)
-            {    //照片多时这里提示内存不足
+            {    //释放前一张照片的内存，否则运行下去会溢出
+                if(pictureBox1.Image!=null)
+                    pictureBox1.Image.Dispose();
                 pictureBox1.Image = Image.FromFile(pics[r.Next(0, pics.Length)]);
                 //currentPosition表示当前正在播放的时间  double类型
                 //currentPositionString表示当前正在播放的时间  string类型

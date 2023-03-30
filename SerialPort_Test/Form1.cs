@@ -442,15 +442,9 @@ namespace SerialPort_Test
 
                     turnOnButton.ForeColor = Color.Gray;
 
-                    System.Threading.Thread.Sleep(1000); //毫秒
-
-
+                    //System.Threading.Thread.Sleep(1000); //毫秒
                     serial.Close();
 
-                    
-                    
-
-                    
                     //使能发送面板
                     //sendControlBorder.IsEnabled = false;
                 }
@@ -561,6 +555,11 @@ namespace SerialPort_Test
                 else //十六进制发送
                 {
                     SendHexString(sendData);
+                }
+
+                if(checkBox_AddNewLine.Checked) //如果选择自动发送换行符
+                {
+                    serial.Write("\r\n");
                 }
 
             }
@@ -1382,6 +1381,16 @@ namespace SerialPort_Test
         }
 
         private void groupBox1_Enter(object sender, EventArgs e)
+        {
+
+        }
+
+        private void hexadecimalSendCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void checkBox_AddNewLine_CheckedChanged(object sender, EventArgs e)
         {
 
         }

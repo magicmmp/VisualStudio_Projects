@@ -1,4 +1,5 @@
 ﻿using System;
+using System.CodeDom;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -26,7 +27,7 @@ namespace itHeiMa_Process_and_Thread
 
         private void musicPlayer_Enter(object sender, EventArgs e)
         {
-
+           
         }
     }
 }

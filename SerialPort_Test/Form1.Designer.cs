@@ -91,6 +91,7 @@
             this.label_B_luminosity = new System.Windows.Forms.Label();
             this.labelLoraStaus = new System.Windows.Forms.Label();
             this.checkBoxOnlySendCheckCmd = new System.Windows.Forms.CheckBox();
+            this.checkBox_AddNewLine = new System.Windows.Forms.CheckBox();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -263,7 +264,7 @@
             // 
             // SendButton
             // 
-            this.SendButton.Location = new System.Drawing.Point(364, 638);
+            this.SendButton.Location = new System.Drawing.Point(392, 583);
             this.SendButton.Margin = new System.Windows.Forms.Padding(4);
             this.SendButton.Name = "SendButton";
             this.SendButton.Size = new System.Drawing.Size(111, 59);
@@ -309,7 +310,7 @@
             // AutoSendCheckBox
             // 
             this.AutoSendCheckBox.AutoSize = true;
-            this.AutoSendCheckBox.Location = new System.Drawing.Point(23, 585);
+            this.AutoSendCheckBox.Location = new System.Drawing.Point(19, 604);
             this.AutoSendCheckBox.Margin = new System.Windows.Forms.Padding(4);
             this.AutoSendCheckBox.Name = "AutoSendCheckBox";
             this.AutoSendCheckBox.Size = new System.Drawing.Size(89, 19);
@@ -383,17 +384,18 @@
             // hexadecimalSendCheckBox
             // 
             this.hexadecimalSendCheckBox.AutoSize = true;
-            this.hexadecimalSendCheckBox.Location = new System.Drawing.Point(188, 585);
+            this.hexadecimalSendCheckBox.Location = new System.Drawing.Point(178, 604);
             this.hexadecimalSendCheckBox.Margin = new System.Windows.Forms.Padding(4);
             this.hexadecimalSendCheckBox.Name = "hexadecimalSendCheckBox";
             this.hexadecimalSendCheckBox.Size = new System.Drawing.Size(119, 19);
             this.hexadecimalSendCheckBox.TabIndex = 38;
             this.hexadecimalSendCheckBox.Text = "十六进制发送";
             this.hexadecimalSendCheckBox.UseVisualStyleBackColor = true;
+            this.hexadecimalSendCheckBox.CheckedChanged += new System.EventHandler(this.hexadecimalSendCheckBox_CheckedChanged);
             // 
             // ClearSendButton
             // 
-            this.ClearSendButton.Location = new System.Drawing.Point(35, 638);
+            this.ClearSendButton.Location = new System.Drawing.Point(392, 660);
             this.ClearSendButton.Margin = new System.Windows.Forms.Padding(4);
             this.ClearSendButton.Name = "ClearSendButton";
             this.ClearSendButton.Size = new System.Drawing.Size(111, 59);
@@ -835,11 +837,26 @@
             this.checkBoxOnlySendCheckCmd.UseVisualStyleBackColor = true;
             this.checkBoxOnlySendCheckCmd.CheckedChanged += new System.EventHandler(this.checkBoxOnlySendCheckCmd_CheckedChanged);
             // 
+            // checkBox_AddNewLine
+            // 
+            this.checkBox_AddNewLine.AutoSize = true;
+            this.checkBox_AddNewLine.Checked = true;
+            this.checkBox_AddNewLine.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.checkBox_AddNewLine.Location = new System.Drawing.Point(19, 660);
+            this.checkBox_AddNewLine.Margin = new System.Windows.Forms.Padding(4);
+            this.checkBox_AddNewLine.Name = "checkBox_AddNewLine";
+            this.checkBox_AddNewLine.Size = new System.Drawing.Size(119, 19);
+            this.checkBox_AddNewLine.TabIndex = 72;
+            this.checkBox_AddNewLine.Text = "自动发送新行";
+            this.checkBox_AddNewLine.UseVisualStyleBackColor = true;
+            this.checkBox_AddNewLine.CheckedChanged += new System.EventHandler(this.checkBox_AddNewLine_CheckedChanged);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1448, 854);
+            this.Controls.Add(this.checkBox_AddNewLine);
             this.Controls.Add(this.checkBoxOnlySendCheckCmd);
             this.Controls.Add(this.labelLoraStaus);
             this.Controls.Add(this.label_B_luminosity);
@@ -973,6 +990,7 @@
         private System.Windows.Forms.Label label_B_luminosity;
         private System.Windows.Forms.Label labelLoraStaus;
         private System.Windows.Forms.CheckBox checkBoxOnlySendCheckCmd;
+        private System.Windows.Forms.CheckBox checkBox_AddNewLine;
     }
 }
 

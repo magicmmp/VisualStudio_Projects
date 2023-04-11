@@ -92,6 +92,7 @@
             this.labelLoraStaus = new System.Windows.Forms.Label();
             this.checkBoxOnlySendCheckCmd = new System.Windows.Forms.CheckBox();
             this.checkBox_AddNewLine = new System.Windows.Forms.CheckBox();
+            this.button_SendEnter = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -395,7 +396,7 @@
             // 
             // ClearSendButton
             // 
-            this.ClearSendButton.Location = new System.Drawing.Point(392, 660);
+            this.ClearSendButton.Location = new System.Drawing.Point(234, 672);
             this.ClearSendButton.Margin = new System.Windows.Forms.Padding(4);
             this.ClearSendButton.Name = "ClearSendButton";
             this.ClearSendButton.Size = new System.Drawing.Size(111, 59);
@@ -851,11 +852,23 @@
             this.checkBox_AddNewLine.UseVisualStyleBackColor = true;
             this.checkBox_AddNewLine.CheckedChanged += new System.EventHandler(this.checkBox_AddNewLine_CheckedChanged);
             // 
+            // button_SendEnter
+            // 
+            this.button_SendEnter.Location = new System.Drawing.Point(392, 672);
+            this.button_SendEnter.Margin = new System.Windows.Forms.Padding(4);
+            this.button_SendEnter.Name = "button_SendEnter";
+            this.button_SendEnter.Size = new System.Drawing.Size(111, 59);
+            this.button_SendEnter.TabIndex = 73;
+            this.button_SendEnter.Text = "发送回车";
+            this.button_SendEnter.UseVisualStyleBackColor = true;
+            this.button_SendEnter.Click += new System.EventHandler(this.button_SendEnter_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1448, 854);
+            this.Controls.Add(this.button_SendEnter);
             this.Controls.Add(this.checkBox_AddNewLine);
             this.Controls.Add(this.checkBoxOnlySendCheckCmd);
             this.Controls.Add(this.labelLoraStaus);
@@ -991,6 +1004,7 @@
         private System.Windows.Forms.Label labelLoraStaus;
         private System.Windows.Forms.CheckBox checkBoxOnlySendCheckCmd;
         private System.Windows.Forms.CheckBox checkBox_AddNewLine;
+        private System.Windows.Forms.Button button_SendEnter;
     }
 }
 

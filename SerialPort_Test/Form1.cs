@@ -444,6 +444,7 @@ namespace SerialPort_Test
 
                     //System.Threading.Thread.Sleep(1000); //毫秒
                     serial.Close();
+                    serial.Dispose();//释放可能占用的资源 2023-4-10
 
                     //使能发送面板
                     //sendControlBorder.IsEnabled = false;
@@ -1393,6 +1394,19 @@ namespace SerialPort_Test
         private void checkBox_AddNewLine_CheckedChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void button_SendEnter_Click(object sender, EventArgs e)
+        {
+            if (!serial.IsOpen)
+            {
+
+                statusDisplay(false, "请先打开串口！");
+                return;
+            }
+
+            if (serialUsageMode == 0)
+                serial.Write("\r\n");
         }
     }
 }
